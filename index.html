@@ -134,6 +134,18 @@
       color: white;
     }
 
+    .user-menu {
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .user-name {
+      color: #596579;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
 
     /* =========================
        ヒーロー
@@ -667,7 +679,7 @@
         opacity 0.25s,
         transform 0.25s;
 
-      z-index: 999;
+      z-index: 9999;
     }
 
     .message.show {
@@ -675,6 +687,202 @@
 
       transform:
         translate(-50%, 0);
+    }
+
+
+    /* =========================
+       モーダル
+    ========================= */
+
+    .modal-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 5000;
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background: rgba(23, 32, 51, 0.55);
+
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 430px;
+
+      background: white;
+
+      border-radius: 22px;
+
+      padding: 32px;
+
+      box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.2);
+
+      animation: modalIn 0.2s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      margin-bottom: 25px;
+    }
+
+    .modal-header h2 {
+      font-size: 25px;
+    }
+
+    .modal-close {
+      width: 36px;
+      height: 36px;
+
+      border: none;
+
+      border-radius: 50%;
+
+      background: #f1f3f7;
+
+      color: #667085;
+
+      font-size: 20px;
+    }
+
+    .modal-close:hover {
+      background: #e8ebf1;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    .form-group label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      font-size: 14px;
+
+      font-weight: 700;
+    }
+
+    .form-input {
+      width: 100%;
+
+      border: 1px solid #dce2eb;
+
+      border-radius: 11px;
+
+      outline: none;
+
+      padding: 12px 14px;
+
+      background: #fafbfc;
+
+      color: #172033;
+    }
+
+    .form-input:focus {
+      border-color: #8b5cf6;
+
+      background: white;
+
+      box-shadow:
+        0 0 0 3px rgba(139, 92, 246, 0.1);
+    }
+
+    .form-button {
+      width: 100%;
+
+      border: none;
+
+      border-radius: 12px;
+
+      padding: 13px;
+
+      margin-top: 5px;
+
+      background: #172033;
+
+      color: white;
+
+      font-weight: 800;
+    }
+
+    .form-button:hover {
+      background: #29344a;
+    }
+
+    .form-button:disabled {
+      opacity: 0.6;
+
+      cursor: not-allowed;
+    }
+
+    .form-switch {
+      text-align: center;
+
+      margin-top: 18px;
+
+      color: #7b8494;
+
+      font-size: 13px;
+    }
+
+    .form-switch button {
+      border: none;
+
+      background: transparent;
+
+      color: #6d4aff;
+
+      font-weight: 800;
+    }
+
+    .form-error {
+      display: none;
+
+      margin-bottom: 15px;
+
+      padding: 10px 12px;
+
+      border-radius: 10px;
+
+      background: #fff1f1;
+
+      color: #d33b3b;
+
+      font-size: 13px;
+    }
+
+    .form-error.show {
+      display: block;
     }
 
 
@@ -753,6 +961,10 @@
 
         text-align: center;
       }
+
+      .user-name {
+        display: none;
+      }
     }
 
     @media (max-width: 450px) {
@@ -763,6 +975,10 @@
 
       .hero-description {
         font-size: 14px;
+      }
+
+      .modal {
+        padding: 25px 20px;
       }
     }
   </style>
@@ -786,19 +1002,41 @@
 
       <nav class="nav">
 
-        <button
-          class="nav-button"
-          onclick="showMessage('ログイン機能は準備中です')"
-        >
-          ログイン
-        </button>
+        <!-- 未ログイン時 -->
 
-        <button
-          class="nav-button nav-primary"
-          onclick="showMessage('アカウント作成機能は準備中です')"
-        >
-          アカウント作成
-        </button>
+        <div id="loggedOutMenu" class="nav">
+          <button
+            class="nav-button"
+            onclick="openLogin()"
+          >
+            ログイン
+          </button>
+
+          <button
+            class="nav-button nav-primary"
+            onclick="openRegister()"
+          >
+            アカウント作成
+          </button>
+        </div>
+
+
+        <!-- ログイン時 -->
+
+        <div id="loggedInMenu" class="user-menu">
+
+          <span class="user-name" id="headerUserName">
+            👤 ユーザー
+          </span>
+
+          <button
+            class="nav-button"
+            onclick="logout()"
+          >
+            ログアウト
+          </button>
+
+        </div>
 
       </nav>
 
@@ -894,11 +1132,6 @@
 
   <main>
 
-
-    <!-- =========================
-         みんなの質問
-    ========================== -->
-
     <section class="section">
 
       <div class="section-title">
@@ -912,7 +1145,6 @@
 
 
       <div class="questions">
-
 
         <article class="question-card">
 
@@ -977,11 +1209,9 @@
 
         </article>
 
-
       </div>
 
     </section>
-
 
 
     <!-- =========================
@@ -1001,7 +1231,6 @@
 
 
       <div class="about-grid">
-
 
         <article class="about-card">
 
@@ -1061,11 +1290,9 @@
 
         </article>
 
-
       </div>
 
     </section>
-
 
 
     <!-- =========================
@@ -1085,7 +1312,6 @@
 
 
       <div class="flow">
-
 
         <article class="flow-card">
 
@@ -1158,11 +1384,9 @@
 
         </article>
 
-
       </div>
 
     </section>
-
 
 
     <!-- =========================
@@ -1194,7 +1418,6 @@
 
     </section>
 
-
   </main>
 
 
@@ -1219,6 +1442,203 @@
   </footer>
 
 
+  <!-- =========================
+       アカウント作成・ログイン
+  ========================== -->
+
+  <div
+    id="modalOverlay"
+    class="modal-overlay"
+    onclick="closeModalOutside(event)"
+  >
+
+    <div
+      class="modal"
+      onclick="event.stopPropagation()"
+    >
+
+      <div class="modal-header">
+
+        <h2 id="modalTitle">
+          アカウント作成
+        </h2>
+
+        <button
+          class="modal-close"
+          onclick="closeModal()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- エラー表示 -->
+
+      <div
+        id="formError"
+        class="form-error"
+      ></div>
+
+
+      <!-- =========================
+           登録フォーム
+      ========================== -->
+
+      <form
+        id="registerForm"
+        onsubmit="register(event)"
+      >
+
+        <div class="form-group">
+
+          <label for="registerUsername">
+            ユーザー名
+          </label>
+
+          <input
+            id="registerUsername"
+            class="form-input"
+            type="text"
+            maxlength="30"
+            autocomplete="username"
+            placeholder="ユーザー名を入力"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="registerPassword">
+            パスワード
+          </label>
+
+          <input
+            id="registerPassword"
+            class="form-input"
+            type="password"
+            minlength="8"
+            maxlength="100"
+            autocomplete="new-password"
+            placeholder="8文字以上"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="registerPasswordConfirm">
+            パスワード（確認）
+          </label>
+
+          <input
+            id="registerPasswordConfirm"
+            class="form-input"
+            type="password"
+            minlength="8"
+            maxlength="100"
+            autocomplete="new-password"
+            placeholder="もう一度入力"
+            required
+          >
+
+        </div>
+
+
+        <button
+          id="registerButton"
+          class="form-button"
+          type="submit"
+        >
+          アカウントを作成
+        </button>
+
+      </form>
+
+
+      <!-- =========================
+           ログインフォーム
+      ========================== -->
+
+      <form
+        id="loginForm"
+        style="display:none"
+        onsubmit="login(event)"
+      >
+
+        <div class="form-group">
+
+          <label for="loginUsername">
+            ユーザー名
+          </label>
+
+          <input
+            id="loginUsername"
+            class="form-input"
+            type="text"
+            maxlength="30"
+            autocomplete="username"
+            placeholder="ユーザー名を入力"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="loginPassword">
+            パスワード
+          </label>
+
+          <input
+            id="loginPassword"
+            class="form-input"
+            type="password"
+            autocomplete="current-password"
+            placeholder="パスワードを入力"
+            required
+          >
+
+        </div>
+
+
+        <button
+          id="loginButton"
+          class="form-button"
+          type="submit"
+        >
+          ログイン
+        </button>
+
+      </form>
+
+
+      <div class="form-switch">
+
+        <span id="switchText">
+          すでにアカウントを持っていますか？
+        </span>
+
+        <button
+          id="switchButton"
+          type="button"
+          onclick="switchForm()"
+        >
+          ログイン
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
   <!-- メッセージ -->
 
   <div
@@ -1233,28 +1653,703 @@
 
   <script>
 
-    /*
-     * 現在はフロントエンドだけなので、
-     * 質問データはまだサーバーには保存されません。
-     *
-     * 後でここをAPIにつなげて、
-     *
-     * 質問
-     * ↓
-     * データベース
-     * ↓
-     * 他ユーザーが回答
-     *
-     * という仕組みにします。
-     */
+    /* =========================================
+       KAKIGOORI AI API
+    ========================================= */
+
+    const API_URL =
+      "https://kakigoori-api.s50261011.workers.dev";
 
 
-    // 質問ボタン
+    /* =========================================
+       現在のログインユーザー
+    ========================================= */
+
+    let currentUser = null;
+
+
+    /* =========================================
+       API共通処理
+    ========================================= */
+
+    async function apiRequest(
+      path,
+      options = {}
+    ) {
+
+      const response =
+        await fetch(
+          API_URL + path,
+          {
+            ...options,
+
+            credentials: "include",
+
+            headers: {
+              "Content-Type":
+                "application/json",
+
+              ...(options.headers || {})
+            }
+          }
+        );
+
+
+      let data;
+
+      try {
+
+        data =
+          await response.json();
+
+      } catch {
+
+        data = {
+          ok: false,
+          message:
+            "サーバーから正しい応答がありませんでした。"
+        };
+
+      }
+
+
+      if (!response.ok) {
+
+        throw new Error(
+          data.message ||
+          "通信に失敗しました。"
+        );
+
+      }
+
+
+      return data;
+
+    }
+
+
+    /* =========================================
+       ログイン状態確認
+    ========================================= */
+
+    async function checkLogin() {
+
+      try {
+
+        const data =
+          await apiRequest("/api/me");
+
+
+        if (data.ok && data.user) {
+
+          currentUser =
+            data.user;
+
+          updateHeader();
+
+        } else {
+
+          currentUser = null;
+
+          updateHeader();
+
+        }
+
+      } catch (error) {
+
+        console.log(
+          "ログイン状態確認:",
+          error
+        );
+
+        currentUser = null;
+
+        updateHeader();
+
+      }
+
+    }
+
+
+    /* =========================================
+       ヘッダー更新
+    ========================================= */
+
+    function updateHeader() {
+
+      const loggedOutMenu =
+        document.getElementById(
+          "loggedOutMenu"
+        );
+
+      const loggedInMenu =
+        document.getElementById(
+          "loggedInMenu"
+        );
+
+      const headerUserName =
+        document.getElementById(
+          "headerUserName"
+        );
+
+
+      if (currentUser) {
+
+        loggedOutMenu.style.display =
+          "none";
+
+        loggedInMenu.style.display =
+          "flex";
+
+        headerUserName.textContent =
+          "👤 " +
+          currentUser.username;
+
+      } else {
+
+        loggedOutMenu.style.display =
+          "flex";
+
+        loggedInMenu.style.display =
+          "none";
+
+      }
+
+    }
+
+
+    /* =========================================
+       アカウント作成画面を開く
+    ========================================= */
+
+    function openRegister() {
+
+      document.getElementById(
+        "modalTitle"
+      ).textContent =
+        "アカウント作成";
+
+
+      document.getElementById(
+        "registerForm"
+      ).style.display =
+        "block";
+
+
+      document.getElementById(
+        "loginForm"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "switchText"
+      ).textContent =
+        "すでにアカウントを持っていますか？";
+
+
+      document.getElementById(
+        "switchButton"
+      ).textContent =
+        "ログイン";
+
+
+      clearFormError();
+
+
+      document.getElementById(
+        "modalOverlay"
+      ).classList.add("show");
+
+
+      setTimeout(() => {
+
+        document
+          .getElementById(
+            "registerUsername"
+          )
+          .focus();
+
+      }, 100);
+
+    }
+
+
+    /* =========================================
+       ログイン画面を開く
+    ========================================= */
+
+    function openLogin() {
+
+      document.getElementById(
+        "modalTitle"
+      ).textContent =
+        "ログイン";
+
+
+      document.getElementById(
+        "registerForm"
+      ).style.display =
+        "none";
+
+
+      document.getElementById(
+        "loginForm"
+      ).style.display =
+        "block";
+
+
+      document.getElementById(
+        "switchText"
+      ).textContent =
+        "アカウントを持っていませんか？";
+
+
+      document.getElementById(
+        "switchButton"
+      ).textContent =
+        "アカウント作成";
+
+
+      clearFormError();
+
+
+      document.getElementById(
+        "modalOverlay"
+      ).classList.add("show");
+
+
+      setTimeout(() => {
+
+        document
+          .getElementById(
+            "loginUsername"
+          )
+          .focus();
+
+      }, 100);
+
+    }
+
+
+    /* =========================================
+       登録 ↔ ログイン切り替え
+    ========================================= */
+
+    function switchForm() {
+
+      const registerForm =
+        document.getElementById(
+          "registerForm"
+        );
+
+
+      if (
+        registerForm.style.display ===
+        "none"
+      ) {
+
+        openRegister();
+
+      } else {
+
+        openLogin();
+
+      }
+
+    }
+
+
+    /* =========================================
+       モーダルを閉じる
+    ========================================= */
+
+    function closeModal() {
+
+      document.getElementById(
+        "modalOverlay"
+      ).classList.remove("show");
+
+
+      clearFormError();
+
+    }
+
+
+    function closeModalOutside(event) {
+
+      if (
+        event.target.id ===
+        "modalOverlay"
+      ) {
+
+        closeModal();
+
+      }
+
+    }
+
+
+    /* =========================================
+       エラー表示
+    ========================================= */
+
+    function showFormError(text) {
+
+      const error =
+        document.getElementById(
+          "formError"
+        );
+
+
+      error.textContent =
+        text;
+
+      error.classList.add("show");
+
+    }
+
+
+    function clearFormError() {
+
+      const error =
+        document.getElementById(
+          "formError"
+        );
+
+
+      error.textContent = "";
+
+      error.classList.remove(
+        "show"
+      );
+
+    }
+
+
+    /* =========================================
+       アカウント作成
+    ========================================= */
+
+    async function register(event) {
+
+      event.preventDefault();
+
+      clearFormError();
+
+
+      const username =
+        document
+          .getElementById(
+            "registerUsername"
+          )
+          .value
+          .trim();
+
+
+      const password =
+        document
+          .getElementById(
+            "registerPassword"
+          )
+          .value;
+
+
+      const passwordConfirm =
+        document
+          .getElementById(
+            "registerPasswordConfirm"
+          )
+          .value;
+
+
+      if (username.length < 3) {
+
+        showFormError(
+          "ユーザー名は3文字以上にしてください。"
+        );
+
+        return;
+
+      }
+
+
+      if (password.length < 8) {
+
+        showFormError(
+          "パスワードは8文字以上にしてください。"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        password !==
+        passwordConfirm
+      ) {
+
+        showFormError(
+          "パスワードが一致していません。"
+        );
+
+        return;
+
+      }
+
+
+      const button =
+        document.getElementById(
+          "registerButton"
+        );
+
+
+      button.disabled = true;
+
+      button.textContent =
+        "作成中……";
+
+
+      try {
+
+        const data =
+          await apiRequest(
+            "/api/register",
+            {
+              method: "POST",
+
+              body:
+                JSON.stringify({
+                  username:
+                    username,
+
+                  password:
+                    password
+                })
+            }
+          );
+
+
+        if (
+          data.ok &&
+          data.user
+        ) {
+
+          currentUser =
+            data.user;
+
+
+          updateHeader();
+
+          closeModal();
+
+
+          document
+            .getElementById(
+              "registerForm"
+            )
+            .reset();
+
+
+          showMessage(
+            "🎉 アカウントを作成しました！"
+          );
+
+        } else {
+
+          throw new Error(
+            data.message ||
+            "アカウント作成に失敗しました。"
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+        showFormError(
+          error.message ||
+          "アカウント作成に失敗しました。"
+        );
+
+      } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+          "アカウントを作成";
+
+      }
+
+    }
+
+
+    /* =========================================
+       ログイン
+    ========================================= */
+
+    async function login(event) {
+
+      event.preventDefault();
+
+      clearFormError();
+
+
+      const username =
+        document
+          .getElementById(
+            "loginUsername"
+          )
+          .value
+          .trim();
+
+
+      const password =
+        document
+          .getElementById(
+            "loginPassword"
+          )
+          .value;
+
+
+      const button =
+        document.getElementById(
+          "loginButton"
+        );
+
+
+      button.disabled = true;
+
+      button.textContent =
+        "ログイン中……";
+
+
+      try {
+
+        const data =
+          await apiRequest(
+            "/api/login",
+            {
+              method: "POST",
+
+              body:
+                JSON.stringify({
+                  username:
+                    username,
+
+                  password:
+                    password
+                })
+            }
+          );
+
+
+        if (
+          data.ok &&
+          data.user
+        ) {
+
+          currentUser =
+            data.user;
+
+
+          updateHeader();
+
+          closeModal();
+
+
+          document
+            .getElementById(
+              "loginForm"
+            )
+            .reset();
+
+
+          showMessage(
+            "👋 ログインしました！"
+          );
+
+        } else {
+
+          throw new Error(
+            data.message ||
+            "ログインに失敗しました。"
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(error);
+
+        showFormError(
+          error.message ||
+          "ログインに失敗しました。"
+        );
+
+      } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+          "ログイン";
+
+      }
+
+    }
+
+
+    /* =========================================
+       ログアウト
+    ========================================= */
+
+    async function logout() {
+
+      try {
+
+        await apiRequest(
+          "/api/logout",
+          {
+            method: "POST"
+          }
+        );
+
+
+        currentUser = null;
+
+        updateHeader();
+
+
+        showMessage(
+          "ログアウトしました。"
+        );
+
+      } catch (error) {
+
+        console.error(error);
+
+        showMessage(
+          "ログアウトに失敗しました。"
+        );
+
+      }
+
+    }
+
+
+    /* =========================================
+       質問
+    ========================================= */
 
     function askQuestion() {
 
       const input =
-        document.getElementById("questionInput");
+        document.getElementById(
+          "questionInput"
+        );
+
 
       const question =
         input.value.trim();
@@ -1269,36 +2364,64 @@
         input.focus();
 
         return;
+
       }
 
 
       /*
-       * 現在はまだサーバーがないため、
-       * 仮メッセージを表示します。
+       * 質問するにはログインが必要
+       */
+
+      if (!currentUser) {
+
+        showMessage(
+          "質問するにはアカウントが必要です。"
+        );
+
+
+        openLogin();
+
+        return;
+
+      }
+
+
+      /*
+       * ここから先は質問APIを
+       * 後で追加する。
        */
 
       showMessage(
-        "質問機能は現在準備中です！"
+        "ログイン確認OK！質問APIは次の段階で接続します。"
       );
 
     }
 
 
-    // サンプル質問を入力欄に入れる
+    /* =========================================
+       サンプル質問
+    ========================================= */
 
     function setQuestion(text) {
 
       const input =
-        document.getElementById("questionInput");
+        document.getElementById(
+          "questionInput"
+        );
 
-      input.value = text;
+
+      input.value =
+        text;
+
 
       input.focus();
 
     }
 
 
-    // 質問欄までスクロール
+    /* =========================================
+       質問欄までスクロール
+    ========================================= */
 
     function scrollToQuestion() {
 
@@ -1314,7 +2437,9 @@
       setTimeout(() => {
 
         document
-          .getElementById("questionInput")
+          .getElementById(
+            "questionInput"
+          )
           .focus();
 
       }, 500);
@@ -1322,7 +2447,9 @@
     }
 
 
-    // メッセージ表示
+    /* =========================================
+       メッセージ表示
+    ========================================= */
 
     let messageTimer;
 
@@ -1330,36 +2457,53 @@
     function showMessage(text) {
 
       const message =
-        document.getElementById("message");
+        document.getElementById(
+          "message"
+        );
 
 
-      message.textContent = text;
+      message.textContent =
+        text;
 
-      message.classList.add("show");
+
+      message.classList.add(
+        "show"
+      );
 
 
-      clearTimeout(messageTimer);
+      clearTimeout(
+        messageTimer
+      );
 
 
       messageTimer =
         setTimeout(() => {
 
-          message.classList.remove("show");
+          message.classList.remove(
+            "show"
+          );
 
         }, 2500);
 
     }
 
 
-    // Enterキーで質問
+    /* =========================================
+       Enterキーで質問
+    ========================================= */
 
     document
-      .getElementById("questionInput")
+      .getElementById(
+        "questionInput"
+      )
       .addEventListener(
         "keydown",
         function(event) {
 
-          if (event.key === "Enter") {
+          if (
+            event.key ===
+            "Enter"
+          ) {
 
             askQuestion();
 
@@ -1367,6 +2511,34 @@
 
         }
       );
+
+
+    /* =========================================
+       Escキーでモーダルを閉じる
+    ========================================= */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeModal();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       ページ読み込み時
+       ログイン状態を確認
+    ========================================= */
+
+    checkLogin();
 
   </script>
 
