@@ -2,11 +2,281 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KakigooriAI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Noto Sans JP",
+                sans-serif;
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        /* ヘッダー */
+        header {
+            height: 72px;
+            background: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            border-bottom: 1px solid #e8eaf0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        /* チャット全体 */
+        .chat {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px 16px 110px;
+        }
+
+        /* AIメッセージ */
+        .message {
+            display: flex;
+            margin-bottom: 18px;
+        }
+
+        .message.ai {
+            justify-content: flex-start;
+        }
+
+        .message.user {
+            justify-content: flex-end;
+        }
+
+        .bubble {
+            max-width: 75%;
+            padding: 15px 18px;
+            border-radius: 22px;
+            line-height: 1.6;
+            font-size: 16px;
+            word-break: break-word;
+        }
+
+        .ai .bubble {
+            background: white;
+            border: 1px solid #e7e9ef;
+            border-bottom-left-radius: 7px;
+        }
+
+        .user .bubble {
+            background: #e9f3ff;
+            border-bottom-right-radius: 7px;
+        }
+
+        /* 入力エリア */
+        .input-area {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+
+            padding: 12px 16px;
+            border-top: 1px solid #e8eaf0;
+        }
+
+        .input-box {
+            max-width: 900px;
+            margin: 0 auto;
+
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        /* 入力欄 */
+        #messageInput {
+            flex: 1;
+            min-width: 0;
+
+            height: 52px;
+            border: 1px solid #dfe3eb;
+            border-radius: 26px;
+
+            padding: 0 20px;
+            font-size: 16px;
+            outline: none;
+
+            background: #f8f9fc;
+        }
+
+        #messageInput:focus {
+            border-color: #9fc7ff;
+            background: white;
+        }
+
+        /* 送信ボタン */
+        #sendButton {
+            width: 52px;
+            height: 52px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: #222;
+            color: white;
+
+            font-size: 20px;
+            cursor: pointer;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            transition: transform 0.1s;
+        }
+
+        #sendButton:active {
+            transform: scale(0.92);
+        }
+
+        /* スマホ対応 */
+        @media (max-width: 600px) {
+            header {
+                height: 64px;
+                padding: 0 16px;
+            }
+
+            .logo {
+                font-size: 21px;
+            }
+
+            .chat {
+                padding: 18px 12px 100px;
+            }
+
+            .bubble {
+                max-width: 85%;
+                font-size: 15px;
+                padding: 13px 16px;
+            }
+
+            #messageInput {
+                height: 50px;
+            }
+
+            #sendButton {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <h1>🍧 KakigooriAI</h1>
-    <p>サイト制作中！</p>
+
+    <header>
+        <div class="logo">🍧 KakigooriAI</div>
+    </header>
+
+    <main class="chat" id="chat">
+
+        <div class="message ai">
+            <div class="bubble">
+                こんにちは！🍧<br>
+                KakigooriAIです。<br>
+                何でも聞いてね！
+            </div>
+        </div>
+
+    </main>
+
+    <div class="input-area">
+        <div class="input-box">
+
+            <input
+                id="messageInput"
+                type="text"
+                placeholder="メッセージを入力..."
+                autocomplete="off"
+            >
+
+            <button id="sendButton" aria-label="送信">
+                ➤
+            </button>
+
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById("messageInput");
+        const button = document.getElementById("sendButton");
+        const chat = document.getElementById("chat");
+
+        function sendMessage() {
+            const text = input.value.trim();
+
+            if (text === "") {
+                return;
+            }
+
+            // ユーザーのメッセージを表示
+            const userMessage = document.createElement("div");
+            userMessage.className = "message user";
+
+            const userBubble = document.createElement("div");
+            userBubble.className = "bubble";
+            userBubble.textContent = text;
+
+            userMessage.appendChild(userBubble);
+            chat.appendChild(userMessage);
+
+            // 入力欄を空にする
+            input.value = "";
+
+            // 仮のAI返信
+            setTimeout(() => {
+                const aiMessage = document.createElement("div");
+                aiMessage.className = "message ai";
+
+                const aiBubble = document.createElement("div");
+                aiBubble.className = "bubble";
+                aiBubble.textContent =
+                    "これはまだテスト版だよ！🤖";
+
+                aiMessage.appendChild(aiBubble);
+                chat.appendChild(aiMessage);
+
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: "smooth"
+                });
+            }, 400);
+
+            window.scrollTo({
+                top: document.body.scrollHeight,
+                behavior: "smooth"
+            });
+        }
+
+        // 送信ボタン
+        button.addEventListener("click", sendMessage);
+
+        // Enterキーでも送信
+        input.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+
 </body>
 </html>
