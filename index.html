@@ -2,7 +2,6 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta
@@ -13,10 +12,6 @@
   <title>KAKIGOORI AI</title>
 
   <style>
-    /* =========================
-       基本設定
-    ========================= */
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -54,16 +49,10 @@
       text-decoration: none;
     }
 
-
-    /* =========================
-       ヘッダー
-    ========================= */
-
     header {
       position: sticky;
       top: 0;
       z-index: 100;
-
       width: 100%;
 
       background: rgba(255, 255, 255, 0.92);
@@ -146,11 +135,6 @@
       font-weight: 700;
     }
 
-
-    /* =========================
-       ヒーロー
-    ========================= */
-
     .hero {
       min-height: 650px;
 
@@ -181,13 +165,11 @@
     .hero-inner {
       width: 100%;
       max-width: 900px;
-
       text-align: center;
     }
 
     .hero-icon {
       font-size: 76px;
-
       margin-bottom: 10px;
 
       animation: float 3s ease-in-out infinite;
@@ -206,11 +188,9 @@
 
     .hero h1 {
       font-size: clamp(42px, 8vw, 78px);
-
       line-height: 1.05;
 
       font-weight: 900;
-
       letter-spacing: -2px;
 
       margin-bottom: 22px;
@@ -247,11 +227,6 @@
 
       font-size: 16px;
     }
-
-
-    /* =========================
-       質問ボックス
-    ========================= */
 
     .question-box {
       max-width: 760px;
@@ -317,6 +292,12 @@
       transform: translateY(1px);
     }
 
+    .ask-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
     .quick-question {
       margin-top: 16px;
 
@@ -349,11 +330,6 @@
       color: #172033;
     }
 
-
-    /* =========================
-       メインコンテンツ
-    ========================= */
-
     main {
       max-width: 1180px;
       margin: 0 auto;
@@ -384,11 +360,6 @@
       color: #7b8494;
       font-size: 14px;
     }
-
-
-    /* =========================
-       質問カード
-    ========================= */
 
     .questions {
       display: grid;
@@ -429,6 +400,8 @@
       margin-bottom: 13px;
 
       line-height: 1.5;
+
+      word-break: break-word;
     }
 
     .question-card-meta {
@@ -438,6 +411,8 @@
 
       justify-content: space-between;
 
+      gap: 10px;
+
       color: #8a94a5;
 
       font-size: 12px;
@@ -445,12 +420,8 @@
 
     .answer-count {
       font-weight: 700;
+      white-space: nowrap;
     }
-
-
-    /* =========================
-       KAKIGOORI AIとは
-    ========================= */
 
     .about-grid {
       display: grid;
@@ -499,11 +470,6 @@
 
       font-size: 14px;
     }
-
-
-    /* =========================
-       仕組み
-    ========================= */
 
     .flow {
       display: grid;
@@ -559,11 +525,6 @@
       color: #747e8e;
     }
 
-
-    /* =========================
-       CTA
-    ========================= */
-
     .cta {
       background: #172033;
 
@@ -611,11 +572,6 @@
       background: #f0f2f6;
     }
 
-
-    /* =========================
-       フッター
-    ========================= */
-
     footer {
       border-top: 1px solid #e5e9f0;
 
@@ -647,11 +603,6 @@
 
       font-size: 12px;
     }
-
-
-    /* =========================
-       ポップアップ
-    ========================= */
 
     .message {
       position: fixed;
@@ -688,11 +639,6 @@
       transform:
         translate(-50%, 0);
     }
-
-
-    /* =========================
-       モーダル
-    ========================= */
 
     .modal-overlay {
       position: fixed;
@@ -885,11 +831,6 @@
       display: block;
     }
 
-
-    /* =========================
-       スマホ対応
-    ========================= */
-
     @media (max-width: 800px) {
 
       .header-inner {
@@ -984,7 +925,6 @@
   </style>
 </head>
 
-
 <body>
 
   <!-- =========================
@@ -1002,9 +942,8 @@
 
       <nav class="nav">
 
-        <!-- 未ログイン時 -->
-
         <div id="loggedOutMenu" class="nav">
+
           <button
             class="nav-button"
             onclick="openLogin()"
@@ -1018,14 +957,18 @@
           >
             アカウント作成
           </button>
+
         </div>
 
+        <div
+          id="loggedInMenu"
+          class="user-menu"
+        >
 
-        <!-- ログイン時 -->
-
-        <div id="loggedInMenu" class="user-menu">
-
-          <span class="user-name" id="headerUserName">
+          <span
+            class="user-name"
+            id="headerUserName"
+          >
             👤 ユーザー
           </span>
 
@@ -1071,9 +1014,6 @@
         新しい形のコミュニティAIを目指します。
       </p>
 
-
-      <!-- 質問入力 -->
-
       <div class="question-box">
 
         <input
@@ -1092,9 +1032,6 @@
         </button>
 
       </div>
-
-
-      <!-- サンプル質問 -->
 
       <div class="quick-question">
 
@@ -1137,79 +1074,29 @@
       <div class="section-title">
 
         <div>
-          <h2>🌎 みんなの質問</h2>
-          <p>みんなが投稿した質問を見ることができます</p>
+
+          <h2>
+            🌎 みんなの質問
+          </h2>
+
+          <p>
+            みんなが投稿した質問を見ることができます
+          </p>
+
         </div>
 
       </div>
 
 
-      <div class="questions">
+      <!--
+        D1から質問を取得して
+        JavaScriptでここに表示する
+      -->
 
-        <article class="question-card">
-
-          <h3>
-            Pythonって何？
-            中学生にも分かるように説明して
-          </h3>
-
-          <div class="question-card-meta">
-
-            <span>
-              👤 ユーザー
-            </span>
-
-            <span class="answer-count">
-              💬 0件の回答
-            </span>
-
-          </div>
-
-        </article>
-
-
-        <article class="question-card">
-
-          <h3>
-            なぜ空は青く見えるの？
-          </h3>
-
-          <div class="question-card-meta">
-
-            <span>
-              👤 ユーザー
-            </span>
-
-            <span class="answer-count">
-              💬 0件の回答
-            </span>
-
-          </div>
-
-        </article>
-
-
-        <article class="question-card">
-
-          <h3>
-            AIはどうやって文章を理解しているの？
-          </h3>
-
-          <div class="question-card-meta">
-
-            <span>
-              👤 ユーザー
-            </span>
-
-            <span class="answer-count">
-              💬 0件の回答
-            </span>
-
-          </div>
-
-        </article>
-
-      </div>
+      <div
+        class="questions"
+        id="questionsList"
+      ></div>
 
     </section>
 
@@ -1223,8 +1110,15 @@
       <div class="section-title">
 
         <div>
-          <h2>🍧 KAKIGOORI AIとは？</h2>
-          <p>みんなの知識をAIにつなげる仕組み</p>
+
+          <h2>
+            🍧 KAKIGOORI AIとは？
+          </h2>
+
+          <p>
+            みんなの知識をAIにつなげる仕組み
+          </p>
+
         </div>
 
       </div>
@@ -1304,8 +1198,15 @@
       <div class="section-title">
 
         <div>
-          <h2>⚙️ KAKIGOORI AIの仕組み</h2>
-          <p>質問からAIの知識になるまで</p>
+
+          <h2>
+            ⚙️ KAKIGOORI AIの仕組み
+          </h2>
+
+          <p>
+            質問からAIの知識になるまで
+          </p>
+
         </div>
 
       </div>
@@ -1473,17 +1374,13 @@
       </div>
 
 
-      <!-- エラー表示 -->
-
       <div
         id="formError"
         class="form-error"
       ></div>
 
 
-      <!-- =========================
-           登録フォーム
-      ========================== -->
+      <!-- 登録 -->
 
       <form
         id="registerForm"
@@ -1560,9 +1457,7 @@
       </form>
 
 
-      <!-- =========================
-           ログインフォーム
-      ========================== -->
+      <!-- ログイン -->
 
       <form
         id="loginForm"
@@ -1679,23 +1574,30 @@
 
       const response =
         await fetch(
+
           API_URL + path,
+
           {
             ...options,
 
             credentials: "include",
 
             headers: {
+
               "Content-Type":
                 "application/json",
 
               ...(options.headers || {})
+
             }
+
           }
+
         );
 
 
       let data;
+
 
       try {
 
@@ -1705,9 +1607,12 @@
       } catch {
 
         data = {
+
           ok: false,
-          message:
+
+          error:
             "サーバーから正しい応答がありませんでした。"
+
         };
 
       }
@@ -1716,8 +1621,13 @@
       if (!response.ok) {
 
         throw new Error(
+
+          data.error ||
+
           data.message ||
+
           "通信に失敗しました。"
+
         );
 
       }
@@ -1737,23 +1647,29 @@
       try {
 
         const data =
-          await apiRequest("/api/me");
+          await apiRequest(
+            "/api/me"
+          );
 
 
-        if (data.ok && data.user) {
+        if (
+          data.ok &&
+          data.loggedIn &&
+          data.user
+        ) {
 
           currentUser =
             data.user;
 
-          updateHeader();
-
         } else {
 
-          currentUser = null;
-
-          updateHeader();
+          currentUser =
+            null;
 
         }
+
+
+        updateHeader();
 
       } catch (error) {
 
@@ -1762,7 +1678,8 @@
           error
         );
 
-        currentUser = null;
+        currentUser =
+          null;
 
         updateHeader();
 
@@ -1782,10 +1699,12 @@
           "loggedOutMenu"
         );
 
+
       const loggedInMenu =
         document.getElementById(
           "loggedInMenu"
         );
+
 
       const headerUserName =
         document.getElementById(
@@ -1798,8 +1717,10 @@
         loggedOutMenu.style.display =
           "none";
 
+
         loggedInMenu.style.display =
           "flex";
+
 
         headerUserName.textContent =
           "👤 " +
@@ -1810,6 +1731,7 @@
         loggedOutMenu.style.display =
           "flex";
 
+
         loggedInMenu.style.display =
           "none";
 
@@ -1819,7 +1741,7 @@
 
 
     /* =========================================
-       アカウント作成画面を開く
+       アカウント作成画面
     ========================================= */
 
     function openRegister() {
@@ -1876,7 +1798,7 @@
 
 
     /* =========================================
-       ログイン画面を開く
+       ログイン画面
     ========================================= */
 
     function openLogin() {
@@ -1933,7 +1855,7 @@
 
 
     /* =========================================
-       登録 ↔ ログイン切り替え
+       登録 ↔ ログイン
     ========================================= */
 
     function switchForm() {
@@ -1968,7 +1890,9 @@
 
       document.getElementById(
         "modalOverlay"
-      ).classList.remove("show");
+      ).classList.remove(
+        "show"
+      );
 
 
       clearFormError();
@@ -2005,7 +1929,10 @@
       error.textContent =
         text;
 
-      error.classList.add("show");
+
+      error.classList.add(
+        "show"
+      );
 
     }
 
@@ -2018,7 +1945,9 @@
         );
 
 
-      error.textContent = "";
+      error.textContent =
+        "";
+
 
       error.classList.remove(
         "show"
@@ -2063,10 +1992,12 @@
           .value;
 
 
-      if (username.length < 3) {
+      if (
+        username.length < 2
+      ) {
 
         showFormError(
-          "ユーザー名は3文字以上にしてください。"
+          "ユーザー名は2文字以上にしてください。"
         );
 
         return;
@@ -2074,7 +2005,22 @@
       }
 
 
-      if (password.length < 8) {
+      if (
+        username.length > 30
+      ) {
+
+        showFormError(
+          "ユーザー名は30文字以内にしてください。"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        password.length < 8
+      ) {
 
         showFormError(
           "パスワードは8文字以上にしてください。"
@@ -2105,7 +2051,9 @@
         );
 
 
-      button.disabled = true;
+      button.disabled =
+        true;
+
 
       button.textContent =
         "作成中……";
@@ -2115,32 +2063,33 @@
 
         const data =
           await apiRequest(
+
             "/api/register",
+
             {
-              method: "POST",
+
+              method:
+                "POST",
 
               body:
                 JSON.stringify({
+
                   username:
                     username,
 
                   password:
                     password
+
                 })
+
             }
+
           );
 
 
         if (
-          data.ok &&
-          data.user
+          data.ok
         ) {
-
-          currentUser =
-            data.user;
-
-
-          updateHeader();
 
           closeModal();
 
@@ -2153,30 +2102,51 @@
 
 
           showMessage(
-            "🎉 アカウントを作成しました！"
+            "🎉 アカウントを作成しました！ログインしてください。"
           );
+
+
+          setTimeout(() => {
+
+            openLogin();
+
+          }, 500);
 
         } else {
 
           throw new Error(
+
+            data.error ||
+
             data.message ||
+
             "アカウント作成に失敗しました。"
+
           );
 
         }
 
       } catch (error) {
 
-        console.error(error);
+        console.error(
+          "REGISTER ERROR:",
+          error
+        );
+
 
         showFormError(
+
           error.message ||
+
           "アカウント作成に失敗しました。"
+
         );
 
       } finally {
 
-        button.disabled = false;
+        button.disabled =
+          false;
+
 
         button.textContent =
           "アカウントを作成";
@@ -2220,7 +2190,9 @@
         );
 
 
-      button.disabled = true;
+      button.disabled =
+        true;
+
 
       button.textContent =
         "ログイン中……";
@@ -2230,19 +2202,27 @@
 
         const data =
           await apiRequest(
+
             "/api/login",
+
             {
-              method: "POST",
+
+              method:
+                "POST",
 
               body:
                 JSON.stringify({
+
                   username:
                     username,
 
                   password:
                     password
+
                 })
+
             }
+
           );
 
 
@@ -2256,6 +2236,7 @@
 
 
           updateHeader();
+
 
           closeModal();
 
@@ -2274,24 +2255,38 @@
         } else {
 
           throw new Error(
+
+            data.error ||
+
             data.message ||
+
             "ログインに失敗しました。"
+
           );
 
         }
 
       } catch (error) {
 
-        console.error(error);
+        console.error(
+          "LOGIN ERROR:",
+          error
+        );
+
 
         showFormError(
+
           error.message ||
+
           "ログインに失敗しました。"
+
         );
 
       } finally {
 
-        button.disabled = false;
+        button.disabled =
+          false;
+
 
         button.textContent =
           "ログイン";
@@ -2310,14 +2305,20 @@
       try {
 
         await apiRequest(
+
           "/api/logout",
+
           {
-            method: "POST"
+            method:
+              "POST"
           }
+
         );
 
 
-        currentUser = null;
+        currentUser =
+          null;
+
 
         updateHeader();
 
@@ -2326,11 +2327,17 @@
           "ログアウトしました。"
         );
 
+
       } catch (error) {
 
-        console.error(error);
+        console.error(
+          "LOGOUT ERROR:",
+          error
+        );
+
 
         showMessage(
+          error.message ||
           "ログアウトに失敗しました。"
         );
 
@@ -2340,10 +2347,10 @@
 
 
     /* =========================================
-       質問
+       質問投稿
     ========================================= */
 
-    function askQuestion() {
+    async function askQuestion() {
 
       const input =
         document.getElementById(
@@ -2355,7 +2362,13 @@
         input.value.trim();
 
 
-      if (question === "") {
+      /* ---------------------------------------
+         入力チェック
+      --------------------------------------- */
+
+      if (
+        question === ""
+      ) {
 
         showMessage(
           "質問を入力してください！"
@@ -2368,9 +2381,24 @@
       }
 
 
-      /*
-       * 質問するにはログインが必要
-       */
+      if (
+        question.length > 500
+      ) {
+
+        showMessage(
+          "質問は500文字以内にしてください。"
+        );
+
+        input.focus();
+
+        return;
+
+      }
+
+
+      /* ---------------------------------------
+         ログイン確認
+      --------------------------------------- */
 
       if (!currentUser) {
 
@@ -2386,14 +2414,353 @@
       }
 
 
-      /*
-       * ここから先は質問APIを
-       * 後で追加する。
-       */
+      const button =
+        document.querySelector(
+          ".ask-button"
+        );
 
-      showMessage(
-        "ログイン確認OK！質問APIは次の段階で接続します。"
-      );
+
+      button.disabled =
+        true;
+
+
+      button.textContent =
+        "投稿中……";
+
+
+      try {
+
+        const data =
+          await apiRequest(
+
+            "/api/questions",
+
+            {
+
+              method:
+                "POST",
+
+              body:
+                JSON.stringify({
+
+                  question:
+                    question
+
+                })
+
+            }
+
+          );
+
+
+        if (
+          data.ok
+        ) {
+
+          input.value =
+            "";
+
+
+          showMessage(
+            "🎉 質問を投稿しました！"
+          );
+
+
+          await loadQuestions();
+
+        } else {
+
+          throw new Error(
+
+            data.error ||
+
+            data.message ||
+
+            "質問の投稿に失敗しました。"
+
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "QUESTION CREATE ERROR:",
+          error
+        );
+
+
+        showMessage(
+
+          error.message ||
+
+          "質問の投稿に失敗しました。"
+
+        );
+
+      } finally {
+
+        button.disabled =
+          false;
+
+
+        button.textContent =
+          "質問する";
+
+      }
+
+    }
+
+
+    /* =========================================
+       質問一覧取得
+    ========================================= */
+
+    async function loadQuestions() {
+
+      const list =
+        document.getElementById(
+          "questionsList"
+        );
+
+
+      if (!list) {
+        return;
+      }
+
+
+      /* ---------------------------------------
+         読み込み中
+      --------------------------------------- */
+
+      list.innerHTML = `
+
+        <div
+          style="
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: #7b8494;
+          "
+        >
+          質問を読み込んでいます……
+        </div>
+
+      `;
+
+
+      try {
+
+        const data =
+          await apiRequest(
+            "/api/questions"
+          );
+
+
+        if (
+          !data.ok ||
+          !Array.isArray(
+            data.questions
+          )
+        ) {
+
+          throw new Error(
+
+            data.error ||
+
+            "質問一覧を取得できませんでした。"
+
+          );
+
+        }
+
+
+        /* -------------------------------------
+           0件
+        ------------------------------------- */
+
+        if (
+          data.questions.length === 0
+        ) {
+
+          list.innerHTML = `
+
+            <div
+              style="
+                grid-column: 1 / -1;
+                text-align: center;
+                padding: 50px 20px;
+                background: white;
+                border: 1px solid #e5e9f0;
+                border-radius: 18px;
+                color: #7b8494;
+              "
+            >
+
+              <div
+                style="
+                  font-size: 40px;
+                  margin-bottom: 10px;
+                "
+              >
+                🍧
+              </div>
+
+              <div>
+                まだ質問がありません。
+              </div>
+
+              <div
+                style="
+                  font-size: 13px;
+                  margin-top: 5px;
+                "
+              >
+                最初の質問を投稿してみよう！
+              </div>
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        /* -------------------------------------
+           質問カード生成
+        ------------------------------------- */
+
+        list.innerHTML =
+          "";
+
+
+        for (
+          const question
+          of data.questions
+        ) {
+
+          const card =
+            document.createElement(
+              "article"
+            );
+
+
+          card.className =
+            "question-card";
+
+
+          /* 質問 */
+
+          const title =
+            document.createElement(
+              "h3"
+            );
+
+
+          title.textContent =
+            question.question;
+
+
+          /* メタ情報 */
+
+          const meta =
+            document.createElement(
+              "div"
+            );
+
+
+          meta.className =
+            "question-card-meta";
+
+
+          const user =
+            document.createElement(
+              "span"
+            );
+
+
+          user.textContent =
+            "👤 " +
+            question.username;
+
+
+          const answerCount =
+            document.createElement(
+              "span"
+            );
+
+
+          answerCount.className =
+            "answer-count";
+
+
+          const count =
+            Number(
+              question.answer_count
+            ) || 0;
+
+
+          answerCount.textContent =
+            "💬 " +
+            count +
+            "件の回答";
+
+
+          meta.appendChild(
+            user
+          );
+
+
+          meta.appendChild(
+            answerCount
+          );
+
+
+          card.appendChild(
+            title
+          );
+
+
+          card.appendChild(
+            meta
+          );
+
+
+          list.appendChild(
+            card
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "QUESTION LIST ERROR:",
+          error
+        );
+
+
+        list.innerHTML = `
+
+          <div
+            style="
+              grid-column: 1 / -1;
+              text-align: center;
+              padding: 40px;
+              background: white;
+              border: 1px solid #e5e9f0;
+              border-radius: 18px;
+              color: #d33b3b;
+            "
+          >
+            質問一覧を読み込めませんでした。
+          </div>
+
+        `;
+
+      }
 
     }
 
@@ -2489,7 +2856,7 @@
 
 
     /* =========================================
-       Enterキーで質問
+       Enterキー
     ========================================= */
 
     document
@@ -2505,6 +2872,8 @@
             "Enter"
           ) {
 
+            event.preventDefault();
+
             askQuestion();
 
           }
@@ -2514,7 +2883,7 @@
 
 
     /* =========================================
-       Escキーでモーダルを閉じる
+       Escキー
     ========================================= */
 
     document.addEventListener(
@@ -2534,11 +2903,12 @@
 
 
     /* =========================================
-       ページ読み込み時
-       ログイン状態を確認
+       ページ読み込み
     ========================================= */
 
     checkLogin();
+
+    loadQuestions();
 
   </script>
 
