@@ -1,282 +1,1374 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KakigooriAI</title>
+  <meta charset="UTF-8">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body {
-            margin: 0;
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Noto Sans JP",
-                sans-serif;
-            background: #f5f7fb;
-            color: #222;
-        }
+  <meta
+    name="description"
+    content="KAKIGOORI AI - みんなで育てる日本語理解AI"
+  >
 
-        /* ヘッダー */
-        header {
-            height: 72px;
-            background: white;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            border-bottom: 1px solid #e8eaf0;
-        }
+  <title>KAKIGOORI AI</title>
 
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-        }
+  <style>
+    /* =========================
+       基本設定
+    ========================= */
 
-        /* チャット全体 */
-        .chat {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 24px 16px 110px;
-        }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        /* AIメッセージ */
-        .message {
-            display: flex;
-            margin-bottom: 18px;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .message.ai {
-            justify-content: flex-start;
-        }
+    body {
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans JP",
+        sans-serif;
 
-        .message.user {
-            justify-content: flex-end;
-        }
+      background: #f7f9fc;
+      color: #172033;
+      line-height: 1.7;
+    }
 
-        .bubble {
-            max-width: 75%;
-            padding: 15px 18px;
-            border-radius: 22px;
-            line-height: 1.6;
-            font-size: 16px;
-            word-break: break-word;
-        }
+    button,
+    input {
+      font: inherit;
+    }
 
-        .ai .bubble {
-            background: white;
-            border: 1px solid #e7e9ef;
-            border-bottom-left-radius: 7px;
-        }
+    button {
+      cursor: pointer;
+    }
 
-        .user .bubble {
-            background: #e9f3ff;
-            border-bottom-right-radius: 7px;
-        }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        /* 入力エリア */
-        .input-area {
-            position: fixed;
-            left: 0;
-            right: 0;
-            bottom: 0;
 
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
+    /* =========================
+       ヘッダー
+    ========================= */
 
-            padding: 12px 16px;
-            border-top: 1px solid #e8eaf0;
-        }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
 
-        .input-box {
-            max-width: 900px;
-            margin: 0 auto;
+      width: 100%;
 
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
 
-        /* 入力欄 */
-        #messageInput {
-            flex: 1;
-            min-width: 0;
+      border-bottom: 1px solid #e7ebf2;
+    }
 
-            height: 52px;
-            border: 1px solid #dfe3eb;
-            border-radius: 26px;
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
 
-            padding: 0 20px;
-            font-size: 16px;
-            outline: none;
+      height: 72px;
 
-            background: #f8f9fc;
-        }
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-        #messageInput:focus {
-            border-color: #9fc7ff;
-            background: white;
-        }
+      padding: 0 24px;
+    }
 
-        /* 送信ボタン */
-        #sendButton {
-            width: 52px;
-            height: 52px;
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
 
-            border: none;
-            border-radius: 50%;
+      font-weight: 800;
+      font-size: 20px;
 
-            background: #222;
-            color: white;
+      letter-spacing: 0.5px;
+    }
 
-            font-size: 20px;
-            cursor: pointer;
+    .logo-icon {
+      font-size: 30px;
+    }
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-            flex-shrink: 0;
+    .nav-button {
+      border: none;
+      background: transparent;
 
-            transition: transform 0.1s;
-        }
+      padding: 9px 14px;
+      border-radius: 10px;
 
-        #sendButton:active {
-            transform: scale(0.92);
-        }
+      color: #4c566a;
+      font-weight: 600;
 
-        /* スマホ対応 */
-        @media (max-width: 600px) {
-            header {
-                height: 64px;
-                padding: 0 16px;
-            }
+      transition: 0.2s;
+    }
 
-            .logo {
-                font-size: 21px;
-            }
+    .nav-button:hover {
+      background: #f0f3f8;
+      color: #172033;
+    }
 
-            .chat {
-                padding: 18px 12px 100px;
-            }
+    .nav-primary {
+      background: #172033;
+      color: white;
+    }
 
-            .bubble {
-                max-width: 85%;
-                font-size: 15px;
-                padding: 13px 16px;
-            }
+    .nav-primary:hover {
+      background: #29344a;
+      color: white;
+    }
 
-            #messageInput {
-                height: 50px;
-            }
 
-            #sendButton {
-                width: 50px;
-                height: 50px;
-            }
-        }
-    </style>
+    /* =========================
+       ヒーロー
+    ========================= */
+
+    .hero {
+      min-height: 650px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 80px 24px 100px;
+
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(126, 211, 255, 0.25),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 80% 30%,
+          rgba(194, 160, 255, 0.22),
+          transparent 30%
+        ),
+        linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #f5f8ff 100%
+        );
+    }
+
+    .hero-inner {
+      width: 100%;
+      max-width: 900px;
+
+      text-align: center;
+    }
+
+    .hero-icon {
+      font-size: 76px;
+
+      margin-bottom: 10px;
+
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 8vw, 78px);
+
+      line-height: 1.05;
+
+      font-weight: 900;
+
+      letter-spacing: -2px;
+
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      background:
+        linear-gradient(
+          90deg,
+          #536dfe,
+          #8b5cf6,
+          #ec4899
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(18px, 3vw, 25px);
+
+      font-weight: 700;
+
+      margin-bottom: 12px;
+    }
+
+    .hero-description {
+      max-width: 650px;
+      margin: 0 auto 35px;
+
+      color: #667085;
+
+      font-size: 16px;
+    }
+
+
+    /* =========================
+       質問ボックス
+    ========================= */
+
+    .question-box {
+      max-width: 760px;
+      margin: 0 auto;
+
+      background: white;
+
+      border: 1px solid #e1e6ef;
+
+      border-radius: 20px;
+
+      padding: 10px;
+
+      display: flex;
+      align-items: center;
+
+      box-shadow:
+        0 15px 45px rgba(30, 50, 90, 0.10);
+    }
+
+    .question-input {
+      flex: 1;
+
+      border: none;
+      outline: none;
+
+      padding: 16px 18px;
+
+      min-width: 0;
+
+      color: #172033;
+
+      background: transparent;
+    }
+
+    .question-input::placeholder {
+      color: #9aa4b5;
+    }
+
+    .ask-button {
+      border: none;
+
+      padding: 14px 22px;
+
+      border-radius: 13px;
+
+      background: #172033;
+      color: white;
+
+      font-weight: 800;
+
+      transition:
+        transform 0.15s,
+        background 0.15s;
+    }
+
+    .ask-button:hover {
+      background: #29344a;
+      transform: translateY(-1px);
+    }
+
+    .ask-button:active {
+      transform: translateY(1px);
+    }
+
+    .quick-question {
+      margin-top: 16px;
+
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      gap: 8px;
+    }
+
+    .quick-button {
+      border: 1px solid #dfe5ef;
+
+      background: rgba(255, 255, 255, 0.8);
+
+      color: #596579;
+
+      padding: 7px 12px;
+
+      border-radius: 999px;
+
+      font-size: 13px;
+
+      transition: 0.2s;
+    }
+
+    .quick-button:hover {
+      background: white;
+      border-color: #b9c4d5;
+      color: #172033;
+    }
+
+
+    /* =========================
+       メインコンテンツ
+    ========================= */
+
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+
+      padding: 80px 24px;
+    }
+
+    .section {
+      margin-bottom: 90px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      margin-bottom: 25px;
+    }
+
+    .section-title h2 {
+      font-size: 28px;
+      line-height: 1.3;
+    }
+
+    .section-title p {
+      color: #7b8494;
+      font-size: 14px;
+    }
+
+
+    /* =========================
+       質問カード
+    ========================= */
+
+    .questions {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 18px;
+    }
+
+    .question-card {
+      background: white;
+
+      border: 1px solid #e5e9f0;
+
+      border-radius: 17px;
+
+      padding: 22px;
+
+      transition:
+        transform 0.2s,
+        box-shadow 0.2s,
+        border-color 0.2s;
+    }
+
+    .question-card:hover {
+      transform: translateY(-3px);
+
+      border-color: #d2d9e5;
+
+      box-shadow:
+        0 12px 30px rgba(30, 50, 90, 0.08);
+    }
+
+    .question-card h3 {
+      font-size: 17px;
+
+      margin-bottom: 13px;
+
+      line-height: 1.5;
+    }
+
+    .question-card-meta {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      color: #8a94a5;
+
+      font-size: 12px;
+    }
+
+    .answer-count {
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       KAKIGOORI AIとは
+    ========================= */
+
+    .about-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 18px;
+    }
+
+    .about-card {
+      background: white;
+
+      border: 1px solid #e5e9f0;
+
+      border-radius: 18px;
+
+      padding: 27px;
+    }
+
+    .about-icon {
+      width: 48px;
+      height: 48px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 14px;
+
+      background: #f1f4f9;
+
+      font-size: 23px;
+
+      margin-bottom: 18px;
+    }
+
+    .about-card h3 {
+      margin-bottom: 8px;
+
+      font-size: 18px;
+    }
+
+    .about-card p {
+      color: #707a8b;
+
+      font-size: 14px;
+    }
+
+
+    /* =========================
+       仕組み
+    ========================= */
+
+    .flow {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+      gap: 14px;
+    }
+
+    .flow-card {
+      position: relative;
+
+      background: white;
+
+      border: 1px solid #e5e9f0;
+
+      border-radius: 18px;
+
+      padding: 25px;
+
+      text-align: center;
+    }
+
+    .flow-number {
+      display: inline-flex;
+
+      width: 35px;
+      height: 35px;
+
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+
+      background: #172033;
+      color: white;
+
+      font-weight: 800;
+
+      margin-bottom: 15px;
+    }
+
+    .flow-card h3 {
+      font-size: 16px;
+
+      margin-bottom: 7px;
+    }
+
+    .flow-card p {
+      font-size: 13px;
+
+      color: #747e8e;
+    }
+
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+      background: #172033;
+
+      color: white;
+
+      border-radius: 25px;
+
+      padding: 55px 30px;
+
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: clamp(26px, 4vw, 38px);
+
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      color: #c8cfdb;
+
+      max-width: 600px;
+
+      margin: 0 auto 25px;
+    }
+
+    .cta-button {
+      border: none;
+
+      background: white;
+      color: #172033;
+
+      padding: 13px 24px;
+
+      border-radius: 12px;
+
+      font-weight: 800;
+
+      transition: 0.2s;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+
+      background: #f0f2f6;
+    }
+
+
+    /* =========================
+       フッター
+    ========================= */
+
+    footer {
+      border-top: 1px solid #e5e9f0;
+
+      background: white;
+
+      padding: 35px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1180px;
+
+      margin: 0 auto;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      gap: 20px;
+    }
+
+    .footer-logo {
+      font-weight: 800;
+    }
+
+    .footer-copy {
+      color: #8a94a5;
+
+      font-size: 12px;
+    }
+
+
+    /* =========================
+       ポップアップ
+    ========================= */
+
+    .message {
+      position: fixed;
+
+      left: 50%;
+      bottom: 25px;
+
+      transform:
+        translate(-50%, 120px);
+
+      background: #172033;
+
+      color: white;
+
+      padding: 13px 20px;
+
+      border-radius: 12px;
+
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.2);
+
+      opacity: 0;
+
+      transition:
+        opacity 0.25s,
+        transform 0.25s;
+
+      z-index: 999;
+    }
+
+    .message.show {
+      opacity: 1;
+
+      transform:
+        translate(-50%, 0);
+    }
+
+
+    /* =========================
+       スマホ対応
+    ========================= */
+
+    @media (max-width: 800px) {
+
+      .header-inner {
+        height: 64px;
+
+        padding: 0 15px;
+      }
+
+      .nav-button:not(.nav-primary) {
+        display: none;
+      }
+
+      .hero {
+        min-height: 600px;
+
+        padding:
+          60px 15px 80px;
+      }
+
+      .hero-icon {
+        font-size: 60px;
+      }
+
+      .hero h1 {
+        letter-spacing: -1px;
+      }
+
+      .question-box {
+        flex-direction: column;
+
+        align-items: stretch;
+
+        padding: 8px;
+      }
+
+      .question-input {
+        width: 100%;
+      }
+
+      .ask-button {
+        width: 100%;
+      }
+
+      main {
+        padding:
+          60px 15px;
+      }
+
+      .questions,
+      .about-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .flow {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .section-title {
+        display: block;
+      }
+
+      .section-title p {
+        margin-top: 6px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 450px) {
+
+      .flow {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-description {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
+
 
 <body>
 
-    <header>
-        <div class="logo">🍧 KakigooriAI</div>
-    </header>
+  <!-- =========================
+       ヘッダー
+  ========================== -->
 
-    <main class="chat" id="chat">
+  <header>
 
-        <div class="message ai">
-            <div class="bubble">
-                こんにちは！🍧<br>
-                KakigooriAIです。<br>
-                何でも聞いてね！
-            </div>
-        </div>
+    <div class="header-inner">
 
-    </main>
+      <a href="#" class="logo">
+        <span class="logo-icon">🍧</span>
+        <span>KAKIGOORI AI</span>
+      </a>
 
-    <div class="input-area">
-        <div class="input-box">
+      <nav class="nav">
 
-            <input
-                id="messageInput"
-                type="text"
-                placeholder="メッセージを入力..."
-                autocomplete="off"
-            >
+        <button
+          class="nav-button"
+          onclick="showMessage('ログイン機能は準備中です')"
+        >
+          ログイン
+        </button>
 
-            <button id="sendButton" aria-label="送信">
-                ➤
-            </button>
+        <button
+          class="nav-button nav-primary"
+          onclick="showMessage('アカウント作成機能は準備中です')"
+        >
+          アカウント作成
+        </button>
 
-        </div>
+      </nav>
+
     </div>
 
-    <script>
-        const input = document.getElementById("messageInput");
-        const button = document.getElementById("sendButton");
-        const chat = document.getElementById("chat");
+  </header>
 
-        function sendMessage() {
-            const text = input.value.trim();
 
-            if (text === "") {
-                return;
-            }
+  <!-- =========================
+       ヒーロー
+  ========================== -->
 
-            // ユーザーのメッセージを表示
-            const userMessage = document.createElement("div");
-            userMessage.className = "message user";
+  <section class="hero">
 
-            const userBubble = document.createElement("div");
-            userBubble.className = "bubble";
-            userBubble.textContent = text;
+    <div class="hero-inner">
 
-            userMessage.appendChild(userBubble);
-            chat.appendChild(userMessage);
+      <div class="hero-icon">
+        🍧
+      </div>
 
-            // 入力欄を空にする
-            input.value = "";
+      <h1>
+        <span>KAKIGOORI AI</span>
+      </h1>
 
-            // 仮のAI返信
-            setTimeout(() => {
-                const aiMessage = document.createElement("div");
-                aiMessage.className = "message ai";
+      <p class="hero-subtitle">
+        みんなで育てる日本語理解AI
+      </p>
 
-                const aiBubble = document.createElement("div");
-                aiBubble.className = "bubble";
-                aiBubble.textContent =
-                    "これはまだテスト版だよ！🤖";
+      <p class="hero-description">
+        みんなが質問し、みんなが答え、
+        その知識をAIが学んでいく。
+        新しい形のコミュニティAIを目指します。
+      </p>
 
-                aiMessage.appendChild(aiBubble);
-                chat.appendChild(aiMessage);
 
-                window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: "smooth"
-                });
-            }, 400);
+      <!-- 質問入力 -->
 
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: "smooth"
-            });
+      <div class="question-box">
+
+        <input
+          id="questionInput"
+          class="question-input"
+          type="text"
+          placeholder="AIに質問したいことを入力してください……"
+          maxlength="500"
+        >
+
+        <button
+          class="ask-button"
+          onclick="askQuestion()"
+        >
+          質問する
+        </button>
+
+      </div>
+
+
+      <!-- サンプル質問 -->
+
+      <div class="quick-question">
+
+        <button
+          class="quick-button"
+          onclick="setQuestion('Pythonって何？中学生にも分かるように説明して')"
+        >
+          Pythonって何？
+        </button>
+
+        <button
+          class="quick-button"
+          onclick="setQuestion('なぜ空は青いの？')"
+        >
+          なぜ空は青い？
+        </button>
+
+        <button
+          class="quick-button"
+          onclick="setQuestion('三平方の定理を分かりやすく説明して')"
+        >
+          三平方の定理
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       メイン
+  ========================== -->
+
+  <main>
+
+
+    <!-- =========================
+         みんなの質問
+    ========================== -->
+
+    <section class="section">
+
+      <div class="section-title">
+
+        <div>
+          <h2>🌎 みんなの質問</h2>
+          <p>みんなが投稿した質問を見ることができます</p>
+        </div>
+
+      </div>
+
+
+      <div class="questions">
+
+
+        <article class="question-card">
+
+          <h3>
+            Pythonって何？
+            中学生にも分かるように説明して
+          </h3>
+
+          <div class="question-card-meta">
+
+            <span>
+              👤 ユーザー
+            </span>
+
+            <span class="answer-count">
+              💬 0件の回答
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <article class="question-card">
+
+          <h3>
+            なぜ空は青く見えるの？
+          </h3>
+
+          <div class="question-card-meta">
+
+            <span>
+              👤 ユーザー
+            </span>
+
+            <span class="answer-count">
+              💬 0件の回答
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <article class="question-card">
+
+          <h3>
+            AIはどうやって文章を理解しているの？
+          </h3>
+
+          <div class="question-card-meta">
+
+            <span>
+              👤 ユーザー
+            </span>
+
+            <span class="answer-count">
+              💬 0件の回答
+            </span>
+
+          </div>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         KAKIGOORI AIとは
+    ========================== -->
+
+    <section class="section">
+
+      <div class="section-title">
+
+        <div>
+          <h2>🍧 KAKIGOORI AIとは？</h2>
+          <p>みんなの知識をAIにつなげる仕組み</p>
+        </div>
+
+      </div>
+
+
+      <div class="about-grid">
+
+
+        <article class="about-card">
+
+          <div class="about-icon">
+            ❓
+          </div>
+
+          <h3>
+            みんなが質問する
+          </h3>
+
+          <p>
+            分からないことや知りたいことを
+            誰でも質問できます。
+            質問には説明の仕方などの条件も
+            自由に書けます。
+          </p>
+
+        </article>
+
+
+        <article class="about-card">
+
+          <div class="about-icon">
+            💬
+          </div>
+
+          <h3>
+            みんなが回答する
+          </h3>
+
+          <p>
+            質問を見た他のユーザーが回答します。
+            いろいろな人の知識や考え方を
+            一つの質問に集めます。
+          </p>
+
+        </article>
+
+
+        <article class="about-card">
+
+          <div class="about-icon">
+            🧠
+          </div>
+
+          <h3>
+            AIが学んでいく
+          </h3>
+
+          <p>
+            評価された回答や管理者によって
+            確認された知識を整理し、
+            AIが利用できる知識として
+            蓄積していきます。
+          </p>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         仕組み
+    ========================== -->
+
+    <section class="section">
+
+      <div class="section-title">
+
+        <div>
+          <h2>⚙️ KAKIGOORI AIの仕組み</h2>
+          <p>質問からAIの知識になるまで</p>
+        </div>
+
+      </div>
+
+
+      <div class="flow">
+
+
+        <article class="flow-card">
+
+          <div class="flow-number">
+            1
+          </div>
+
+          <h3>
+            質問
+          </h3>
+
+          <p>
+            ユーザーが
+            質問を投稿します。
+          </p>
+
+        </article>
+
+
+        <article class="flow-card">
+
+          <div class="flow-number">
+            2
+          </div>
+
+          <h3>
+            回答
+          </h3>
+
+          <p>
+            他のユーザーが
+            回答を書きます。
+          </p>
+
+        </article>
+
+
+        <article class="flow-card">
+
+          <div class="flow-number">
+            3
+          </div>
+
+          <h3>
+            評価
+          </h3>
+
+          <p>
+            Good / Badで
+            回答を評価します。
+          </p>
+
+        </article>
+
+
+        <article class="flow-card">
+
+          <div class="flow-number">
+            4
+          </div>
+
+          <h3>
+            学習
+          </h3>
+
+          <p>
+            確認された知識を
+            AIが利用します。
+          </p>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         CTA
+    ========================== -->
+
+    <section class="section">
+
+      <div class="cta">
+
+        <h2>
+          あなたの知識をAIへ。
+        </h2>
+
+        <p>
+          KAKIGOORI AIは、
+          一人だけではなく、
+          みんなで知識を集めて育てるAIを目指します。
+        </p>
+
+        <button
+          class="cta-button"
+          onclick="scrollToQuestion()"
+        >
+          質問してみる
+        </button>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================
+       フッター
+  ========================== -->
+
+  <footer>
+
+    <div class="footer-inner">
+
+      <div class="footer-logo">
+        🍧 KAKIGOORI AI
+      </div>
+
+      <div class="footer-copy">
+        © 2026 KAKIGOORI AI
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- メッセージ -->
+
+  <div
+    id="message"
+    class="message"
+  ></div>
+
+
+  <!-- =========================
+       JavaScript
+  ========================== -->
+
+  <script>
+
+    /*
+     * 現在はフロントエンドだけなので、
+     * 質問データはまだサーバーには保存されません。
+     *
+     * 後でここをAPIにつなげて、
+     *
+     * 質問
+     * ↓
+     * データベース
+     * ↓
+     * 他ユーザーが回答
+     *
+     * という仕組みにします。
+     */
+
+
+    // 質問ボタン
+
+    function askQuestion() {
+
+      const input =
+        document.getElementById("questionInput");
+
+      const question =
+        input.value.trim();
+
+
+      if (question === "") {
+
+        showMessage(
+          "質問を入力してください！"
+        );
+
+        input.focus();
+
+        return;
+      }
+
+
+      /*
+       * 現在はまだサーバーがないため、
+       * 仮メッセージを表示します。
+       */
+
+      showMessage(
+        "質問機能は現在準備中です！"
+      );
+
+    }
+
+
+    // サンプル質問を入力欄に入れる
+
+    function setQuestion(text) {
+
+      const input =
+        document.getElementById("questionInput");
+
+      input.value = text;
+
+      input.focus();
+
+    }
+
+
+    // 質問欄までスクロール
+
+    function scrollToQuestion() {
+
+      window.scrollTo({
+
+        top: 0,
+
+        behavior: "smooth"
+
+      });
+
+
+      setTimeout(() => {
+
+        document
+          .getElementById("questionInput")
+          .focus();
+
+      }, 500);
+
+    }
+
+
+    // メッセージ表示
+
+    let messageTimer;
+
+
+    function showMessage(text) {
+
+      const message =
+        document.getElementById("message");
+
+
+      message.textContent = text;
+
+      message.classList.add("show");
+
+
+      clearTimeout(messageTimer);
+
+
+      messageTimer =
+        setTimeout(() => {
+
+          message.classList.remove("show");
+
+        }, 2500);
+
+    }
+
+
+    // Enterキーで質問
+
+    document
+      .getElementById("questionInput")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (event.key === "Enter") {
+
+            askQuestion();
+
+          }
+
         }
+      );
 
-        // 送信ボタン
-        button.addEventListener("click", sendMessage);
-
-        // Enterキーでも送信
-        input.addEventListener("keydown", (event) => {
-            if (event.key === "Enter") {
-                sendMessage();
-            }
-        });
-    </script>
+  </script>
 
 </body>
 </html>
