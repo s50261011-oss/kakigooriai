@@ -1,1406 +1,1292 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta
-    name="description"
-    content="KAKIGOORI AI - みんなで育てる日本語理解AI"
-  >
-
-  <title>KAKIGOORI AI</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        "Noto Sans JP",
-        sans-serif;
-
-      background: #f7f9fc;
-      color: #172033;
-      line-height: 1.7;
-    }
-
-    button,
-    input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      width: 100%;
-
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(12px);
-
-      border-bottom: 1px solid #e7ebf2;
-    }
-
-    .header-inner {
-      max-width: 1180px;
-      margin: 0 auto;
-
-      height: 72px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 0 24px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      font-weight: 800;
-      font-size: 20px;
-
-      letter-spacing: 0.5px;
-    }
-
-    .logo-icon {
-      font-size: 30px;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .nav-button {
-      border: none;
-      background: transparent;
-
-      padding: 9px 14px;
-      border-radius: 10px;
-
-      color: #4c566a;
-      font-weight: 600;
-
-      transition: 0.2s;
-    }
-
-    .nav-button:hover {
-      background: #f0f3f8;
-      color: #172033;
-    }
-
-    .nav-primary {
-      background: #172033;
-      color: white;
-    }
-
-    .nav-primary:hover {
-      background: #29344a;
-      color: white;
-    }
-
-    .user-menu {
-      display: none;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .user-name {
-      color: #596579;
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .hero {
-      min-height: 650px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 80px 24px 100px;
-
-      background:
-        radial-gradient(
-          circle at 20% 20%,
-          rgba(126, 211, 255, 0.25),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 80% 30%,
-          rgba(194, 160, 255, 0.22),
-          transparent 30%
-        ),
-        linear-gradient(
-          180deg,
-          #ffffff 0%,
-          #f5f8ff 100%
-        );
-    }
+<meta charset="UTF-8">
 
-    .hero-inner {
-      width: 100%;
-      max-width: 900px;
-      text-align: center;
-    }
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-    .hero-icon {
-      font-size: 76px;
-      margin-bottom: 10px;
+<title>KAKIGOORI AI</title>
 
-      animation: float 3s ease-in-out infinite;
-    }
+<meta
+  name="description"
+  content="みんなの知識で育つ、みんなのAI。KAKIGOORI AI"
+>
 
-    @keyframes float {
-      0%,
-      100% {
-        transform: translateY(0);
-      }
+<style>
 
-      50% {
-        transform: translateY(-8px);
-      }
-    }
+* {
+  box-sizing: border-box;
+}
 
-    .hero h1 {
-      font-size: clamp(42px, 8vw, 78px);
-      line-height: 1.05;
+html {
+  scroll-behavior: smooth;
+}
 
-      font-weight: 900;
-      letter-spacing: -2px;
+body {
+  margin: 0;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Noto Sans JP",
+    sans-serif;
 
-      margin-bottom: 22px;
-    }
+  background:
+    linear-gradient(
+      180deg,
+      #f8fbff 0%,
+      #ffffff 45%,
+      #f5f9ff 100%
+    );
 
-    .hero h1 span {
-      background:
-        linear-gradient(
-          90deg,
-          #536dfe,
-          #8b5cf6,
-          #ec4899
-        );
+  color: #172033;
+}
 
-      -webkit-background-clip: text;
-      background-clip: text;
 
-      color: transparent;
-    }
+/* =========================
+   Header
+========================= */
 
-    .hero-subtitle {
-      font-size: clamp(18px, 3vw, 25px);
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
-      font-weight: 700;
+  background: rgba(255,255,255,0.88);
 
-      margin-bottom: 12px;
-    }
+  backdrop-filter: blur(18px);
 
-    .hero-description {
-      max-width: 650px;
-      margin: 0 auto 35px;
+  border-bottom:
+    1px solid rgba(20,40,80,0.08);
+}
 
-      color: #667085;
+.header-inner {
+  max-width: 1180px;
+  margin: auto;
 
-      font-size: 16px;
-    }
+  padding: 16px 24px;
 
-    .question-box {
-      max-width: 760px;
-      margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
 
-      background: white;
+.logo {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
 
-      border: 1px solid #e1e6ef;
+  color: #2376ff;
 
-      border-radius: 20px;
+  cursor: pointer;
+}
 
-      padding: 10px;
+.logo span {
+  color: #172033;
+}
 
-      display: flex;
-      align-items: center;
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
-      box-shadow:
-        0 15px 45px rgba(30, 50, 90, 0.10);
-    }
+.user-name {
+  font-size: 14px;
+  color: #59657a;
+}
 
-    .question-input {
-      flex: 1;
 
-      border: none;
-      outline: none;
+/* =========================
+   Buttons
+========================= */
 
-      padding: 16px 18px;
+button {
+  border: none;
+  cursor: pointer;
 
-      min-width: 0;
+  font: inherit;
+}
 
-      color: #172033;
+.btn {
+  padding: 11px 18px;
 
-      background: transparent;
-    }
+  border-radius: 12px;
 
-    .question-input::placeholder {
-      color: #9aa4b5;
-    }
+  font-weight: 700;
 
-    .ask-button {
-      border: none;
+  transition:
+    transform .15s,
+    box-shadow .15s,
+    opacity .15s;
+}
 
-      padding: 14px 22px;
+.btn:hover {
+  transform: translateY(-1px);
+}
 
-      border-radius: 13px;
+.btn-primary {
+  color: white;
 
-      background: #172033;
-      color: white;
+  background:
+    linear-gradient(
+      135deg,
+      #2376ff,
+      #5b9aff
+    );
 
-      font-weight: 800;
+  box-shadow:
+    0 8px 24px rgba(35,118,255,.22);
+}
 
-      transition:
-        transform 0.15s,
-        background 0.15s;
-    }
+.btn-secondary {
+  background: #eef4ff;
+  color: #2465d8;
+}
 
-    .ask-button:hover {
-      background: #29344a;
-      transform: translateY(-1px);
-    }
+.btn-ghost {
+  background: transparent;
+  color: #59657a;
+}
 
-    .ask-button:active {
-      transform: translateY(1px);
-    }
 
-    .ask-button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
+/* =========================
+   Hero
+========================= */
 
-    .quick-question {
-      margin-top: 16px;
+.hero {
+  max-width: 1000px;
+  margin: auto;
 
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
+  padding:
+    90px 24px
+    70px;
 
-      gap: 8px;
-    }
+  text-align: center;
+}
 
-    .quick-button {
-      border: 1px solid #dfe5ef;
+.badge {
+  display: inline-block;
 
-      background: rgba(255, 255, 255, 0.8);
+  padding: 8px 14px;
 
-      color: #596579;
+  border-radius: 999px;
 
-      padding: 7px 12px;
+  background: #eaf2ff;
+  color: #2671ed;
 
-      border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
 
-      font-size: 13px;
+  margin-bottom: 20px;
+}
 
-      transition: 0.2s;
-    }
+.hero h1 {
+  margin: 0;
 
-    .quick-button:hover {
-      background: white;
-      border-color: #b9c4d5;
-      color: #172033;
-    }
+  font-size:
+    clamp(42px, 8vw, 76px);
 
-    main {
-      max-width: 1180px;
-      margin: 0 auto;
+  line-height: 1.05;
 
-      padding: 80px 24px;
-    }
+  letter-spacing: -3px;
 
-    .section {
-      margin-bottom: 90px;
-    }
+  background:
+    linear-gradient(
+      135deg,
+      #2376ff,
+      #7a8cff
+    );
 
-    .section-title {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
+  -webkit-background-clip: text;
+  background-clip: text;
 
-      gap: 20px;
+  color: transparent;
+}
 
-      margin-bottom: 25px;
-    }
+.hero-subtitle {
+  margin:
+    22px auto
+    38px;
 
-    .section-title h2 {
-      font-size: 28px;
-      line-height: 1.3;
-    }
+  max-width: 700px;
 
-    .section-title p {
-      color: #7b8494;
-      font-size: 14px;
-    }
+  color: #69758a;
 
-    .questions {
-      display: grid;
+  font-size: 18px;
+  line-height: 1.8;
+}
 
-      grid-template-columns:
-        repeat(3, minmax(0, 1fr));
 
-      gap: 18px;
-    }
+/* =========================
+   Question Box
+========================= */
 
-    .question-card {
-      background: white;
+.ask-box {
+  max-width: 760px;
+  margin: auto;
 
-      border: 1px solid #e5e9f0;
+  background: white;
 
-      border-radius: 17px;
+  border:
+    1px solid rgba(30,70,130,.10);
 
-      padding: 22px;
+  border-radius: 24px;
 
-      transition:
-        transform 0.2s,
-        box-shadow 0.2s,
-        border-color 0.2s;
-    }
+  padding: 10px;
 
-    .question-card:hover {
-      transform: translateY(-3px);
+  box-shadow:
+    0 20px 60px rgba(31,74,145,.10);
 
-      border-color: #d2d9e5;
+  display: flex;
+  gap: 10px;
+}
 
-      box-shadow:
-        0 12px 30px rgba(30, 50, 90, 0.08);
-    }
+.ask-box textarea {
+  flex: 1;
 
-    .question-card h3 {
-      font-size: 17px;
+  border: none;
+  outline: none;
 
-      margin-bottom: 13px;
+  resize: none;
 
-      line-height: 1.5;
+  min-height: 58px;
 
-      word-break: break-word;
-    }
+  padding:
+    17px 16px;
 
-    .question-card-meta {
-      display: flex;
+  font-size: 16px;
 
-      align-items: center;
+  font-family: inherit;
+}
 
-      justify-content: space-between;
+.ask-box button {
+  min-width: 110px;
+}
 
-      gap: 10px;
 
-      color: #8a94a5;
+/* =========================
+   Samples
+========================= */
 
-      font-size: 12px;
-    }
+.samples {
+  max-width: 760px;
 
-    .answer-count {
-      font-weight: 700;
-      white-space: nowrap;
-    }
+  margin:
+    16px auto 0;
 
-    .about-grid {
-      display: grid;
+  display: flex;
+  flex-wrap: wrap;
 
-      grid-template-columns:
-        repeat(3, minmax(0, 1fr));
+  justify-content: center;
 
-      gap: 18px;
-    }
+  gap: 8px;
+}
 
-    .about-card {
-      background: white;
+.sample {
+  padding: 8px 13px;
 
-      border: 1px solid #e5e9f0;
+  border-radius: 999px;
 
-      border-radius: 18px;
+  background: white;
 
-      padding: 27px;
-    }
+  border:
+    1px solid #e3e9f3;
 
-    .about-icon {
-      width: 48px;
-      height: 48px;
+  color: #637087;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  font-size: 13px;
 
-      border-radius: 14px;
+  cursor: pointer;
 
-      background: #f1f4f9;
+  transition: .15s;
+}
 
-      font-size: 23px;
+.sample:hover {
+  border-color: #80aaff;
+  color: #2376ff;
+}
 
-      margin-bottom: 18px;
-    }
 
-    .about-card h3 {
-      margin-bottom: 8px;
+/* =========================
+   Sections
+========================= */
 
-      font-size: 18px;
-    }
+section {
+  max-width: 1180px;
 
-    .about-card p {
-      color: #707a8b;
+  margin: auto;
 
-      font-size: 14px;
-    }
+  padding:
+    70px 24px;
+}
 
-    .flow {
-      display: grid;
+.section-title {
+  text-align: center;
 
-      grid-template-columns:
-        repeat(4, minmax(0, 1fr));
+  font-size: 32px;
 
-      gap: 14px;
-    }
+  margin:
+    0 0 10px;
+}
 
-    .flow-card {
-      position: relative;
+.section-description {
+  text-align: center;
 
-      background: white;
+  color: #718097;
 
-      border: 1px solid #e5e9f0;
+  margin:
+    0 auto 38px;
 
-      border-radius: 18px;
+  max-width: 650px;
 
-      padding: 25px;
+  line-height: 1.7;
+}
 
-      text-align: center;
-    }
 
-    .flow-number {
-      display: inline-flex;
+/* =========================
+   Questions
+========================= */
 
-      width: 35px;
-      height: 35px;
+.questions {
+  display: grid;
 
-      align-items: center;
-      justify-content: center;
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(280px, 1fr)
+    );
 
-      border-radius: 50%;
+  gap: 18px;
+}
 
-      background: #172033;
-      color: white;
+.question-card {
+  background: white;
 
-      font-weight: 800;
+  border:
+    1px solid #e5ebf5;
 
-      margin-bottom: 15px;
-    }
+  border-radius: 18px;
 
-    .flow-card h3 {
-      font-size: 16px;
+  padding: 22px;
 
-      margin-bottom: 7px;
-    }
+  cursor: pointer;
 
-    .flow-card p {
-      font-size: 13px;
+  transition:
+    transform .18s,
+    box-shadow .18s,
+    border-color .18s;
+}
 
-      color: #747e8e;
-    }
+.question-card:hover {
+  transform: translateY(-3px);
 
-    .cta {
-      background: #172033;
+  border-color: #a9c6ff;
 
-      color: white;
+  box-shadow:
+    0 15px 40px rgba(35,90,170,.10);
+}
 
-      border-radius: 25px;
+.question-text {
+  font-size: 17px;
 
-      padding: 55px 30px;
+  line-height: 1.7;
 
-      text-align: center;
-    }
+  font-weight: 700;
 
-    .cta h2 {
-      font-size: clamp(26px, 4vw, 38px);
+  margin-bottom: 16px;
 
-      margin-bottom: 12px;
-    }
+  white-space: pre-wrap;
 
-    .cta p {
-      color: #c8cfdb;
+  word-break: break-word;
+}
 
-      max-width: 600px;
+.question-meta {
+  display: flex;
 
-      margin: 0 auto 25px;
-    }
+  align-items: center;
 
-    .cta-button {
-      border: none;
+  justify-content: space-between;
 
-      background: white;
-      color: #172033;
+  gap: 10px;
 
-      padding: 13px 24px;
+  color: #7a8699;
 
-      border-radius: 12px;
+  font-size: 13px;
+}
 
-      font-weight: 800;
+.answer-count {
+  padding:
+    5px 9px;
 
-      transition: 0.2s;
-    }
+  background: #eef5ff;
 
-    .cta-button:hover {
-      transform: translateY(-2px);
+  color: #3678dc;
 
-      background: #f0f2f6;
-    }
+  border-radius: 999px;
 
-    footer {
-      border-top: 1px solid #e5e9f0;
+  font-weight: 700;
+}
 
-      background: white;
+.loading {
+  text-align: center;
 
-      padding: 35px 24px;
-    }
+  color: #78859a;
 
-    .footer-inner {
-      max-width: 1180px;
+  padding: 50px;
+}
 
-      margin: 0 auto;
+.empty {
+  text-align: center;
 
-      display: flex;
+  color: #78859a;
 
-      justify-content: space-between;
+  padding: 50px;
 
-      align-items: center;
+  background: white;
 
-      gap: 20px;
-    }
+  border-radius: 20px;
 
-    .footer-logo {
-      font-weight: 800;
-    }
+  border: 1px dashed #d8e1ef;
+}
 
-    .footer-copy {
-      color: #8a94a5;
 
-      font-size: 12px;
-    }
+/* =========================
+   About
+========================= */
 
-    .message {
-      position: fixed;
+.about-grid {
+  display: grid;
 
-      left: 50%;
-      bottom: 25px;
+  grid-template-columns:
+    repeat(3, 1fr);
 
-      transform:
-        translate(-50%, 120px);
+  gap: 18px;
+}
 
-      background: #172033;
+.about-card {
+  background: white;
 
-      color: white;
+  padding: 28px;
 
-      padding: 13px 20px;
+  border-radius: 20px;
 
-      border-radius: 12px;
+  border:
+    1px solid #e5ebf5;
+}
 
-      box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.2);
+.about-icon {
+  font-size: 30px;
 
-      opacity: 0;
+  margin-bottom: 15px;
+}
 
-      transition:
-        opacity 0.25s,
-        transform 0.25s;
+.about-card h3 {
+  margin:
+    0 0 10px;
+}
 
-      z-index: 9999;
-    }
+.about-card p {
+  margin: 0;
 
-    .message.show {
-      opacity: 1;
+  color: #6c788d;
 
-      transform:
-        translate(-50%, 0);
-    }
+  line-height: 1.7;
+}
 
-    .modal-overlay {
-      position: fixed;
 
-      inset: 0;
+/* =========================
+   Flow
+========================= */
 
-      z-index: 5000;
+.flow {
+  display: grid;
 
-      display: none;
+  grid-template-columns:
+    repeat(4, 1fr);
 
-      align-items: center;
-      justify-content: center;
+  gap: 15px;
+}
 
-      padding: 20px;
+.flow-card {
+  text-align: center;
 
-      background: rgba(23, 32, 51, 0.55);
+  padding: 25px 15px;
 
-      backdrop-filter: blur(5px);
-    }
+  background: white;
 
-    .modal-overlay.show {
-      display: flex;
-    }
+  border:
+    1px solid #e5ebf5;
 
-    .modal {
-      width: 100%;
-      max-width: 430px;
+  border-radius: 20px;
+}
 
-      background: white;
+.flow-number {
+  width: 42px;
+  height: 42px;
 
-      border-radius: 22px;
+  margin: 0 auto 15px;
 
-      padding: 32px;
+  border-radius: 50%;
 
-      box-shadow:
-        0 25px 70px rgba(0, 0, 0, 0.2);
+  display: grid;
+  place-items: center;
 
-      animation: modalIn 0.2s ease;
-    }
+  background: #eaf2ff;
 
-    @keyframes modalIn {
-      from {
-        opacity: 0;
-        transform: translateY(12px) scale(0.98);
-      }
+  color: #2376ff;
 
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
+  font-weight: 900;
+}
 
-    .modal-header {
-      display: flex;
 
-      justify-content: space-between;
+/* =========================
+   Footer
+========================= */
 
-      align-items: center;
+footer {
+  margin-top: 50px;
 
-      margin-bottom: 25px;
-    }
+  padding:
+    35px 24px;
 
-    .modal-header h2 {
-      font-size: 25px;
-    }
+  text-align: center;
 
-    .modal-close {
-      width: 36px;
-      height: 36px;
+  color: #7a8699;
 
-      border: none;
+  border-top:
+    1px solid #e5ebf5;
+}
 
-      border-radius: 50%;
 
-      background: #f1f3f7;
+/* =========================
+   Modal
+========================= */
 
-      color: #667085;
+.modal-bg {
+  position: fixed;
 
-      font-size: 20px;
-    }
+  inset: 0;
 
-    .modal-close:hover {
-      background: #e8ebf1;
-    }
+  z-index: 500;
 
-    .form-group {
-      margin-bottom: 17px;
-    }
+  background:
+    rgba(12,22,40,.45);
 
-    .form-group label {
-      display: block;
+  backdrop-filter:
+    blur(6px);
 
-      margin-bottom: 7px;
+  display: none;
 
-      font-size: 14px;
+  align-items: center;
+  justify-content: center;
 
-      font-weight: 700;
-    }
+  padding: 20px;
+}
 
-    .form-input {
-      width: 100%;
+.modal-bg.active {
+  display: flex;
+}
 
-      border: 1px solid #dce2eb;
+.modal {
+  width: min(560px, 100%);
 
-      border-radius: 11px;
+  max-height: 90vh;
 
-      outline: none;
+  overflow-y: auto;
 
-      padding: 12px 14px;
+  background: white;
 
-      background: #fafbfc;
+  border-radius: 24px;
 
-      color: #172033;
-    }
+  padding: 30px;
 
-    .form-input:focus {
-      border-color: #8b5cf6;
+  box-shadow:
+    0 30px 90px rgba(0,0,0,.20);
 
-      background: white;
+  position: relative;
+}
 
-      box-shadow:
-        0 0 0 3px rgba(139, 92, 246, 0.1);
-    }
+.modal-close {
+  position: absolute;
 
-    .form-button {
-      width: 100%;
+  right: 18px;
+  top: 15px;
 
-      border: none;
+  width: 36px;
+  height: 36px;
 
-      border-radius: 12px;
+  border-radius: 50%;
 
-      padding: 13px;
+  background: #f1f4f8;
 
-      margin-top: 5px;
+  color: #667386;
 
-      background: #172033;
+  font-size: 20px;
+}
 
-      color: white;
+.modal h2 {
+  margin:
+    0 0 22px;
+}
 
-      font-weight: 800;
-    }
+.form-group {
+  margin-bottom: 16px;
+}
 
-    .form-button:hover {
-      background: #29344a;
-    }
+.form-group label {
+  display: block;
 
-    .form-button:disabled {
-      opacity: 0.6;
+  font-size: 13px;
 
-      cursor: not-allowed;
-    }
+  font-weight: 700;
 
-    .form-switch {
-      text-align: center;
+  margin-bottom: 7px;
 
-      margin-top: 18px;
+  color: #5f6b7e;
+}
 
-      color: #7b8494;
+.form-group input,
+.form-group textarea {
+  width: 100%;
 
-      font-size: 13px;
-    }
+  padding:
+    13px 14px;
 
-    .form-switch button {
-      border: none;
+  border:
+    1px solid #dce4ef;
 
-      background: transparent;
+  border-radius: 12px;
 
-      color: #6d4aff;
+  outline: none;
 
-      font-weight: 800;
-    }
+  font-family: inherit;
 
-    .form-error {
-      display: none;
+  font-size: 15px;
+}
 
-      margin-bottom: 15px;
+.form-group textarea {
+  resize: vertical;
 
-      padding: 10px 12px;
+  min-height: 130px;
+}
 
-      border-radius: 10px;
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #70a0ff;
 
-      background: #fff1f1;
+  box-shadow:
+    0 0 0 3px
+    rgba(35,118,255,.10);
+}
 
-      color: #d33b3b;
+.form-button {
+  width: 100%;
 
-      font-size: 13px;
-    }
+  padding: 13px;
 
-    .form-error.show {
-      display: block;
-    }
+  border-radius: 12px;
 
-    @media (max-width: 800px) {
+  font-weight: 800;
 
-      .header-inner {
-        height: 64px;
+  color: white;
 
-        padding: 0 15px;
-      }
+  background: #2376ff;
+}
 
-      .nav-button:not(.nav-primary) {
-        display: none;
-      }
+.switch-auth {
+  text-align: center;
 
-      .hero {
-        min-height: 600px;
+  margin-top: 18px;
 
-        padding:
-          60px 15px 80px;
-      }
+  color: #758196;
 
-      .hero-icon {
-        font-size: 60px;
-      }
+  font-size: 14px;
+}
 
-      .hero h1 {
-        letter-spacing: -1px;
-      }
+.switch-auth button {
+  color: #2376ff;
 
-      .question-box {
-        flex-direction: column;
+  background: none;
 
-        align-items: stretch;
+  font-weight: 800;
+}
 
-        padding: 8px;
-      }
 
-      .question-input {
-        width: 100%;
-      }
+/* =========================
+   Question Detail
+========================= */
 
-      .ask-button {
-        width: 100%;
-      }
+.detail-question {
+  padding: 20px;
 
-      main {
-        padding:
-          60px 15px;
-      }
+  background: #f5f8fd;
 
-      .questions,
-      .about-grid {
-        grid-template-columns: 1fr;
-      }
+  border-radius: 16px;
 
-      .flow {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-      }
+  margin-bottom: 25px;
+}
 
-      .section-title {
-        display: block;
-      }
+.detail-question-text {
+  white-space: pre-wrap;
 
-      .section-title p {
-        margin-top: 6px;
-      }
+  word-break: break-word;
 
-      .footer-inner {
-        flex-direction: column;
+  font-size: 18px;
 
-        text-align: center;
-      }
+  line-height: 1.8;
 
-      .user-name {
-        display: none;
-      }
-    }
+  font-weight: 700;
 
-    @media (max-width: 450px) {
+  margin-bottom: 12px;
+}
 
-      .flow {
-        grid-template-columns: 1fr;
-      }
+.detail-question-meta {
+  font-size: 13px;
 
-      .hero-description {
-        font-size: 14px;
-      }
+  color: #778399;
+}
 
-      .modal {
-        padding: 25px 20px;
-      }
-    }
-  </style>
+
+/* =========================
+   Answers
+========================= */
+
+.answers-title {
+  font-size: 20px;
+
+  margin:
+    0 0 15px;
+}
+
+.answer-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.answer-card {
+  border:
+    1px solid #e1e8f2;
+
+  border-radius: 16px;
+
+  padding: 18px;
+
+  background: white;
+}
+
+.answer-header {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+}
+
+.answer-author {
+  font-weight: 800;
+
+  color: #2c5fae;
+}
+
+.answer-date {
+  color: #8a95a7;
+
+  font-size: 12px;
+}
+
+.answer-text {
+  white-space: pre-wrap;
+
+  word-break: break-word;
+
+  line-height: 1.8;
+
+  color: #354157;
+}
+
+.answer-actions {
+  display: flex;
+
+  gap: 8px;
+
+  margin-top: 15px;
+}
+
+.rate-button {
+  padding:
+    7px 12px;
+
+  border-radius: 999px;
+
+  background: #f1f4f8;
+
+  color: #68758a;
+
+  font-size: 13px;
+
+  font-weight: 700;
+}
+
+.rate-button:hover {
+  background: #e7edf6;
+}
+
+.no-answers {
+  padding: 30px;
+
+  text-align: center;
+
+  color: #8994a6;
+
+  background: #f8fafc;
+
+  border-radius: 15px;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 800px) {
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .flow {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+  .ask-box {
+    flex-direction: column;
+  }
+
+  .ask-box button {
+    width: 100%;
+  }
+
+}
+
+@media (max-width: 500px) {
+
+  .header-inner {
+    padding:
+      13px 15px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+
+  .user-name {
+    display: none;
+  }
+
+  .hero {
+    padding:
+      60px 15px;
+  }
+
+  section {
+    padding:
+      50px 15px;
+  }
+
+  .flow {
+    grid-template-columns: 1fr;
+  }
+
+  .modal {
+    padding: 24px 18px;
+  }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
-  <!-- =========================
-       ヘッダー
-  ========================== -->
 
-  <header>
+<!-- =========================
+     Header
+========================= -->
 
-    <div class="header-inner">
+<header>
 
-      <a href="#" class="logo">
-        <span class="logo-icon">🍧</span>
-        <span>KAKIGOORI AI</span>
-      </a>
-
-      <nav class="nav">
-
-        <div id="loggedOutMenu" class="nav">
-
-          <button
-            class="nav-button"
-            onclick="openLogin()"
-          >
-            ログイン
-          </button>
-
-          <button
-            class="nav-button nav-primary"
-            onclick="openRegister()"
-          >
-            アカウント作成
-          </button>
-
-        </div>
-
-        <div
-          id="loggedInMenu"
-          class="user-menu"
-        >
-
-          <span
-            class="user-name"
-            id="headerUserName"
-          >
-            👤 ユーザー
-          </span>
-
-          <button
-            class="nav-button"
-            onclick="logout()"
-          >
-            ログアウト
-          </button>
-
-        </div>
-
-      </nav>
-
-    </div>
-
-  </header>
-
-
-  <!-- =========================
-       ヒーロー
-  ========================== -->
-
-  <section class="hero">
-
-    <div class="hero-inner">
-
-      <div class="hero-icon">
-        🍧
-      </div>
-
-      <h1>
-        <span>KAKIGOORI AI</span>
-      </h1>
-
-      <p class="hero-subtitle">
-        みんなで育てる日本語理解AI
-      </p>
-
-      <p class="hero-description">
-        みんなが質問し、みんなが答え、
-        その知識をAIが学んでいく。
-        新しい形のコミュニティAIを目指します。
-      </p>
-
-      <div class="question-box">
-
-        <input
-          id="questionInput"
-          class="question-input"
-          type="text"
-          placeholder="AIに質問したいことを入力してください……"
-          maxlength="500"
-        >
-
-        <button
-          class="ask-button"
-          onclick="askQuestion()"
-        >
-          質問する
-        </button>
-
-      </div>
-
-      <div class="quick-question">
-
-        <button
-          class="quick-button"
-          onclick="setQuestion('Pythonって何？中学生にも分かるように説明して')"
-        >
-          Pythonって何？
-        </button>
-
-        <button
-          class="quick-button"
-          onclick="setQuestion('なぜ空は青いの？')"
-        >
-          なぜ空は青い？
-        </button>
-
-        <button
-          class="quick-button"
-          onclick="setQuestion('三平方の定理を分かりやすく説明して')"
-        >
-          三平方の定理
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       メイン
-  ========================== -->
-
-  <main>
-
-    <section class="section">
-
-      <div class="section-title">
-
-        <div>
-
-          <h2>
-            🌎 みんなの質問
-          </h2>
-
-          <p>
-            みんなが投稿した質問を見ることができます
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <!--
-        D1から質問を取得して
-        JavaScriptでここに表示する
-      -->
-
-      <div
-        class="questions"
-        id="questionsList"
-      ></div>
-
-    </section>
-
-
-    <!-- =========================
-         KAKIGOORI AIとは
-    ========================== -->
-
-    <section class="section">
-
-      <div class="section-title">
-
-        <div>
-
-          <h2>
-            🍧 KAKIGOORI AIとは？
-          </h2>
-
-          <p>
-            みんなの知識をAIにつなげる仕組み
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="about-grid">
-
-        <article class="about-card">
-
-          <div class="about-icon">
-            ❓
-          </div>
-
-          <h3>
-            みんなが質問する
-          </h3>
-
-          <p>
-            分からないことや知りたいことを
-            誰でも質問できます。
-            質問には説明の仕方などの条件も
-            自由に書けます。
-          </p>
-
-        </article>
-
-
-        <article class="about-card">
-
-          <div class="about-icon">
-            💬
-          </div>
-
-          <h3>
-            みんなが回答する
-          </h3>
-
-          <p>
-            質問を見た他のユーザーが回答します。
-            いろいろな人の知識や考え方を
-            一つの質問に集めます。
-          </p>
-
-        </article>
-
-
-        <article class="about-card">
-
-          <div class="about-icon">
-            🧠
-          </div>
-
-          <h3>
-            AIが学んでいく
-          </h3>
-
-          <p>
-            評価された回答や管理者によって
-            確認された知識を整理し、
-            AIが利用できる知識として
-            蓄積していきます。
-          </p>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         仕組み
-    ========================== -->
-
-    <section class="section">
-
-      <div class="section-title">
-
-        <div>
-
-          <h2>
-            ⚙️ KAKIGOORI AIの仕組み
-          </h2>
-
-          <p>
-            質問からAIの知識になるまで
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="flow">
-
-        <article class="flow-card">
-
-          <div class="flow-number">
-            1
-          </div>
-
-          <h3>
-            質問
-          </h3>
-
-          <p>
-            ユーザーが
-            質問を投稿します。
-          </p>
-
-        </article>
-
-
-        <article class="flow-card">
-
-          <div class="flow-number">
-            2
-          </div>
-
-          <h3>
-            回答
-          </h3>
-
-          <p>
-            他のユーザーが
-            回答を書きます。
-          </p>
-
-        </article>
-
-
-        <article class="flow-card">
-
-          <div class="flow-number">
-            3
-          </div>
-
-          <h3>
-            評価
-          </h3>
-
-          <p>
-            Good / Badで
-            回答を評価します。
-          </p>
-
-        </article>
-
-
-        <article class="flow-card">
-
-          <div class="flow-number">
-            4
-          </div>
-
-          <h3>
-            学習
-          </h3>
-
-          <p>
-            確認された知識を
-            AIが利用します。
-          </p>
-
-        </article>
-
-      </div>
-
-    </section>
-
-
-    <!-- =========================
-         CTA
-    ========================== -->
-
-    <section class="section">
-
-      <div class="cta">
-
-        <h2>
-          あなたの知識をAIへ。
-        </h2>
-
-        <p>
-          KAKIGOORI AIは、
-          一人だけではなく、
-          みんなで知識を集めて育てるAIを目指します。
-        </p>
-
-        <button
-          class="cta-button"
-          onclick="scrollToQuestion()"
-        >
-          質問してみる
-        </button>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =========================
-       フッター
-  ========================== -->
-
-  <footer>
-
-    <div class="footer-inner">
-
-      <div class="footer-logo">
-        🍧 KAKIGOORI AI
-      </div>
-
-      <div class="footer-copy">
-        © 2026 KAKIGOORI AI
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =========================
-       アカウント作成・ログイン
-  ========================== -->
-
-  <div
-    id="modalOverlay"
-    class="modal-overlay"
-    onclick="closeModalOutside(event)"
-  >
+  <div class="header-inner">
 
     <div
-      class="modal"
-      onclick="event.stopPropagation()"
+      class="logo"
+      onclick="window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      })"
+    >
+      🍧 KAKIGOORI <span>AI</span>
+    </div>
+
+
+    <div
+      class="header-right"
+      id="headerRight"
     >
 
-      <div class="modal-header">
+      <button
+        class="btn btn-secondary"
+        onclick="openAuth('login')"
+      >
+        ログイン
+      </button>
 
-        <h2 id="modalTitle">
-          アカウント作成
-        </h2>
+      <button
+        class="btn btn-primary"
+        onclick="openAuth('register')"
+      >
+        アカウント作成
+      </button>
 
-        <button
-          class="modal-close"
-          onclick="closeModal()"
-        >
-          ×
-        </button>
+    </div>
 
+  </div>
+
+</header>
+
+
+
+<!-- =========================
+     Hero
+========================= -->
+
+<main>
+
+<section class="hero">
+
+  <div class="badge">
+    🌎 みんなの知識で育つAI
+  </div>
+
+
+  <h1>
+    KAKIGOORI AI
+  </h1>
+
+
+  <p class="hero-subtitle">
+    分からないことを質問して、<br>
+    みんなで答えて、知識を育てよう。
+  </p>
+
+
+  <div class="ask-box">
+
+    <textarea
+      id="questionInput"
+      maxlength="500"
+      placeholder="質問を書いてみよう。例：Pythonって何？中学生にも分かるように説明して"
+    ></textarea>
+
+
+    <button
+      class="btn btn-primary"
+      id="askButton"
+      onclick="askQuestion()"
+    >
+      質問する
+    </button>
+
+  </div>
+
+
+  <div class="samples">
+
+    <button
+      class="sample"
+      onclick="useSample('Pythonって何？中学生にも分かるように説明して')"
+    >
+      Pythonって何？
+    </button>
+
+    <button
+      class="sample"
+      onclick="useSample('なぜ空は青いの？')"
+    >
+      なぜ空は青いの？
+    </button>
+
+    <button
+      class="sample"
+      onclick="useSample('三平方の定理を分かりやすく説明して')"
+    >
+      三平方の定理
+    </button>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     Questions
+========================= -->
+
+<section id="questions">
+
+  <h2 class="section-title">
+    みんなの質問
+  </h2>
+
+  <p class="section-description">
+    世界中のユーザーが投稿した質問。
+    気になる質問をクリックすると、回答を見ることができます。
+  </p>
+
+
+  <div
+    class="questions"
+    id="questionsList"
+  >
+    <div class="loading">
+      質問を読み込んでいます…
+    </div>
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     About
+========================= -->
+
+<section>
+
+  <h2 class="section-title">
+    KAKIGOORI AIとは？
+  </h2>
+
+  <p class="section-description">
+    KAKIGOORI AIは、ユーザー同士が知識を共有し、
+    その知識をAIの学習に活用していくことを目指すサービスです。
+  </p>
+
+
+  <div class="about-grid">
+
+    <div class="about-card">
+
+      <div class="about-icon">
+        ❓
       </div>
 
+      <h3>
+        質問する
+      </h3>
 
-      <div
-        id="formError"
-        class="form-error"
-      ></div>
+      <p>
+        分からないことを質問できます。
+        「中学生にも分かるように」など、
+        説明してほしいレベルも質問文に書けます。
+      </p>
+
+    </div>
 
 
-      <!-- 登録 -->
+    <div class="about-card">
 
-      <form
-        id="registerForm"
-        onsubmit="register(event)"
-      >
+      <div class="about-icon">
+        💬
+      </div>
+
+      <h3>
+        みんなで回答
+      </h3>
+
+      <p>
+        他のユーザーが質問に回答します。
+        いろいろな人の考え方や説明を集めることができます。
+      </p>
+
+    </div>
+
+
+    <div class="about-card">
+
+      <div class="about-icon">
+        🧠
+      </div>
+
+      <h3>
+        知識を育てる
+      </h3>
+
+      <p>
+        集まった回答を評価・確認し、
+        正しい知識を整理してAIの学習に活用していく構想です。
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     Flow
+========================= -->
+
+<section>
+
+  <h2 class="section-title">
+    KAKIGOORI AIの流れ
+  </h2>
+
+
+  <div class="flow">
+
+    <div class="flow-card">
+
+      <div class="flow-number">
+        1
+      </div>
+
+      <h3>
+        質問
+      </h3>
+
+      <p>
+        ユーザーが質問する
+      </p>
+
+    </div>
+
+
+    <div class="flow-card">
+
+      <div class="flow-number">
+        2
+      </div>
+
+      <h3>
+        回答
+      </h3>
+
+      <p>
+        他のユーザーが回答する
+      </p>
+
+    </div>
+
+
+    <div class="flow-card">
+
+      <div class="flow-number">
+        3
+      </div>
+
+      <h3>
+        評価
+      </h3>
+
+      <p>
+        回答をGood / Badで評価する
+      </p>
+
+    </div>
+
+
+    <div class="flow-card">
+
+      <div class="flow-number">
+        4
+      </div>
+
+      <h3>
+        学習
+      </h3>
+
+      <p>
+        確認された知識をAIに活用する
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+
+
+<footer>
+  🍧 KAKIGOORI AI
+  <br>
+  <small>
+    Knowledge grows when everyone contributes.
+  </small>
+</footer>
+
+
+
+<!-- =========================
+     Auth Modal
+========================= -->
+
+<div
+  class="modal-bg"
+  id="authModal"
+>
+
+  <div class="modal">
+
+    <button
+      class="modal-close"
+      onclick="closeModal()"
+    >
+      ×
+    </button>
+
+
+    <!-- Register -->
+
+    <div id="registerForm">
+
+      <h2>
+        アカウントを作成
+      </h2>
+
+
+      <form onsubmit="register(event)">
 
         <div class="form-group">
 
-          <label for="registerUsername">
+          <label>
             ユーザー名
           </label>
 
           <input
             id="registerUsername"
-            class="form-input"
             type="text"
             maxlength="30"
-            autocomplete="username"
-            placeholder="ユーザー名を入力"
             required
+            autocomplete="username"
           >
 
         </div>
@@ -1408,46 +1294,22 @@
 
         <div class="form-group">
 
-          <label for="registerPassword">
+          <label>
             パスワード
           </label>
 
           <input
             id="registerPassword"
-            class="form-input"
             type="password"
-            minlength="8"
-            maxlength="100"
-            autocomplete="new-password"
-            placeholder="8文字以上"
+            maxlength="200"
             required
-          >
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label for="registerPasswordConfirm">
-            パスワード（確認）
-          </label>
-
-          <input
-            id="registerPasswordConfirm"
-            class="form-input"
-            type="password"
-            minlength="8"
-            maxlength="100"
             autocomplete="new-password"
-            placeholder="もう一度入力"
-            required
           >
 
         </div>
 
 
         <button
-          id="registerButton"
           class="form-button"
           type="submit"
         >
@@ -1457,28 +1319,45 @@
       </form>
 
 
-      <!-- ログイン -->
+      <div class="switch-auth">
 
-      <form
-        id="loginForm"
-        style="display:none"
-        onsubmit="login(event)"
-      >
+        すでにアカウントを持っていますか？
+
+        <button onclick="showLoginForm()">
+          ログイン
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- Login -->
+
+    <div
+      id="loginForm"
+      style="display:none;"
+    >
+
+      <h2>
+        ログイン
+      </h2>
+
+
+      <form onsubmit="login(event)">
 
         <div class="form-group">
 
-          <label for="loginUsername">
+          <label>
             ユーザー名
           </label>
 
           <input
             id="loginUsername"
-            class="form-input"
             type="text"
-            maxlength="30"
-            autocomplete="username"
-            placeholder="ユーザー名を入力"
             required
+            autocomplete="username"
           >
 
         </div>
@@ -1486,24 +1365,21 @@
 
         <div class="form-group">
 
-          <label for="loginPassword">
+          <label>
             パスワード
           </label>
 
           <input
             id="loginPassword"
-            class="form-input"
             type="password"
-            autocomplete="current-password"
-            placeholder="パスワードを入力"
             required
+            autocomplete="current-password"
           >
 
         </div>
 
 
         <button
-          id="loginButton"
           class="form-button"
           type="submit"
         >
@@ -1513,18 +1389,12 @@
       </form>
 
 
-      <div class="form-switch">
+      <div class="switch-auth">
 
-        <span id="switchText">
-          すでにアカウントを持っていますか？
-        </span>
+        アカウントを持っていませんか？
 
-        <button
-          id="switchButton"
-          type="button"
-          onclick="switchForm()"
-        >
-          ログイン
+        <button onclick="showRegisterForm()">
+          アカウント作成
         </button>
 
       </div>
@@ -1533,378 +1403,1627 @@
 
   </div>
 
-
-  <!-- メッセージ -->
-
-  <div
-    id="message"
-    class="message"
-  ></div>
+</div>
 
 
-  <!-- =========================
-       JavaScript
-  ========================== -->
 
-  <script>
+<!-- =========================
+     Question Detail Modal
+========================= -->
 
-    /* =========================================
-       KAKIGOORI AI API
-    ========================================= */
+<div
+  class="modal-bg"
+  id="questionModal"
+>
 
-    const API_URL =
-      "";
+  <div class="modal">
+
+    <button
+      class="modal-close"
+      onclick="closeQuestionModal()"
+    >
+      ×
+    </button>
 
 
-    /* =========================================
-       現在のログインユーザー
-    ========================================= */
+    <div id="questionDetail">
 
-    let currentUser = null;
+      <div class="loading">
+        読み込んでいます…
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
 
-    /* =========================================
-       API共通処理
-    ========================================= */
 
-    async function apiRequest(
-      path,
-      options = {}
+<script>
+
+
+// =====================================================
+// API
+// =====================================================
+
+const API_URL = "";
+
+let currentUser = null;
+
+let currentQuestionId = null;
+
+
+
+// =====================================================
+// API request
+// =====================================================
+
+async function apiRequest(path, options = {}) {
+
+  const fetchOptions = {
+    ...options,
+
+    credentials: "include",
+
+    headers: {
+      "Content-Type": "application/json",
+      ...(options.headers || {})
+    }
+  };
+
+
+  const response =
+    await fetch(
+      API_URL + path,
+      fetchOptions
+    );
+
+
+  let data;
+
+  try {
+    data = await response.json();
+  } catch {
+    data = {
+      ok: false,
+      error: "サーバーから正しい応答がありませんでした。"
+    };
+  }
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      data.error ||
+      data.message ||
+      "通信に失敗しました。"
+    );
+
+  }
+
+
+  return data;
+}
+
+
+
+// =====================================================
+// Login check
+// =====================================================
+
+async function checkLogin() {
+
+  try {
+
+    const data =
+      await apiRequest("/api/me");
+
+
+    if (
+      data.ok &&
+      data.loggedIn &&
+      data.user
     ) {
 
-      const response =
-        await fetch(
+      currentUser =
+        data.user;
 
-          API_URL + path,
+    } else {
 
-          {
-            ...options,
-
-            credentials: "include",
-
-            headers: {
-
-              "Content-Type":
-                "application/json",
-
-              ...(options.headers || {})
-
-            }
-
-          }
-
-        );
-
-
-      let data;
-
-
-      try {
-
-        data =
-          await response.json();
-
-      } catch {
-
-        data = {
-
-          ok: false,
-
-          error:
-            "サーバーから正しい応答がありませんでした。"
-
-        };
-
-      }
-
-
-      if (!response.ok) {
-
-        throw new Error(
-
-          data.error ||
-
-          data.message ||
-
-          "通信に失敗しました。"
-
-        );
-
-      }
-
-
-      return data;
+      currentUser = null;
 
     }
 
 
-    /* =========================================
-       ログイン状態確認
-    ========================================= */
+    updateHeader();
 
-    async function checkLogin() {
+  } catch (error) {
 
-      try {
+    console.error(error);
 
-        const data =
-          await apiRequest(
-            "/api/me"
-          );
+    currentUser = null;
+
+    updateHeader();
+
+  }
+
+}
 
 
-        if (
-          data.ok &&
-          data.loggedIn &&
-          data.user
-        ) {
 
-          currentUser =
-            data.user;
+// =====================================================
+// Header
+// =====================================================
 
-        } else {
+function updateHeader() {
 
-          currentUser =
-            null;
+  const headerRight =
+    document.getElementById(
+      "headerRight"
+    );
 
+
+  headerRight.innerHTML = "";
+
+
+  if (currentUser) {
+
+    const userName =
+      document.createElement("span");
+
+    userName.className =
+      "user-name";
+
+    userName.textContent =
+      `こんにちは、${currentUser.username}さん`;
+
+
+    const logoutButton =
+      document.createElement("button");
+
+    logoutButton.className =
+      "btn btn-ghost";
+
+    logoutButton.textContent =
+      "ログアウト";
+
+    logoutButton.onclick =
+      logout;
+
+
+    headerRight.appendChild(
+      userName
+    );
+
+    headerRight.appendChild(
+      logoutButton
+    );
+
+  } else {
+
+    const loginButton =
+      document.createElement("button");
+
+    loginButton.className =
+      "btn btn-secondary";
+
+    loginButton.textContent =
+      "ログイン";
+
+    loginButton.onclick =
+      () => openAuth("login");
+
+
+    const registerButton =
+      document.createElement("button");
+
+    registerButton.className =
+      "btn btn-primary";
+
+    registerButton.textContent =
+      "アカウント作成";
+
+    registerButton.onclick =
+      () => openAuth("register");
+
+
+    headerRight.appendChild(
+      loginButton
+    );
+
+    headerRight.appendChild(
+      registerButton
+    );
+
+  }
+
+}
+
+
+
+// =====================================================
+// Auth modal
+// =====================================================
+
+function openAuth(type) {
+
+  document
+    .getElementById("authModal")
+    .classList
+    .add("active");
+
+
+  if (type === "login") {
+
+    showLoginForm();
+
+  } else {
+
+    showRegisterForm();
+
+  }
+
+}
+
+
+function closeModal() {
+
+  document
+    .getElementById("authModal")
+    .classList
+    .remove("active");
+
+}
+
+
+function showLoginForm() {
+
+  document
+    .getElementById("registerForm")
+    .style.display = "none";
+
+
+  document
+    .getElementById("loginForm")
+    .style.display = "block";
+
+}
+
+
+function showRegisterForm() {
+
+  document
+    .getElementById("registerForm")
+    .style.display = "block";
+
+
+  document
+    .getElementById("loginForm")
+    .style.display = "none";
+
+}
+
+
+
+// =====================================================
+// Register
+// =====================================================
+
+async function register(event) {
+
+  event.preventDefault();
+
+
+  const username =
+    document
+      .getElementById("registerUsername")
+      .value
+      .trim();
+
+
+  const password =
+    document
+      .getElementById("registerPassword")
+      .value;
+
+
+  try {
+
+    const data =
+      await apiRequest(
+        "/api/register",
+        {
+          method: "POST",
+
+          body: JSON.stringify({
+            username,
+            password
+          })
         }
-
-
-        updateHeader();
-
-      } catch (error) {
-
-        console.log(
-          "ログイン状態確認:",
-          error
-        );
-
-        currentUser =
-          null;
-
-        updateHeader();
-
-      }
-
-    }
-
-
-    /* =========================================
-       ヘッダー更新
-    ========================================= */
-
-    function updateHeader() {
-
-      const loggedOutMenu =
-        document.getElementById(
-          "loggedOutMenu"
-        );
-
-
-      const loggedInMenu =
-        document.getElementById(
-          "loggedInMenu"
-        );
-
-
-      const headerUserName =
-        document.getElementById(
-          "headerUserName"
-        );
-
-
-      if (currentUser) {
-
-        loggedOutMenu.style.display =
-          "none";
-
-
-        loggedInMenu.style.display =
-          "flex";
-
-
-        headerUserName.textContent =
-          "👤 " +
-          currentUser.username;
-
-      } else {
-
-        loggedOutMenu.style.display =
-          "flex";
-
-
-        loggedInMenu.style.display =
-          "none";
-
-      }
-
-    }
-
-
-    /* =========================================
-       アカウント作成画面
-    ========================================= */
-
-    function openRegister() {
-
-      document.getElementById(
-        "modalTitle"
-      ).textContent =
-        "アカウント作成";
-
-
-      document.getElementById(
-        "registerForm"
-      ).style.display =
-        "block";
-
-
-      document.getElementById(
-        "loginForm"
-      ).style.display =
-        "none";
-
-
-      document.getElementById(
-        "switchText"
-      ).textContent =
-        "すでにアカウントを持っていますか？";
-
-
-      document.getElementById(
-        "switchButton"
-      ).textContent =
-        "ログイン";
-
-
-      clearFormError();
-
-
-      document.getElementById(
-        "modalOverlay"
-      ).classList.add("show");
-
-
-      setTimeout(() => {
-
-        document
-          .getElementById(
-            "registerUsername"
-          )
-          .focus();
-
-      }, 100);
-
-    }
-
-
-    /* =========================================
-       ログイン画面
-    ========================================= */
-
-    function openLogin() {
-
-      document.getElementById(
-        "modalTitle"
-      ).textContent =
-        "ログイン";
-
-
-      document.getElementById(
-        "registerForm"
-      ).style.display =
-        "none";
-
-
-      document.getElementById(
-        "loginForm"
-      ).style.display =
-        "block";
-
-
-      document.getElementById(
-        "switchText"
-      ).textContent =
-        "アカウントを持っていませんか？";
-
-
-      document.getElementById(
-        "switchButton"
-      ).textContent =
-        "アカウント作成";
-
-
-      clearFormError();
-
-
-      document.getElementById(
-        "modalOverlay"
-      ).classList.add("show");
-
-
-      setTimeout(() => {
-
-        document
-          .getElementById(
-            "loginUsername"
-          )
-          .focus();
-
-      }, 100);
-
-    }
-
-
-    /* =========================================
-       登録 ↔ ログイン
-    ========================================= */
-
-    function switchForm() {
-
-      const registerForm =
-        document.getElementById(
-          "registerForm"
-        );
-
-
-      if (
-        registerForm.style.display ===
-        "none"
-      ) {
-
-        openRegister();
-
-      } else {
-
-        openLogin();
-
-      }
-
-    }
-
-
-    /* =========================================
-       モーダルを閉じる
-    ========================================= */
-
-    function closeModal() {
-
-      document.getElementById(
-        "modalOverlay"
-      ).classList.remove(
-        "show"
       );
 
 
-      clearFormError();
+    alert(
+      data.message ||
+      "アカウントを作成しました。"
+    );
+
+
+    document
+      .getElementById("registerUsername")
+      .value = "";
+
+    document
+      .getElementById("registerPassword")
+      .value = "";
+
+
+    showLoginForm();
+
+
+    document
+      .getElementById("loginUsername")
+      .value = username;
+
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+
+}
+
+
+
+// =====================================================
+// Login
+// =====================================================
+
+async function login(event) {
+
+  event.preventDefault();
+
+
+  const username =
+    document
+      .getElementById("loginUsername")
+      .value
+      .trim();
+
+
+  const password =
+    document
+      .getElementById("loginPassword")
+      .value;
+
+
+  try {
+
+    const data =
+      await apiRequest(
+        "/api/login",
+        {
+          method: "POST",
+
+          body: JSON.stringify({
+            username,
+            password
+          })
+        }
+      );
+
+
+    if (
+      data.ok &&
+      data.user
+    ) {
+
+      currentUser =
+        data.user;
+
+
+      updateHeader();
+
+
+      document
+        .getElementById("loginPassword")
+        .value = "";
+
+
+      closeModal();
+
+
+      alert(
+        `ログインしました。ようこそ、${currentUser.username}さん！`
+      );
 
     }
 
+  } catch (error) {
 
-    function closeModalOutside(event) {
+    alert(error.message);
+
+  }
+
+}
+
+
+
+// =====================================================
+// Logout
+// =====================================================
+
+async function logout() {
+
+  try {
+
+    await apiRequest(
+      "/api/logout",
+      {
+        method: "POST"
+      }
+    );
+
+
+    currentUser = null;
+
+    updateHeader();
+
+
+    alert(
+      "ログアウトしました。"
+    );
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+
+}
+
+
+
+// =====================================================
+// Sample question
+// =====================================================
+
+function useSample(text) {
+
+  const input =
+    document.getElementById(
+      "questionInput"
+    );
+
+
+  input.value = text;
+
+  input.focus();
+
+}
+
+
+
+// =====================================================
+// Ask question
+// =====================================================
+
+async function askQuestion() {
+
+  const input =
+    document.getElementById(
+      "questionInput"
+    );
+
+
+  const button =
+    document.getElementById(
+      "askButton"
+    );
+
+
+  const question =
+    input.value.trim();
+
+
+  if (!question) {
+
+    alert(
+      "質問を入力してください。"
+    );
+
+    input.focus();
+
+    return;
+  }
+
+
+  if (question.length > 500) {
+
+    alert(
+      "質問は500文字以内にしてください。"
+    );
+
+    return;
+  }
+
+
+  // ログインしていなければログイン画面
+  if (!currentUser) {
+
+    alert(
+      "質問するにはログインしてください。"
+    );
+
+    openAuth("login");
+
+    return;
+  }
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "投稿中…";
+
+
+  try {
+
+    await apiRequest(
+      "/api/questions",
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          question
+        })
+      }
+    );
+
+
+    input.value = "";
+
+
+    alert(
+      "質問を投稿しました！"
+    );
+
+
+    await loadQuestions();
+
+
+    document
+      .getElementById("questions")
+      .scrollIntoView({
+        behavior: "smooth"
+      });
+
+
+  } catch (error) {
+
+    alert(error.message);
+
+  } finally {
+
+    button.disabled = false;
+
+    button.textContent =
+      "質問する";
+
+  }
+
+}
+
+
+
+// =====================================================
+// Load questions
+// =====================================================
+
+async function loadQuestions() {
+
+  const list =
+    document.getElementById(
+      "questionsList"
+    );
+
+
+  list.innerHTML = `
+    <div class="loading">
+      質問を読み込んでいます…
+    </div>
+  `;
+
+
+  try {
+
+    const data =
+      await apiRequest(
+        "/api/questions"
+      );
+
+
+    list.innerHTML = "";
+
+
+    if (
+      !data.questions ||
+      data.questions.length === 0
+    ) {
+
+      list.innerHTML = `
+        <div class="empty">
+          まだ質問がありません。<br>
+          最初の質問を投稿してみよう！
+        </div>
+      `;
+
+      return;
+    }
+
+
+    for (
+      const question
+      of data.questions
+    ) {
+
+      const card =
+        document.createElement(
+          "div"
+        );
+
+
+      card.className =
+        "question-card";
+
+
+      card.onclick =
+        () => openQuestion(
+          question.id
+        );
+
+
+      const text =
+        document.createElement(
+          "div"
+        );
+
+
+      text.className =
+        "question-text";
+
+      text.textContent =
+        question.question;
+
+
+      const meta =
+        document.createElement(
+          "div"
+        );
+
+
+      meta.className =
+        "question-meta";
+
+
+      const author =
+        document.createElement(
+          "span"
+        );
+
+
+      author.textContent =
+        `👤 ${question.username}`;
+
+
+      const count =
+        document.createElement(
+          "span"
+        );
+
+
+      count.className =
+        "answer-count";
+
+
+      const answerCount =
+        Number(
+          question.answer_count || 0
+        );
+
+
+      count.textContent =
+        `💬 ${answerCount}件の回答`;
+
+
+      meta.appendChild(
+        author
+      );
+
+      meta.appendChild(
+        count
+      );
+
+
+      card.appendChild(
+        text
+      );
+
+      card.appendChild(
+        meta
+      );
+
+
+      list.appendChild(
+        card
+      );
+
+    }
+
+  } catch (error) {
+
+    console.error(error);
+
+
+    list.innerHTML = `
+      <div class="empty">
+        質問を読み込めませんでした。<br>
+        ${escapeHtml(error.message)}
+      </div>
+    `;
+
+  }
+
+}
+
+
+
+// =====================================================
+// Open question
+// =====================================================
+
+async function openQuestion(
+  questionId
+) {
+
+  currentQuestionId =
+    questionId;
+
+
+  const modal =
+    document.getElementById(
+      "questionModal"
+    );
+
+
+  const detail =
+    document.getElementById(
+      "questionDetail"
+    );
+
+
+  modal.classList.add(
+    "active"
+  );
+
+
+  detail.innerHTML = `
+    <div class="loading">
+      質問と回答を読み込んでいます…
+    </div>
+  `;
+
+
+  try {
+
+    const data =
+      await apiRequest(
+        `/api/questions/${questionId}`
+      );
+
+
+    renderQuestionDetail(
+      data
+    );
+
+
+  } catch (error) {
+
+    detail.innerHTML = `
+      <div class="empty">
+        ${escapeHtml(error.message)}
+      </div>
+    `;
+
+  }
+
+}
+
+
+
+// =====================================================
+// Render question detail
+// =====================================================
+
+function renderQuestionDetail(
+  data
+) {
+
+  const detail =
+    document.getElementById(
+      "questionDetail"
+    );
+
+
+  detail.innerHTML = "";
+
+
+  // -----------------------------
+  // Question
+  // -----------------------------
+
+  const questionBox =
+    document.createElement(
+      "div"
+    );
+
+
+  questionBox.className =
+    "detail-question";
+
+
+  const questionText =
+    document.createElement(
+      "div"
+    );
+
+
+  questionText.className =
+    "detail-question-text";
+
+
+  questionText.textContent =
+    data.question.question;
+
+
+  const questionMeta =
+    document.createElement(
+      "div"
+    );
+
+
+  questionMeta.className =
+    "detail-question-meta";
+
+
+  questionMeta.textContent =
+    `👤 ${data.question.username}`;
+
+
+  questionBox.appendChild(
+    questionText
+  );
+
+  questionBox.appendChild(
+    questionMeta
+  );
+
+
+  detail.appendChild(
+    questionBox
+  );
+
+
+  // -----------------------------
+  // Answers title
+  // -----------------------------
+
+  const title =
+    document.createElement(
+      "h3"
+    );
+
+
+  title.className =
+    "answers-title";
+
+
+  title.textContent =
+    `回答 ${data.answers.length}件`;
+
+
+  detail.appendChild(
+    title
+  );
+
+
+  // -----------------------------
+  // Answer list
+  // -----------------------------
+
+  const answerList =
+    document.createElement(
+      "div"
+    );
+
+
+  answerList.className =
+    "answer-list";
+
+
+  if (
+    !data.answers ||
+    data.answers.length === 0
+  ) {
+
+    const empty =
+      document.createElement(
+        "div"
+      );
+
+
+    empty.className =
+      "no-answers";
+
+
+    empty.textContent =
+      "まだ回答がありません。最初の回答を書いてみよう！";
+
+
+    answerList.appendChild(
+      empty
+    );
+
+  } else {
+
+    for (
+      const answer
+      of data.answers
+    ) {
+
+      answerList.appendChild(
+        createAnswerCard(
+          answer
+        )
+      );
+
+    }
+
+  }
+
+
+  detail.appendChild(
+    answerList
+  );
+
+
+  // -----------------------------
+  // Answer form
+  // -----------------------------
+
+  const answerArea =
+    document.createElement(
+      "div"
+    );
+
+
+  answerArea.style.marginTop =
+    "25px";
+
+
+  if (data.question.is_closed) {
+
+    const closed =
+      document.createElement(
+        "div"
+      );
+
+
+    closed.className =
+      "no-answers";
+
+
+    closed.textContent =
+      "この質問は締め切られています。";
+
+
+    answerArea.appendChild(
+      closed
+    );
+
+  } else if (currentUser) {
+
+    const form =
+      document.createElement(
+        "form"
+      );
+
+
+    form.onsubmit =
+      submitAnswer;
+
+
+    const group =
+      document.createElement(
+        "div"
+      );
+
+
+    group.className =
+      "form-group";
+
+
+    const label =
+      document.createElement(
+        "label"
+      );
+
+
+    label.textContent =
+      "あなたの回答";
+
+
+    const textarea =
+      document.createElement(
+        "textarea"
+      );
+
+
+    textarea.id =
+      "answerInput";
+
+    textarea.maxLength =
+      3000;
+
+    textarea.placeholder =
+      "質問への回答を書いてください。";
+
+
+    group.appendChild(
+      label
+    );
+
+    group.appendChild(
+      textarea
+    );
+
+
+    const button =
+      document.createElement(
+        "button"
+      );
+
+
+    button.type =
+      "submit";
+
+    button.className =
+      "form-button";
+
+    button.textContent =
+      "回答を投稿";
+
+
+    form.appendChild(
+      group
+    );
+
+    form.appendChild(
+      button
+    );
+
+
+    answerArea.appendChild(
+      form
+    );
+
+  } else {
+
+    const loginMessage =
+      document.createElement(
+        "div"
+      );
+
+
+    loginMessage.className =
+      "no-answers";
+
+
+    loginMessage.textContent =
+      "回答するにはログインしてください。";
+
+
+    const loginButton =
+      document.createElement(
+        "button"
+      );
+
+
+    loginButton.className =
+      "btn btn-primary";
+
+
+    loginButton.style.marginTop =
+      "12px";
+
+
+    loginButton.textContent =
+      "ログイン";
+
+
+    loginButton.onclick =
+      () => {
+
+        closeQuestionModal();
+
+        openAuth("login");
+
+      };
+
+
+    loginMessage.appendChild(
+      document.createElement("br")
+    );
+
+    loginMessage.appendChild(
+      loginButton
+    );
+
+
+    answerArea.appendChild(
+      loginMessage
+    );
+
+  }
+
+
+  detail.appendChild(
+    answerArea
+  );
+
+}
+
+
+
+// =====================================================
+// Create answer card
+// =====================================================
+
+function createAnswerCard(
+  answer
+) {
+
+  const card =
+    document.createElement(
+      "div"
+    );
+
+
+  card.className =
+    "answer-card";
+
+
+  // Header
+  const header =
+    document.createElement(
+      "div"
+    );
+
+
+  header.className =
+    "answer-header";
+
+
+  const author =
+    document.createElement(
+      "span"
+    );
+
+
+  author.className =
+    "answer-author";
+
+
+  author.textContent =
+    `👤 ${answer.username}`;
+
+
+  const date =
+    document.createElement(
+      "span"
+    );
+
+
+  date.className =
+    "answer-date";
+
+
+  date.textContent =
+    formatDate(
+      answer.created_at
+    );
+
+
+  header.appendChild(
+    author
+  );
+
+  header.appendChild(
+    date
+  );
+
+
+  // Text
+  const text =
+    document.createElement(
+      "div"
+    );
+
+
+  text.className =
+    "answer-text";
+
+
+  text.textContent =
+    answer.answer;
+
+
+  // Actions
+  const actions =
+    document.createElement(
+      "div"
+    );
+
+
+  actions.className =
+    "answer-actions";
+
+
+  const good =
+    document.createElement(
+      "button"
+    );
+
+
+  good.className =
+    "rate-button";
+
+
+  good.textContent =
+    `👍 Good ${answer.good_count || 0}`;
+
+
+  good.onclick =
+    () => rateAnswer(
+      answer.id,
+      1
+    );
+
+
+  const bad =
+    document.createElement(
+      "button"
+    );
+
+
+  bad.className =
+    "rate-button";
+
+
+  bad.textContent =
+    `👎 Bad ${answer.bad_count || 0}`;
+
+
+  bad.onclick =
+    () => rateAnswer(
+      answer.id,
+      -1
+    );
+
+
+  actions.appendChild(
+    good
+  );
+
+  actions.appendChild(
+    bad
+  );
+
+
+  card.appendChild(
+    header
+  );
+
+  card.appendChild(
+    text
+  );
+
+  card.appendChild(
+    actions
+  );
+
+
+  return card;
+
+}
+
+
+
+// =====================================================
+// Submit answer
+// =====================================================
+
+async function submitAnswer(
+  event
+) {
+
+  event.preventDefault();
+
+
+  if (!currentUser) {
+
+    alert(
+      "回答するにはログインしてください。"
+    );
+
+    return;
+
+  }
+
+
+  const input =
+    document.getElementById(
+      "answerInput"
+    );
+
+
+  const answer =
+    input.value.trim();
+
+
+  if (!answer) {
+
+    alert(
+      "回答を入力してください。"
+    );
+
+    input.focus();
+
+    return;
+
+  }
+
+
+  if (answer.length > 3000) {
+
+    alert(
+      "回答は3000文字以内にしてください。"
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    event.target.querySelector(
+      "button[type='submit']"
+    );
+
+
+  button.disabled = true;
+
+  button.textContent =
+    "投稿中…";
+
+
+  try {
+
+    await apiRequest(
+      `/api/questions/${currentQuestionId}/answers`,
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          answer
+        })
+      }
+    );
+
+
+    input.value = "";
+
+
+    // 詳細を再読み込み
+    const data =
+      await apiRequest(
+        `/api/questions/${currentQuestionId}`
+      );
+
+
+    renderQuestionDetail(
+      data
+    );
+
+
+    // 一覧の回答数も更新
+    await loadQuestions();
+
+
+  } catch (error) {
+
+    alert(error.message);
+
+    button.disabled = false;
+
+    button.textContent =
+      "回答を投稿";
+
+  }
+
+}
+
+
+
+// =====================================================
+// Rate answer
+// =====================================================
+
+async function rateAnswer(
+  answerId,
+  rating
+) {
+
+  if (!currentUser) {
+
+    alert(
+      "評価するにはログインしてください。"
+    );
+
+    openAuth("login");
+
+    return;
+
+  }
+
+
+  try {
+
+    await apiRequest(
+      `/api/answers/${answerId}/rate`,
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          rating
+        })
+      }
+    );
+
+
+    // 詳細を再読み込み
+    const data =
+      await apiRequest(
+        `/api/questions/${currentQuestionId}`
+      );
+
+
+    renderQuestionDetail(
+      data
+    );
+
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+
+}
+
+
+
+// =====================================================
+// Close question modal
+// =====================================================
+
+function closeQuestionModal() {
+
+  document
+    .getElementById(
+      "questionModal"
+    )
+    .classList
+    .remove("active");
+
+  currentQuestionId = null;
+
+}
+
+
+
+// =====================================================
+// Date
+// =====================================================
+
+function formatDate(
+  dateString
+) {
+
+  if (!dateString) {
+    return "";
+  }
+
+
+  const date =
+    new Date(
+      dateString
+    );
+
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+    return dateString;
+  }
+
+
+  return date.toLocaleString(
+    "ja-JP",
+    {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }
+  );
+
+}
+
+
+
+// =====================================================
+// HTML escape
+// =====================================================
+
+function escapeHtml(
+  text
+) {
+
+  const div =
+    document.createElement(
+      "div"
+    );
+
+
+  div.textContent =
+    String(text);
+
+
+  return div.innerHTML;
+
+}
+
+
+
+// =====================================================
+// Close modal by background
+// =====================================================
+
+document
+  .getElementById("authModal")
+  .addEventListener(
+    "click",
+    event => {
 
       if (
         event.target.id ===
-        "modalOverlay"
+        "authModal"
       ) {
 
         closeModal();
@@ -1912,1005 +3031,38 @@
       }
 
     }
+  );
 
 
-    /* =========================================
-       エラー表示
-    ========================================= */
-
-    function showFormError(text) {
-
-      const error =
-        document.getElementById(
-          "formError"
-        );
-
-
-      error.textContent =
-        text;
-
-
-      error.classList.add(
-        "show"
-      );
-
-    }
-
-
-    function clearFormError() {
-
-      const error =
-        document.getElementById(
-          "formError"
-        );
-
-
-      error.textContent =
-        "";
-
-
-      error.classList.remove(
-        "show"
-      );
-
-    }
-
-
-    /* =========================================
-       アカウント作成
-    ========================================= */
-
-    async function register(event) {
-
-      event.preventDefault();
-
-      clearFormError();
-
-
-      const username =
-        document
-          .getElementById(
-            "registerUsername"
-          )
-          .value
-          .trim();
-
-
-      const password =
-        document
-          .getElementById(
-            "registerPassword"
-          )
-          .value;
-
-
-      const passwordConfirm =
-        document
-          .getElementById(
-            "registerPasswordConfirm"
-          )
-          .value;
-
+document
+  .getElementById("questionModal")
+  .addEventListener(
+    "click",
+    event => {
 
       if (
-        username.length < 2
+        event.target.id ===
+        "questionModal"
       ) {
 
-        showFormError(
-          "ユーザー名は2文字以上にしてください。"
-        );
-
-        return;
-
-      }
-
-
-      if (
-        username.length > 30
-      ) {
-
-        showFormError(
-          "ユーザー名は30文字以内にしてください。"
-        );
-
-        return;
-
-      }
-
-
-      if (
-        password.length < 8
-      ) {
-
-        showFormError(
-          "パスワードは8文字以上にしてください。"
-        );
-
-        return;
-
-      }
-
-
-      if (
-        password !==
-        passwordConfirm
-      ) {
-
-        showFormError(
-          "パスワードが一致していません。"
-        );
-
-        return;
-
-      }
-
-
-      const button =
-        document.getElementById(
-          "registerButton"
-        );
-
-
-      button.disabled =
-        true;
-
-
-      button.textContent =
-        "作成中……";
-
-
-      try {
-
-        const data =
-          await apiRequest(
-
-            "/api/register",
-
-            {
-
-              method:
-                "POST",
-
-              body:
-                JSON.stringify({
-
-                  username:
-                    username,
-
-                  password:
-                    password
-
-                })
-
-            }
-
-          );
-
-
-        if (
-          data.ok
-        ) {
-
-          closeModal();
-
-
-          document
-            .getElementById(
-              "registerForm"
-            )
-            .reset();
-
-
-          showMessage(
-            "🎉 アカウントを作成しました！ログインしてください。"
-          );
-
-
-          setTimeout(() => {
-
-            openLogin();
-
-          }, 500);
-
-        } else {
-
-          throw new Error(
-
-            data.error ||
-
-            data.message ||
-
-            "アカウント作成に失敗しました。"
-
-          );
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "REGISTER ERROR:",
-          error
-        );
-
-
-        showFormError(
-
-          error.message ||
-
-          "アカウント作成に失敗しました。"
-
-        );
-
-      } finally {
-
-        button.disabled =
-          false;
-
-
-        button.textContent =
-          "アカウントを作成";
+        closeQuestionModal();
 
       }
 
     }
+  );
 
 
-    /* =========================================
-       ログイン
-    ========================================= */
 
-    async function login(event) {
+// =====================================================
+// Start
+// =====================================================
 
-      event.preventDefault();
+checkLogin();
 
-      clearFormError();
+loadQuestions();
 
-
-      const username =
-        document
-          .getElementById(
-            "loginUsername"
-          )
-          .value
-          .trim();
-
-
-      const password =
-        document
-          .getElementById(
-            "loginPassword"
-          )
-          .value;
-
-
-      const button =
-        document.getElementById(
-          "loginButton"
-        );
-
-
-      button.disabled =
-        true;
-
-
-      button.textContent =
-        "ログイン中……";
-
-
-      try {
-
-        const data =
-          await apiRequest(
-
-            "/api/login",
-
-            {
-
-              method:
-                "POST",
-
-              body:
-                JSON.stringify({
-
-                  username:
-                    username,
-
-                  password:
-                    password
-
-                })
-
-            }
-
-          );
-
-
-        if (
-          data.ok &&
-          data.user
-        ) {
-
-          currentUser =
-            data.user;
-
-
-          updateHeader();
-
-
-          closeModal();
-
-
-          document
-            .getElementById(
-              "loginForm"
-            )
-            .reset();
-
-
-          showMessage(
-            "👋 ログインしました！"
-          );
-
-        } else {
-
-          throw new Error(
-
-            data.error ||
-
-            data.message ||
-
-            "ログインに失敗しました。"
-
-          );
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "LOGIN ERROR:",
-          error
-        );
-
-
-        showFormError(
-
-          error.message ||
-
-          "ログインに失敗しました。"
-
-        );
-
-      } finally {
-
-        button.disabled =
-          false;
-
-
-        button.textContent =
-          "ログイン";
-
-      }
-
-    }
-
-
-    /* =========================================
-       ログアウト
-    ========================================= */
-
-    async function logout() {
-
-      try {
-
-        await apiRequest(
-
-          "/api/logout",
-
-          {
-            method:
-              "POST"
-          }
-
-        );
-
-
-        currentUser =
-          null;
-
-
-        updateHeader();
-
-
-        showMessage(
-          "ログアウトしました。"
-        );
-
-
-      } catch (error) {
-
-        console.error(
-          "LOGOUT ERROR:",
-          error
-        );
-
-
-        showMessage(
-          error.message ||
-          "ログアウトに失敗しました。"
-        );
-
-      }
-
-    }
-
-
-    /* =========================================
-       質問投稿
-    ========================================= */
-
-    async function askQuestion() {
-
-      const input =
-        document.getElementById(
-          "questionInput"
-        );
-
-
-      const question =
-        input.value.trim();
-
-
-      /* ---------------------------------------
-         入力チェック
-      --------------------------------------- */
-
-      if (
-        question === ""
-      ) {
-
-        showMessage(
-          "質問を入力してください！"
-        );
-
-        input.focus();
-
-        return;
-
-      }
-
-
-      if (
-        question.length > 500
-      ) {
-
-        showMessage(
-          "質問は500文字以内にしてください。"
-        );
-
-        input.focus();
-
-        return;
-
-      }
-
-
-      /* ---------------------------------------
-         ログイン確認
-      --------------------------------------- */
-
-      if (!currentUser) {
-
-        showMessage(
-          "質問するにはアカウントが必要です。"
-        );
-
-
-        openLogin();
-
-        return;
-
-      }
-
-
-      const button =
-        document.querySelector(
-          ".ask-button"
-        );
-
-
-      button.disabled =
-        true;
-
-
-      button.textContent =
-        "投稿中……";
-
-
-      try {
-
-        const data =
-          await apiRequest(
-
-            "/api/questions",
-
-            {
-
-              method:
-                "POST",
-
-              body:
-                JSON.stringify({
-
-                  question:
-                    question
-
-                })
-
-            }
-
-          );
-
-
-        if (
-          data.ok
-        ) {
-
-          input.value =
-            "";
-
-
-          showMessage(
-            "🎉 質問を投稿しました！"
-          );
-
-
-          await loadQuestions();
-
-        } else {
-
-          throw new Error(
-
-            data.error ||
-
-            data.message ||
-
-            "質問の投稿に失敗しました。"
-
-          );
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "QUESTION CREATE ERROR:",
-          error
-        );
-
-
-        showMessage(
-
-          error.message ||
-
-          "質問の投稿に失敗しました。"
-
-        );
-
-      } finally {
-
-        button.disabled =
-          false;
-
-
-        button.textContent =
-          "質問する";
-
-      }
-
-    }
-
-
-    /* =========================================
-       質問一覧取得
-    ========================================= */
-
-    async function loadQuestions() {
-
-      const list =
-        document.getElementById(
-          "questionsList"
-        );
-
-
-      if (!list) {
-        return;
-      }
-
-
-      /* ---------------------------------------
-         読み込み中
-      --------------------------------------- */
-
-      list.innerHTML = `
-
-        <div
-          style="
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 40px;
-            color: #7b8494;
-          "
-        >
-          質問を読み込んでいます……
-        </div>
-
-      `;
-
-
-      try {
-
-        const data =
-          await apiRequest(
-            "/api/questions"
-          );
-
-
-        if (
-          !data.ok ||
-          !Array.isArray(
-            data.questions
-          )
-        ) {
-
-          throw new Error(
-
-            data.error ||
-
-            "質問一覧を取得できませんでした。"
-
-          );
-
-        }
-
-
-        /* -------------------------------------
-           0件
-        ------------------------------------- */
-
-        if (
-          data.questions.length === 0
-        ) {
-
-          list.innerHTML = `
-
-            <div
-              style="
-                grid-column: 1 / -1;
-                text-align: center;
-                padding: 50px 20px;
-                background: white;
-                border: 1px solid #e5e9f0;
-                border-radius: 18px;
-                color: #7b8494;
-              "
-            >
-
-              <div
-                style="
-                  font-size: 40px;
-                  margin-bottom: 10px;
-                "
-              >
-                🍧
-              </div>
-
-              <div>
-                まだ質問がありません。
-              </div>
-
-              <div
-                style="
-                  font-size: 13px;
-                  margin-top: 5px;
-                "
-              >
-                最初の質問を投稿してみよう！
-              </div>
-
-            </div>
-
-          `;
-
-          return;
-
-        }
-
-
-        /* -------------------------------------
-           質問カード生成
-        ------------------------------------- */
-
-        list.innerHTML =
-          "";
-
-
-        for (
-          const question
-          of data.questions
-        ) {
-
-          const card =
-            document.createElement(
-              "article"
-            );
-
-
-          card.className =
-            "question-card";
-
-
-          /* 質問 */
-
-          const title =
-            document.createElement(
-              "h3"
-            );
-
-
-          title.textContent =
-            question.question;
-
-
-          /* メタ情報 */
-
-          const meta =
-            document.createElement(
-              "div"
-            );
-
-
-          meta.className =
-            "question-card-meta";
-
-
-          const user =
-            document.createElement(
-              "span"
-            );
-
-
-          user.textContent =
-            "👤 " +
-            question.username;
-
-
-          const answerCount =
-            document.createElement(
-              "span"
-            );
-
-
-          answerCount.className =
-            "answer-count";
-
-
-          const count =
-            Number(
-              question.answer_count
-            ) || 0;
-
-
-          answerCount.textContent =
-            "💬 " +
-            count +
-            "件の回答";
-
-
-          meta.appendChild(
-            user
-          );
-
-
-          meta.appendChild(
-            answerCount
-          );
-
-
-          card.appendChild(
-            title
-          );
-
-
-          card.appendChild(
-            meta
-          );
-
-
-          list.appendChild(
-            card
-          );
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          "QUESTION LIST ERROR:",
-          error
-        );
-
-
-        list.innerHTML = `
-
-          <div
-            style="
-              grid-column: 1 / -1;
-              text-align: center;
-              padding: 40px;
-              background: white;
-              border: 1px solid #e5e9f0;
-              border-radius: 18px;
-              color: #d33b3b;
-            "
-          >
-            質問一覧を読み込めませんでした。
-          </div>
-
-        `;
-
-      }
-
-    }
-
-
-    /* =========================================
-       サンプル質問
-    ========================================= */
-
-    function setQuestion(text) {
-
-      const input =
-        document.getElementById(
-          "questionInput"
-        );
-
-
-      input.value =
-        text;
-
-
-      input.focus();
-
-    }
-
-
-    /* =========================================
-       質問欄までスクロール
-    ========================================= */
-
-    function scrollToQuestion() {
-
-      window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-      });
-
-
-      setTimeout(() => {
-
-        document
-          .getElementById(
-            "questionInput"
-          )
-          .focus();
-
-      }, 500);
-
-    }
-
-
-    /* =========================================
-       メッセージ表示
-    ========================================= */
-
-    let messageTimer;
-
-
-    function showMessage(text) {
-
-      const message =
-        document.getElementById(
-          "message"
-        );
-
-
-      message.textContent =
-        text;
-
-
-      message.classList.add(
-        "show"
-      );
-
-
-      clearTimeout(
-        messageTimer
-      );
-
-
-      messageTimer =
-        setTimeout(() => {
-
-          message.classList.remove(
-            "show"
-          );
-
-        }, 2500);
-
-    }
-
-
-    /* =========================================
-       Enterキー
-    ========================================= */
-
-    document
-      .getElementById(
-        "questionInput"
-      )
-      .addEventListener(
-        "keydown",
-        function(event) {
-
-          if (
-            event.key ===
-            "Enter"
-          ) {
-
-            event.preventDefault();
-
-            askQuestion();
-
-          }
-
-        }
-      );
-
-
-    /* =========================================
-       Escキー
-    ========================================= */
-
-    document.addEventListener(
-      "keydown",
-      function(event) {
-
-        if (
-          event.key === "Escape"
-        ) {
-
-          closeModal();
-
-        }
-
-      }
-    );
-
-
-    /* =========================================
-       ページ読み込み
-    ========================================= */
-
-    checkLogin();
-
-    loadQuestions();
-
-  </script>
+</script>
 
 </body>
 </html>
