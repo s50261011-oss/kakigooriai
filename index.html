@@ -1,22 +1,19 @@
 <!DOCTYPE html>
+
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>KAKIGOORI AI</title>
 
 <meta
-  name="description"
-  content="みんなの知識で育つ、みんなのAI。KAKIGOORI AI"
+name="description"
+content="みんなの知識で育つ、みんなのAI。KAKIGOORI AI"
+
 >
 
 <style>
-
 * {
   box-sizing: border-box;
 }
@@ -45,30 +42,69 @@ body {
   color: #172033;
 }
 
+button {
+  border: none;
+  cursor: pointer;
+  font: inherit;
+}
 
-/* =========================
-   Header
-========================= */
+button:disabled {
+  cursor: not-allowed;
+  opacity: .6;
+}
+
+.btn {
+  padding: 11px 18px;
+  border-radius: 12px;
+  font-weight: 700;
+  transition: transform .15s, box-shadow .15s, opacity .15s;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary {
+  color: white;
+  background: linear-gradient(135deg, #2376ff, #5b9aff);
+  box-shadow: 0 8px 24px rgba(35,118,255,.22);
+}
+
+.btn-secondary {
+  background: #eef4ff;
+  color: #2465d8;
+}
+
+.btn-danger {
+  background: #fff0f0;
+  color: #d43d3d;
+}
+
+.btn-success {
+  background: #eafaf0;
+  color: #18864b;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #59657a;
+}
+
+/* Header */
 
 header {
   position: sticky;
   top: 0;
   z-index: 100;
-
-  background: rgba(255,255,255,0.88);
-
+  background: rgba(255,255,255,.88);
   backdrop-filter: blur(18px);
-
-  border-bottom:
-    1px solid rgba(20,40,80,0.08);
+  border-bottom: 1px solid rgba(20,40,80,.08);
 }
 
 .header-inner {
   max-width: 1180px;
   margin: auto;
-
   padding: 16px 24px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -78,10 +114,8 @@ header {
 .logo {
   font-size: 22px;
   font-weight: 900;
-  letter-spacing: 0.5px;
-
+  letter-spacing: .5px;
   color: #2376ff;
-
   cursor: pointer;
 }
 
@@ -92,7 +126,7 @@ header {
 .header-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .user-name {
@@ -100,167 +134,68 @@ header {
   color: #59657a;
 }
 
-
-/* =========================
-   Buttons
-========================= */
-
-button {
-  border: none;
-  cursor: pointer;
-
-  font: inherit;
-}
-
-.btn {
-  padding: 11px 18px;
-
-  border-radius: 12px;
-
-  font-weight: 700;
-
-  transition:
-    transform .15s,
-    box-shadow .15s,
-    opacity .15s;
-}
-
-.btn:hover {
-  transform: translateY(-1px);
-}
-
-.btn-primary {
-  color: white;
-
-  background:
-    linear-gradient(
-      135deg,
-      #2376ff,
-      #5b9aff
-    );
-
-  box-shadow:
-    0 8px 24px rgba(35,118,255,.22);
-}
-
-.btn-secondary {
-  background: #eef4ff;
-  color: #2465d8;
-}
-
-.btn-ghost {
-  background: transparent;
-  color: #59657a;
-}
-
-
-/* =========================
-   Hero
-========================= */
+/* Hero */
 
 .hero {
   max-width: 1000px;
   margin: auto;
-
-  padding:
-    90px 24px
-    70px;
-
+  padding: 90px 24px 70px;
   text-align: center;
 }
 
 .badge {
   display: inline-block;
-
   padding: 8px 14px;
-
   border-radius: 999px;
-
   background: #eaf2ff;
   color: #2671ed;
-
   font-size: 13px;
   font-weight: 800;
-
   margin-bottom: 20px;
 }
 
 .hero h1 {
   margin: 0;
-
-  font-size:
-    clamp(42px, 8vw, 76px);
-
+  font-size: clamp(42px, 8vw, 76px);
   line-height: 1.05;
-
   letter-spacing: -3px;
 
-  background:
-    linear-gradient(
-      135deg,
-      #2376ff,
-      #7a8cff
-    );
-
+  background: linear-gradient(135deg, #2376ff, #7a8cff);
   -webkit-background-clip: text;
   background-clip: text;
-
   color: transparent;
 }
 
 .hero-subtitle {
-  margin:
-    22px auto
-    38px;
-
+  margin: 22px auto 38px;
   max-width: 700px;
-
   color: #69758a;
-
   font-size: 18px;
   line-height: 1.8;
 }
 
-
-/* =========================
-   Question Box
-========================= */
+/* Question */
 
 .ask-box {
   max-width: 760px;
   margin: auto;
-
   background: white;
-
-  border:
-    1px solid rgba(30,70,130,.10);
-
+  border: 1px solid rgba(30,70,130,.10);
   border-radius: 24px;
-
   padding: 10px;
-
-  box-shadow:
-    0 20px 60px rgba(31,74,145,.10);
-
+  box-shadow: 0 20px 60px rgba(31,74,145,.10);
   display: flex;
   gap: 10px;
 }
 
 .ask-box textarea {
   flex: 1;
-
   border: none;
   outline: none;
-
   resize: none;
-
   min-height: 58px;
-
-  padding:
-    17px 16px;
-
+  padding: 17px 16px;
   font-size: 16px;
-
   font-family: inherit;
 }
 
@@ -268,41 +203,22 @@ button {
   min-width: 110px;
 }
 
-
-/* =========================
-   Samples
-========================= */
-
 .samples {
   max-width: 760px;
-
-  margin:
-    16px auto 0;
-
+  margin: 16px auto 0;
   display: flex;
   flex-wrap: wrap;
-
   justify-content: center;
-
   gap: 8px;
 }
 
 .sample {
   padding: 8px 13px;
-
   border-radius: 999px;
-
   background: white;
-
-  border:
-    1px solid #e3e9f3;
-
+  border: 1px solid #e3e9f3;
   color: #637087;
-
   font-size: 13px;
-
-  cursor: pointer;
-
   transition: .15s;
 }
 
@@ -311,280 +227,164 @@ button {
   color: #2376ff;
 }
 
-
-/* =========================
-   Sections
-========================= */
+/* Sections */
 
 section {
   max-width: 1180px;
-
   margin: auto;
-
-  padding:
-    70px 24px;
+  padding: 70px 24px;
 }
 
 .section-title {
   text-align: center;
-
   font-size: 32px;
-
-  margin:
-    0 0 10px;
+  margin: 0 0 10px;
 }
 
 .section-description {
   text-align: center;
-
   color: #718097;
-
-  margin:
-    0 auto 38px;
-
+  margin: 0 auto 38px;
   max-width: 650px;
-
   line-height: 1.7;
 }
 
-
-/* =========================
-   Questions
-========================= */
+/* Questions */
 
 .questions {
   display: grid;
-
-  grid-template-columns:
-    repeat(
-      auto-fill,
-      minmax(280px, 1fr)
-    );
-
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 18px;
 }
 
 .question-card {
   background: white;
-
-  border:
-    1px solid #e5ebf5;
-
+  border: 1px solid #e5ebf5;
   border-radius: 18px;
-
   padding: 22px;
-
   cursor: pointer;
-
-  transition:
-    transform .18s,
-    box-shadow .18s,
-    border-color .18s;
+  transition: transform .18s, box-shadow .18s, border-color .18s;
 }
 
 .question-card:hover {
   transform: translateY(-3px);
-
   border-color: #a9c6ff;
-
-  box-shadow:
-    0 15px 40px rgba(35,90,170,.10);
+  box-shadow: 0 15px 40px rgba(35,90,170,.10);
 }
 
 .question-text {
   font-size: 17px;
-
   line-height: 1.7;
-
   font-weight: 700;
-
   margin-bottom: 16px;
-
   white-space: pre-wrap;
-
   word-break: break-word;
 }
 
 .question-meta {
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
-
   gap: 10px;
-
   color: #7a8699;
-
   font-size: 13px;
 }
 
 .answer-count {
-  padding:
-    5px 9px;
-
+  padding: 5px 9px;
   background: #eef5ff;
-
   color: #3678dc;
-
   border-radius: 999px;
-
   font-weight: 700;
 }
 
-.loading {
-  text-align: center;
-
-  color: #78859a;
-
-  padding: 50px;
-}
-
-.empty {
-  text-align: center;
-
-  color: #78859a;
-
-  padding: 50px;
-
-  background: white;
-
-  border-radius: 20px;
-
-  border: 1px dashed #d8e1ef;
-}
-
-
-/* =========================
-   About
-========================= */
+/* About */
 
 .about-grid {
   display: grid;
-
-  grid-template-columns:
-    repeat(3, 1fr);
-
+  grid-template-columns: repeat(3, 1fr);
   gap: 18px;
 }
 
 .about-card {
   background: white;
-
   padding: 28px;
-
   border-radius: 20px;
-
-  border:
-    1px solid #e5ebf5;
+  border: 1px solid #e5ebf5;
 }
 
 .about-icon {
   font-size: 30px;
-
   margin-bottom: 15px;
 }
 
 .about-card h3 {
-  margin:
-    0 0 10px;
+  margin: 0 0 10px;
 }
 
 .about-card p {
   margin: 0;
-
   color: #6c788d;
-
   line-height: 1.7;
 }
 
-
-/* =========================
-   Flow
-========================= */
+/* Flow */
 
 .flow {
   display: grid;
-
-  grid-template-columns:
-    repeat(4, 1fr);
-
+  grid-template-columns: repeat(4, 1fr);
   gap: 15px;
 }
 
 .flow-card {
   text-align: center;
-
   padding: 25px 15px;
-
   background: white;
-
-  border:
-    1px solid #e5ebf5;
-
+  border: 1px solid #e5ebf5;
   border-radius: 20px;
 }
 
 .flow-number {
   width: 42px;
   height: 42px;
-
   margin: 0 auto 15px;
-
   border-radius: 50%;
-
   display: grid;
   place-items: center;
-
   background: #eaf2ff;
-
   color: #2376ff;
-
   font-weight: 900;
 }
 
+/* General */
 
-/* =========================
-   Footer
-========================= */
-
-footer {
-  margin-top: 50px;
-
-  padding:
-    35px 24px;
-
+.loading {
   text-align: center;
-
-  color: #7a8699;
-
-  border-top:
-    1px solid #e5ebf5;
+  color: #78859a;
+  padding: 50px;
 }
 
+.empty {
+  text-align: center;
+  color: #78859a;
+  padding: 50px;
+  background: white;
+  border-radius: 20px;
+  border: 1px dashed #d8e1ef;
+}
 
-/* =========================
-   Modal
-========================= */
+/* Modal */
 
 .modal-bg {
   position: fixed;
-
   inset: 0;
-
   z-index: 500;
-
-  background:
-    rgba(12,22,40,.45);
-
-  backdrop-filter:
-    blur(6px);
+  background: rgba(12,22,40,.45);
+  backdrop-filter: blur(6px);
 
   display: none;
-
   align-items: center;
   justify-content: center;
-
   padding: 20px;
 }
 
@@ -593,45 +393,34 @@ footer {
 }
 
 .modal {
-  width: min(560px, 100%);
-
+  width: min(650px, 100%);
   max-height: 90vh;
-
   overflow-y: auto;
-
   background: white;
-
   border-radius: 24px;
-
   padding: 30px;
-
-  box-shadow:
-    0 30px 90px rgba(0,0,0,.20);
-
+  box-shadow: 0 30px 90px rgba(0,0,0,.20);
   position: relative;
+}
+
+.modal-large {
+  width: min(900px, 100%);
 }
 
 .modal-close {
   position: absolute;
-
   right: 18px;
   top: 15px;
-
   width: 36px;
   height: 36px;
-
   border-radius: 50%;
-
   background: #f1f4f8;
-
   color: #667386;
-
   font-size: 20px;
 }
 
 .modal h2 {
-  margin:
-    0 0 22px;
+  margin: 0 0 22px;
 }
 
 .form-group {
@@ -640,200 +429,136 @@ footer {
 
 .form-group label {
   display: block;
-
   font-size: 13px;
-
   font-weight: 700;
-
   margin-bottom: 7px;
-
   color: #5f6b7e;
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
   width: 100%;
-
-  padding:
-    13px 14px;
-
-  border:
-    1px solid #dce4ef;
-
+  padding: 13px 14px;
+  border: 1px solid #dce4ef;
   border-radius: 12px;
-
   outline: none;
-
   font-family: inherit;
-
   font-size: 15px;
+  background: white;
 }
 
 .form-group textarea {
   resize: vertical;
-
   min-height: 130px;
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
   border-color: #70a0ff;
-
-  box-shadow:
-    0 0 0 3px
-    rgba(35,118,255,.10);
+  box-shadow: 0 0 0 3px rgba(35,118,255,.10);
 }
 
 .form-button {
   width: 100%;
-
   padding: 13px;
-
   border-radius: 12px;
-
   font-weight: 800;
-
   color: white;
-
   background: #2376ff;
 }
 
 .switch-auth {
   text-align: center;
-
   margin-top: 18px;
-
   color: #758196;
-
   font-size: 14px;
 }
 
 .switch-auth button {
   color: #2376ff;
-
   background: none;
-
   font-weight: 800;
 }
 
-
-/* =========================
-   Question Detail
-========================= */
+/* Question detail */
 
 .detail-question {
   padding: 20px;
-
   background: #f5f8fd;
-
   border-radius: 16px;
-
   margin-bottom: 25px;
 }
 
 .detail-question-text {
   white-space: pre-wrap;
-
   word-break: break-word;
-
   font-size: 18px;
-
   line-height: 1.8;
-
   font-weight: 700;
-
   margin-bottom: 12px;
 }
 
 .detail-question-meta {
   font-size: 13px;
-
   color: #778399;
 }
 
-
-/* =========================
-   Answers
-========================= */
-
 .answers-title {
   font-size: 20px;
-
-  margin:
-    0 0 15px;
+  margin: 0 0 15px;
 }
 
 .answer-list {
   display: flex;
-
   flex-direction: column;
-
   gap: 14px;
 }
 
 .answer-card {
-  border:
-    1px solid #e1e8f2;
-
+  border: 1px solid #e1e8f2;
   border-radius: 16px;
-
   padding: 18px;
-
   background: white;
 }
 
 .answer-header {
   display: flex;
-
   justify-content: space-between;
-
   gap: 10px;
-
   margin-bottom: 12px;
 }
 
 .answer-author {
   font-weight: 800;
-
   color: #2c5fae;
 }
 
 .answer-date {
   color: #8a95a7;
-
   font-size: 12px;
 }
 
 .answer-text {
   white-space: pre-wrap;
-
   word-break: break-word;
-
   line-height: 1.8;
-
   color: #354157;
 }
 
 .answer-actions {
   display: flex;
-
   gap: 8px;
-
   margin-top: 15px;
 }
 
 .rate-button {
-  padding:
-    7px 12px;
-
+  padding: 7px 12px;
   border-radius: 999px;
-
   background: #f1f4f8;
-
   color: #68758a;
-
   font-size: 13px;
-
   font-weight: 700;
 }
 
@@ -843,30 +568,157 @@ footer {
 
 .no-answers {
   padding: 30px;
-
   text-align: center;
-
   color: #8994a6;
-
   background: #f8fafc;
-
   border-radius: 15px;
 }
 
+/* Admin */
 
-/* =========================
-   Responsive
-========================= */
+.admin-section {
+  display: none;
+}
+
+.admin-section.visible {
+  display: block;
+}
+
+.admin-panel {
+  background: white;
+  border: 1px solid #e2e9f4;
+  border-radius: 22px;
+  padding: 25px;
+  box-shadow: 0 10px 35px rgba(30,70,130,.06);
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.admin-header h2 {
+  margin: 0;
+}
+
+.admin-badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #fff3d9;
+  color: #a56a00;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.candidate-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.candidate-card {
+  border: 1px solid #e3e9f2;
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.candidate-card:hover {
+  border-color: #a9c6ff;
+}
+
+.candidate-question {
+  font-weight: 800;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.candidate-meta {
+  margin-top: 10px;
+  color: #748095;
+  font-size: 13px;
+}
+
+.candidate-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+/* Admin detail */
+
+.admin-question-box {
+  padding: 20px;
+  background: #f5f8fd;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.admin-question-box h3 {
+  margin-top: 0;
+}
+
+.admin-answer {
+  padding: 18px;
+  border: 1px solid #e1e8f2;
+  border-radius: 16px;
+  margin-bottom: 12px;
+}
+
+.admin-answer-text {
+  white-space: pre-wrap;
+  line-height: 1.8;
+  margin: 10px 0;
+}
+
+.admin-answer-stats {
+  font-size: 13px;
+  color: #69778d;
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+/* Sources */
+
+.source-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.source-card {
+  padding: 15px;
+  border: 1px solid #e1e8f2;
+  border-radius: 14px;
+}
+
+.source-title {
+  font-weight: 800;
+}
+
+.source-meta {
+  color: #78859a;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* Responsive */
 
 @media (max-width: 800px) {
-
   .about-grid {
     grid-template-columns: 1fr;
   }
 
   .flow {
-    grid-template-columns:
-      repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .ask-box {
@@ -876,14 +728,11 @@ footer {
   .ask-box button {
     width: 100%;
   }
-
 }
 
 @media (max-width: 500px) {
-
   .header-inner {
-    padding:
-      13px 15px;
+    padding: 13px 15px;
   }
 
   .logo {
@@ -895,13 +744,11 @@ footer {
   }
 
   .hero {
-    padding:
-      60px 15px;
+    padding: 60px 15px;
   }
 
   section {
-    padding:
-      50px 15px;
+    padding: 50px 15px;
   }
 
   .flow {
@@ -912,64 +759,51 @@ footer {
     padding: 24px 18px;
   }
 
+  .header-right {
+    gap: 4px;
+  }
+
+  .header-right .btn {
+    padding: 9px 11px;
+    font-size: 13px;
+  }
 }
-
 </style>
-</head>
 
+</head>
 
 <body>
 
-
-<!-- =========================
-     Header
-========================= -->
-
 <header>
-
   <div class="header-inner">
 
-    <div
-      class="logo"
-      onclick="window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      })"
-    >
-      🍧 KAKIGOORI <span>AI</span>
-    </div>
+```
+<div
+  class="logo"
+  onclick="window.scrollTo({top:0,behavior:'smooth'})"
+>
+  🍧 KAKIGOORI <span>AI</span>
+</div>
 
+<div class="header-right" id="headerRight">
+  <button
+    class="btn btn-secondary"
+    onclick="openAuth('login')"
+  >
+    ログイン
+  </button>
 
-    <div
-      class="header-right"
-      id="headerRight"
-    >
-
-      <button
-        class="btn btn-secondary"
-        onclick="openAuth('login')"
-      >
-        ログイン
-      </button>
-
-      <button
-        class="btn btn-primary"
-        onclick="openAuth('register')"
-      >
-        アカウント作成
-      </button>
-
-    </div>
+  <button
+    class="btn btn-primary"
+    onclick="openAuth('register')"
+  >
+    アカウント作成
+  </button>
+</div>
+```
 
   </div>
-
 </header>
-
-
-
-<!-- =========================
-     Hero
-========================= -->
 
 <main>
 
@@ -979,70 +813,61 @@ footer {
     🌎 みんなの知識で育つAI
   </div>
 
-
-  <h1>
-    KAKIGOORI AI
-  </h1>
-
+  <h1>KAKIGOORI AI</h1>
 
   <p class="hero-subtitle">
     分からないことを質問して、<br>
     みんなで答えて、知識を育てよう。
   </p>
 
-
   <div class="ask-box">
 
-    <textarea
-      id="questionInput"
-      maxlength="500"
-      placeholder="質問を書いてみよう。例：Pythonって何？中学生にも分かるように説明して"
-    ></textarea>
+```
+<textarea
+  id="questionInput"
+  maxlength="500"
+  placeholder="質問を書いてみよう。例：Pythonって何？中学生にも分かるように説明して"
+></textarea>
 
-
-    <button
-      class="btn btn-primary"
-      id="askButton"
-      onclick="askQuestion()"
-    >
-      質問する
-    </button>
+<button
+  class="btn btn-primary"
+  id="askButton"
+  onclick="askQuestion()"
+>
+  質問する
+</button>
+```
 
   </div>
 
-
   <div class="samples">
 
-    <button
-      class="sample"
-      onclick="useSample('Pythonって何？中学生にも分かるように説明して')"
-    >
-      Pythonって何？
-    </button>
+```
+<button
+  class="sample"
+  onclick="useSample('Pythonって何？中学生にも分かるように説明して')"
+>
+  Pythonって何？
+</button>
 
-    <button
-      class="sample"
-      onclick="useSample('なぜ空は青いの？')"
-    >
-      なぜ空は青いの？
-    </button>
+<button
+  class="sample"
+  onclick="useSample('なぜ空は青いの？')"
+>
+  なぜ空は青いの？
+</button>
 
-    <button
-      class="sample"
-      onclick="useSample('三平方の定理を分かりやすく説明して')"
-    >
-      三平方の定理
-    </button>
+<button
+  class="sample"
+  onclick="useSample('三平方の定理を分かりやすく説明して')"
+>
+  三平方の定理
+</button>
+```
 
   </div>
 
 </section>
-
-
-
-<!-- =========================
-     Questions
-========================= -->
 
 <section id="questions">
 
@@ -1055,11 +880,7 @@ footer {
     気になる質問をクリックすると、回答を見ることができます。
   </p>
 
-
-  <div
-    class="questions"
-    id="questionsList"
-  >
+  <div class="questions" id="questionsList">
     <div class="loading">
       質問を読み込んでいます…
     </div>
@@ -1067,11 +888,169 @@ footer {
 
 </section>
 
+<!-- 管理者専用 -->
 
+<section
+  id="adminSection"
+  class="admin-section"
+>
 
-<!-- =========================
-     About
-========================= -->
+  <div class="admin-panel">
+
+```
+<div class="admin-header">
+
+  <div>
+    <h2>👑 管理者メニュー</h2>
+    <p style="margin:6px 0 0;color:#748095;">
+      学習候補と知識ソースを管理します。
+    </p>
+  </div>
+
+  <span class="admin-badge">
+    ADMIN
+  </span>
+
+</div>
+
+<h3>
+  📚 学習候補
+</h3>
+
+<div
+  id="candidateList"
+  class="candidate-list"
+>
+  <div class="loading">
+    学習候補を読み込んでいます…
+  </div>
+</div>
+
+<hr
+  style="
+    border:0;
+    border-top:1px solid #e5ebf5;
+    margin:30px 0;
+  "
+>
+
+<h3>
+  📖 知識ソースを登録
+</h3>
+
+<form onsubmit="registerSource(event)">
+
+  <div class="form-group">
+    <label>タイトル</label>
+    <input
+      id="sourceTitle"
+      maxlength="200"
+      required
+      placeholder="例：Wikipedia Python"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>種類</label>
+
+    <select id="sourceType">
+      <option value="wikipedia">Wikipedia</option>
+      <option value="dictionary">辞書</option>
+      <option value="paper">論文</option>
+      <option value="book">書籍</option>
+      <option value="novel">小説</option>
+      <option value="website">Webサイト</option>
+      <option value="other">その他</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>URL</label>
+
+    <input
+      id="sourceUrl"
+      type="url"
+      placeholder="https://..."
+    >
+  </div>
+
+  <div class="form-group">
+    <label>著者</label>
+
+    <input
+      id="sourceAuthor"
+      maxlength="200"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>出版社</label>
+
+    <input
+      id="sourcePublisher"
+      maxlength="200"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>ライセンス</label>
+
+    <input
+      id="sourceLicense"
+      maxlength="200"
+      placeholder="例：CC BY-SA 4.0"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>説明</label>
+
+    <textarea
+      id="sourceDescription"
+      maxlength="2000"
+    ></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>本文・取得した知識</label>
+
+    <textarea
+      id="sourceContent"
+      maxlength="100000"
+      placeholder="利用条件を確認したうえで登録してください。"
+    ></textarea>
+  </div>
+
+  <button
+    class="form-button"
+    type="submit"
+  >
+    ソースを登録
+  </button>
+
+</form>
+
+<div style="margin-top:30px;">
+
+  <h3>
+    登録済みソース
+  </h3>
+
+  <div
+    id="sourceList"
+    class="source-list"
+  >
+    <div class="loading">
+      ソースを読み込んでいます…
+    </div>
+  </div>
+
+</div>
+```
+
+  </div>
+
+</section>
 
 <section>
 
@@ -1084,72 +1063,47 @@ footer {
     その知識をAIの学習に活用していくことを目指すサービスです。
   </p>
 
-
   <div class="about-grid">
 
-    <div class="about-card">
+```
+<div class="about-card">
+  <div class="about-icon">❓</div>
 
-      <div class="about-icon">
-        ❓
-      </div>
+  <h3>質問する</h3>
 
-      <h3>
-        質問する
-      </h3>
+  <p>
+    分からないことを質問できます。
+    「中学生にも分かるように」など、
+    説明してほしいレベルも質問文に書けます。
+  </p>
+</div>
 
-      <p>
-        分からないことを質問できます。
-        「中学生にも分かるように」など、
-        説明してほしいレベルも質問文に書けます。
-      </p>
+<div class="about-card">
+  <div class="about-icon">💬</div>
 
-    </div>
+  <h3>みんなで回答</h3>
 
+  <p>
+    他のユーザーが質問に回答します。
+    いろいろな人の考え方や説明を集めることができます。
+  </p>
+</div>
 
-    <div class="about-card">
+<div class="about-card">
+  <div class="about-icon">🧠</div>
 
-      <div class="about-icon">
-        💬
-      </div>
+  <h3>知識を育てる</h3>
 
-      <h3>
-        みんなで回答
-      </h3>
-
-      <p>
-        他のユーザーが質問に回答します。
-        いろいろな人の考え方や説明を集めることができます。
-      </p>
-
-    </div>
-
-
-    <div class="about-card">
-
-      <div class="about-icon">
-        🧠
-      </div>
-
-      <h3>
-        知識を育てる
-      </h3>
-
-      <p>
-        集まった回答を評価・確認し、
-        正しい知識を整理してAIの学習に活用していく構想です。
-      </p>
-
-    </div>
+  <p>
+    集まった回答を評価・確認し、
+    正しい知識を整理してAIの学習に活用していきます。
+  </p>
+</div>
+```
 
   </div>
 
 </section>
-
-
-
-<!-- =========================
-     Flow
-========================= -->
 
 <section>
 
@@ -1157,83 +1111,39 @@ footer {
     KAKIGOORI AIの流れ
   </h2>
 
-
   <div class="flow">
 
-    <div class="flow-card">
+```
+<div class="flow-card">
+  <div class="flow-number">1</div>
+  <h3>質問</h3>
+  <p>ユーザーが質問する</p>
+</div>
 
-      <div class="flow-number">
-        1
-      </div>
+<div class="flow-card">
+  <div class="flow-number">2</div>
+  <h3>回答</h3>
+  <p>他のユーザーが回答する</p>
+</div>
 
-      <h3>
-        質問
-      </h3>
+<div class="flow-card">
+  <div class="flow-number">3</div>
+  <h3>評価</h3>
+  <p>回答をGood / Badで評価する</p>
+</div>
 
-      <p>
-        ユーザーが質問する
-      </p>
-
-    </div>
-
-
-    <div class="flow-card">
-
-      <div class="flow-number">
-        2
-      </div>
-
-      <h3>
-        回答
-      </h3>
-
-      <p>
-        他のユーザーが回答する
-      </p>
-
-    </div>
-
-
-    <div class="flow-card">
-
-      <div class="flow-number">
-        3
-      </div>
-
-      <h3>
-        評価
-      </h3>
-
-      <p>
-        回答をGood / Badで評価する
-      </p>
-
-    </div>
-
-
-    <div class="flow-card">
-
-      <div class="flow-number">
-        4
-      </div>
-
-      <h3>
-        学習
-      </h3>
-
-      <p>
-        確認された知識をAIに活用する
-      </p>
-
-    </div>
+<div class="flow-card">
+  <div class="flow-number">4</div>
+  <h3>学習</h3>
+  <p>管理者が確認した知識をAIに活用する</p>
+</div>
+```
 
   </div>
 
 </section>
 
 </main>
-
-
 
 <footer>
   🍧 KAKIGOORI AI
@@ -1243,11 +1153,7 @@ footer {
   </small>
 </footer>
 
-
-
-<!-- =========================
-     Auth Modal
-========================= -->
+<!-- Auth Modal -->
 
 <div
   class="modal-bg"
@@ -1256,160 +1162,119 @@ footer {
 
   <div class="modal">
 
+```
+<button
+  class="modal-close"
+  onclick="closeModal()"
+>
+  ×
+</button>
+
+<div id="registerForm">
+
+  <h2>アカウントを作成</h2>
+
+  <form onsubmit="register(event)">
+
+    <div class="form-group">
+      <label>ユーザー名</label>
+
+      <input
+        id="registerUsername"
+        type="text"
+        maxlength="30"
+        required
+        autocomplete="username"
+      >
+    </div>
+
+    <div class="form-group">
+      <label>パスワード</label>
+
+      <input
+        id="registerPassword"
+        type="password"
+        maxlength="200"
+        required
+        autocomplete="new-password"
+      >
+    </div>
+
     <button
-      class="modal-close"
-      onclick="closeModal()"
+      class="form-button"
+      type="submit"
     >
-      ×
+      アカウントを作成
     </button>
 
+  </form>
 
-    <!-- Register -->
+  <div class="switch-auth">
+    すでにアカウントを持っていますか？
 
-    <div id="registerForm">
+    <button onclick="showLoginForm()">
+      ログイン
+    </button>
+  </div>
 
-      <h2>
-        アカウントを作成
-      </h2>
+</div>
 
+<div
+  id="loginForm"
+  style="display:none;"
+>
 
-      <form onsubmit="register(event)">
+  <h2>ログイン</h2>
 
-        <div class="form-group">
+  <form onsubmit="login(event)">
 
-          <label>
-            ユーザー名
-          </label>
+    <div class="form-group">
+      <label>ユーザー名</label>
 
-          <input
-            id="registerUsername"
-            type="text"
-            maxlength="30"
-            required
-            autocomplete="username"
-          >
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>
-            パスワード
-          </label>
-
-          <input
-            id="registerPassword"
-            type="password"
-            maxlength="200"
-            required
-            autocomplete="new-password"
-          >
-
-        </div>
-
-
-        <button
-          class="form-button"
-          type="submit"
-        >
-          アカウントを作成
-        </button>
-
-      </form>
-
-
-      <div class="switch-auth">
-
-        すでにアカウントを持っていますか？
-
-        <button onclick="showLoginForm()">
-          ログイン
-        </button>
-
-      </div>
-
+      <input
+        id="loginUsername"
+        type="text"
+        required
+        autocomplete="username"
+      >
     </div>
 
+    <div class="form-group">
+      <label>パスワード</label>
 
+      <input
+        id="loginPassword"
+        type="password"
+        required
+        autocomplete="current-password"
+      >
+    </div>
 
-    <!-- Login -->
-
-    <div
-      id="loginForm"
-      style="display:none;"
+    <button
+      class="form-button"
+      type="submit"
     >
+      ログイン
+    </button>
 
-      <h2>
-        ログイン
-      </h2>
+  </form>
 
+  <div class="switch-auth">
+    アカウントを持っていませんか？
 
-      <form onsubmit="login(event)">
+    <button onclick="showRegisterForm()">
+      アカウント作成
+    </button>
+  </div>
 
-        <div class="form-group">
-
-          <label>
-            ユーザー名
-          </label>
-
-          <input
-            id="loginUsername"
-            type="text"
-            required
-            autocomplete="username"
-          >
-
-        </div>
-
-
-        <div class="form-group">
-
-          <label>
-            パスワード
-          </label>
-
-          <input
-            id="loginPassword"
-            type="password"
-            required
-            autocomplete="current-password"
-          >
-
-        </div>
-
-
-        <button
-          class="form-button"
-          type="submit"
-        >
-          ログイン
-        </button>
-
-      </form>
-
-
-      <div class="switch-auth">
-
-        アカウントを持っていませんか？
-
-        <button onclick="showRegisterForm()">
-          アカウント作成
-        </button>
-
-      </div>
-
-    </div>
+</div>
+```
 
   </div>
 
 </div>
 
-
-
-<!-- =========================
-     Question Detail Modal
-========================= -->
+<!-- Question Detail -->
 
 <div
   class="modal-bg"
@@ -1418,46 +1283,122 @@ footer {
 
   <div class="modal">
 
-    <button
-      class="modal-close"
-      onclick="closeQuestionModal()"
-    >
-      ×
-    </button>
+```
+<button
+  class="modal-close"
+  onclick="closeQuestionModal()"
+>
+  ×
+</button>
 
-
-    <div id="questionDetail">
-
-      <div class="loading">
-        読み込んでいます…
-      </div>
-
-    </div>
+<div id="questionDetail">
+  <div class="loading">
+    読み込んでいます…
+  </div>
+</div>
+```
 
   </div>
 
 </div>
 
+<!-- Admin Candidate Detail -->
 
+<div
+  class="modal-bg"
+  id="candidateModal"
+>
+
+  <div class="modal modal-large">
+
+```
+<button
+  class="modal-close"
+  onclick="closeCandidateModal()"
+>
+  ×
+</button>
+
+<div id="candidateDetail">
+  <div class="loading">
+    学習候補を読み込んでいます…
+  </div>
+</div>
+```
+
+  </div>
+
+</div>
+
+<!-- Reject / Correction -->
+
+<div
+  class="modal-bg"
+  id="correctionModal"
+>
+
+  <div class="modal">
+
+```
+<button
+  class="modal-close"
+  onclick="closeCorrectionModal()"
+>
+  ×
+</button>
+
+<h2>
+  ✏️ 修正版を登録
+</h2>
+
+<p style="color:#718097;line-height:1.7;">
+  元の回答が不正確だった場合、
+  管理者が正しい内容を書いて学習データとして登録できます。
+</p>
+
+<div class="form-group">
+
+  <label>
+    修正版
+  </label>
+
+  <textarea
+    id="correctionInput"
+    maxlength="10000"
+    placeholder="正しい回答を書いてください。"
+  ></textarea>
+
+</div>
+
+<button
+  class="form-button"
+  onclick="submitCorrection()"
+>
+  修正版を登録
+</button>
+```
+
+  </div>
+
+</div>
 
 <script>
 
-
-// =====================================================
-// API
-// =====================================================
+/* =====================================================
+   API
+===================================================== */
 
 const API_URL = "";
 
 let currentUser = null;
-
 let currentQuestionId = null;
+let currentCandidateId = null;
+let currentCandidateAnswerId = null;
 
 
-
-// =====================================================
-// API request
-// =====================================================
+/* =====================================================
+   API request
+===================================================== */
 
 async function apiRequest(path, options = {}) {
 
@@ -1472,13 +1413,10 @@ async function apiRequest(path, options = {}) {
     }
   };
 
-
-  const response =
-    await fetch(
-      API_URL + path,
-      fetchOptions
-    );
-
+  const response = await fetch(
+    API_URL + path,
+    fetchOptions
+  );
 
   let data;
 
@@ -1491,26 +1429,21 @@ async function apiRequest(path, options = {}) {
     };
   }
 
-
   if (!response.ok) {
-
     throw new Error(
       data.error ||
       data.message ||
       "通信に失敗しました。"
     );
-
   }
-
 
   return data;
 }
 
 
-
-// =====================================================
-// Login check
-// =====================================================
+/* =====================================================
+   Login check
+===================================================== */
 
 async function checkLogin() {
 
@@ -1519,65 +1452,48 @@ async function checkLogin() {
     const data =
       await apiRequest("/api/me");
 
-
     if (
       data.ok &&
       data.loggedIn &&
       data.user
     ) {
-
-      currentUser =
-        data.user;
-
+      currentUser = data.user;
     } else {
-
       currentUser = null;
-
     }
-
-
-    updateHeader();
 
   } catch (error) {
 
     console.error(error);
-
     currentUser = null;
-
-    updateHeader();
 
   }
 
+  updateHeader();
+  updateAdminSection();
 }
 
 
-
-// =====================================================
-// Header
-// =====================================================
+/* =====================================================
+   Header
+===================================================== */
 
 function updateHeader() {
 
   const headerRight =
-    document.getElementById(
-      "headerRight"
-    );
-
+    document.getElementById("headerRight");
 
   headerRight.innerHTML = "";
-
 
   if (currentUser) {
 
     const userName =
       document.createElement("span");
 
-    userName.className =
-      "user-name";
+    userName.className = "user-name";
 
     userName.textContent =
       `こんにちは、${currentUser.username}さん`;
-
 
     const logoutButton =
       document.createElement("button");
@@ -1591,14 +1507,8 @@ function updateHeader() {
     logoutButton.onclick =
       logout;
 
-
-    headerRight.appendChild(
-      userName
-    );
-
-    headerRight.appendChild(
-      logoutButton
-    );
+    headerRight.appendChild(userName);
+    headerRight.appendChild(logoutButton);
 
   } else {
 
@@ -1614,7 +1524,6 @@ function updateHeader() {
     loginButton.onclick =
       () => openAuth("login");
 
-
     const registerButton =
       document.createElement("button");
 
@@ -1627,43 +1536,54 @@ function updateHeader() {
     registerButton.onclick =
       () => openAuth("register");
 
-
-    headerRight.appendChild(
-      loginButton
-    );
-
-    headerRight.appendChild(
-      registerButton
-    );
-
+    headerRight.appendChild(loginButton);
+    headerRight.appendChild(registerButton);
   }
-
 }
 
 
+/* =====================================================
+   Admin section
+===================================================== */
 
-// =====================================================
-// Auth modal
-// =====================================================
+function updateAdminSection() {
+
+  const section =
+    document.getElementById("adminSection");
+
+  if (
+    currentUser &&
+    currentUser.role === "admin"
+  ) {
+
+    section.classList.add("visible");
+
+    loadCandidates();
+    loadSources();
+
+  } else {
+
+    section.classList.remove("visible");
+
+  }
+}
+
+
+/* =====================================================
+   Auth
+===================================================== */
 
 function openAuth(type) {
 
   document
     .getElementById("authModal")
-    .classList
-    .add("active");
-
+    .classList.add("active");
 
   if (type === "login") {
-
     showLoginForm();
-
   } else {
-
     showRegisterForm();
-
   }
-
 }
 
 
@@ -1671,8 +1591,7 @@ function closeModal() {
 
   document
     .getElementById("authModal")
-    .classList
-    .remove("active");
+    .classList.remove("active");
 
 }
 
@@ -1682,7 +1601,6 @@ function showLoginForm() {
   document
     .getElementById("registerForm")
     .style.display = "none";
-
 
   document
     .getElementById("loginForm")
@@ -1697,7 +1615,6 @@ function showRegisterForm() {
     .getElementById("registerForm")
     .style.display = "block";
 
-
   document
     .getElementById("loginForm")
     .style.display = "none";
@@ -1705,15 +1622,13 @@ function showRegisterForm() {
 }
 
 
-
-// =====================================================
-// Register
-// =====================================================
+/* =====================================================
+   Register
+===================================================== */
 
 async function register(event) {
 
   event.preventDefault();
-
 
   const username =
     document
@@ -1721,12 +1636,10 @@ async function register(event) {
       .value
       .trim();
 
-
   const password =
     document
       .getElementById("registerPassword")
       .value;
-
 
   try {
 
@@ -1743,12 +1656,10 @@ async function register(event) {
         }
       );
 
-
     alert(
       data.message ||
       "アカウントを作成しました。"
     );
-
 
     document
       .getElementById("registerUsername")
@@ -1758,33 +1669,27 @@ async function register(event) {
       .getElementById("registerPassword")
       .value = "";
 
-
     showLoginForm();
-
 
     document
       .getElementById("loginUsername")
       .value = username;
-
 
   } catch (error) {
 
     alert(error.message);
 
   }
-
 }
 
 
-
-// =====================================================
-// Login
-// =====================================================
+/* =====================================================
+   Login
+===================================================== */
 
 async function login(event) {
 
   event.preventDefault();
-
 
   const username =
     document
@@ -1792,12 +1697,10 @@ async function login(event) {
       .value
       .trim();
 
-
   const password =
     document
       .getElementById("loginPassword")
       .value;
-
 
   try {
 
@@ -1814,31 +1717,25 @@ async function login(event) {
         }
       );
 
-
     if (
       data.ok &&
       data.user
     ) {
 
-      currentUser =
-        data.user;
-
+      currentUser = data.user;
 
       updateHeader();
-
+      updateAdminSection();
 
       document
         .getElementById("loginPassword")
         .value = "";
 
-
       closeModal();
-
 
       alert(
         `ログインしました。ようこそ、${currentUser.username}さん！`
       );
-
     }
 
   } catch (error) {
@@ -1846,14 +1743,12 @@ async function login(event) {
     alert(error.message);
 
   }
-
 }
 
 
-
-// =====================================================
-// Logout
-// =====================================================
+/* =====================================================
+   Logout
+===================================================== */
 
 async function logout() {
 
@@ -1866,108 +1761,76 @@ async function logout() {
       }
     );
 
-
     currentUser = null;
 
     updateHeader();
+    updateAdminSection();
 
-
-    alert(
-      "ログアウトしました。"
-    );
+    alert("ログアウトしました。");
 
   } catch (error) {
 
     alert(error.message);
 
   }
-
 }
 
 
-
-// =====================================================
-// Sample question
-// =====================================================
+/* =====================================================
+   Sample
+===================================================== */
 
 function useSample(text) {
 
   const input =
-    document.getElementById(
-      "questionInput"
-    );
-
+    document.getElementById("questionInput");
 
   input.value = text;
-
   input.focus();
 
 }
 
 
-
-// =====================================================
-// Ask question
-// =====================================================
+/* =====================================================
+   Ask
+===================================================== */
 
 async function askQuestion() {
 
   const input =
-    document.getElementById(
-      "questionInput"
-    );
-
+    document.getElementById("questionInput");
 
   const button =
-    document.getElementById(
-      "askButton"
-    );
-
+    document.getElementById("askButton");
 
   const question =
     input.value.trim();
 
-
   if (!question) {
 
-    alert(
-      "質問を入力してください。"
-    );
-
+    alert("質問を入力してください。");
     input.focus();
-
     return;
-  }
 
+  }
 
   if (question.length > 500) {
 
-    alert(
-      "質問は500文字以内にしてください。"
-    );
-
+    alert("質問は500文字以内にしてください。");
     return;
+
   }
 
-
-  // ログインしていなければログイン画面
   if (!currentUser) {
 
-    alert(
-      "質問するにはログインしてください。"
-    );
-
+    alert("質問するにはログインしてください。");
     openAuth("login");
-
     return;
+
   }
 
-
   button.disabled = true;
-
-  button.textContent =
-    "投稿中…";
-
+  button.textContent = "投稿中…";
 
   try {
 
@@ -1982,24 +1845,17 @@ async function askQuestion() {
       }
     );
 
-
     input.value = "";
 
-
-    alert(
-      "質問を投稿しました！"
-    );
-
+    alert("質問を投稿しました！");
 
     await loadQuestions();
-
 
     document
       .getElementById("questions")
       .scrollIntoView({
         behavior: "smooth"
       });
-
 
   } catch (error) {
 
@@ -2008,27 +1864,20 @@ async function askQuestion() {
   } finally {
 
     button.disabled = false;
-
-    button.textContent =
-      "質問する";
+    button.textContent = "質問する";
 
   }
-
 }
 
 
-
-// =====================================================
-// Load questions
-// =====================================================
+/* =====================================================
+   Questions
+===================================================== */
 
 async function loadQuestions() {
 
   const list =
-    document.getElementById(
-      "questionsList"
-    );
-
+    document.getElementById("questionsList");
 
   list.innerHTML = `
     <div class="loading">
@@ -2036,17 +1885,12 @@ async function loadQuestions() {
     </div>
   `;
 
-
   try {
 
     const data =
-      await apiRequest(
-        "/api/questions"
-      );
-
+      await apiRequest("/api/questions");
 
     list.innerHTML = "";
-
 
     if (
       !data.questions ||
@@ -2063,33 +1907,21 @@ async function loadQuestions() {
       return;
     }
 
-
     for (
-      const question
-      of data.questions
+      const question of data.questions
     ) {
 
       const card =
-        document.createElement(
-          "div"
-        );
-
+        document.createElement("div");
 
       card.className =
         "question-card";
 
-
       card.onclick =
-        () => openQuestion(
-          question.id
-        );
-
+        () => openQuestion(question.id);
 
       const text =
-        document.createElement(
-          "div"
-        );
-
+        document.createElement("div");
 
       text.className =
         "question-text";
@@ -2097,75 +1929,39 @@ async function loadQuestions() {
       text.textContent =
         question.question;
 
-
       const meta =
-        document.createElement(
-          "div"
-        );
-
+        document.createElement("div");
 
       meta.className =
         "question-meta";
 
-
       const author =
-        document.createElement(
-          "span"
-        );
-
+        document.createElement("span");
 
       author.textContent =
         `👤 ${question.username}`;
 
-
       const count =
-        document.createElement(
-          "span"
-        );
-
+        document.createElement("span");
 
       count.className =
         "answer-count";
 
-
-      const answerCount =
-        Number(
-          question.answer_count || 0
-        );
-
-
       count.textContent =
-        `💬 ${answerCount}件の回答`;
+        `💬 ${Number(question.answer_count || 0)}件の回答`;
 
+      meta.appendChild(author);
+      meta.appendChild(count);
 
-      meta.appendChild(
-        author
-      );
+      card.appendChild(text);
+      card.appendChild(meta);
 
-      meta.appendChild(
-        count
-      );
-
-
-      card.appendChild(
-        text
-      );
-
-      card.appendChild(
-        meta
-      );
-
-
-      list.appendChild(
-        card
-      );
-
+      list.appendChild(card);
     }
 
   } catch (error) {
 
     console.error(error);
-
 
     list.innerHTML = `
       <div class="empty">
@@ -2173,48 +1969,31 @@ async function loadQuestions() {
         ${escapeHtml(error.message)}
       </div>
     `;
-
   }
-
 }
 
 
+/* =====================================================
+   Question detail
+===================================================== */
 
-// =====================================================
-// Open question
-// =====================================================
+async function openQuestion(questionId) {
 
-async function openQuestion(
-  questionId
-) {
-
-  currentQuestionId =
-    questionId;
-
+  currentQuestionId = questionId;
 
   const modal =
-    document.getElementById(
-      "questionModal"
-    );
-
+    document.getElementById("questionModal");
 
   const detail =
-    document.getElementById(
-      "questionDetail"
-    );
+    document.getElementById("questionDetail");
 
-
-  modal.classList.add(
-    "active"
-  );
-
+  modal.classList.add("active");
 
   detail.innerHTML = `
     <div class="loading">
       質問と回答を読み込んでいます…
     </div>
   `;
-
 
   try {
 
@@ -2223,11 +2002,7 @@ async function openQuestion(
         `/api/questions/${questionId}`
       );
 
-
-    renderQuestionDetail(
-      data
-    );
-
+    renderQuestionDetail(data);
 
   } catch (error) {
 
@@ -2238,120 +2013,61 @@ async function openQuestion(
     `;
 
   }
-
 }
 
 
-
-// =====================================================
-// Render question detail
-// =====================================================
-
-function renderQuestionDetail(
-  data
-) {
+function renderQuestionDetail(data) {
 
   const detail =
-    document.getElementById(
-      "questionDetail"
-    );
-
+    document.getElementById("questionDetail");
 
   detail.innerHTML = "";
 
-
-  // -----------------------------
-  // Question
-  // -----------------------------
-
   const questionBox =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   questionBox.className =
     "detail-question";
 
-
   const questionText =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   questionText.className =
     "detail-question-text";
 
-
   questionText.textContent =
     data.question.question;
 
-
   const questionMeta =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   questionMeta.className =
     "detail-question-meta";
 
-
   questionMeta.textContent =
     `👤 ${data.question.username}`;
 
+  questionBox.appendChild(questionText);
+  questionBox.appendChild(questionMeta);
 
-  questionBox.appendChild(
-    questionText
-  );
-
-  questionBox.appendChild(
-    questionMeta
-  );
-
-
-  detail.appendChild(
-    questionBox
-  );
-
-
-  // -----------------------------
-  // Answers title
-  // -----------------------------
+  detail.appendChild(questionBox);
 
   const title =
-    document.createElement(
-      "h3"
-    );
-
+    document.createElement("h3");
 
   title.className =
     "answers-title";
 
-
   title.textContent =
     `回答 ${data.answers.length}件`;
 
-
-  detail.appendChild(
-    title
-  );
-
-
-  // -----------------------------
-  // Answer list
-  // -----------------------------
+  detail.appendChild(title);
 
   const answerList =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   answerList.className =
     "answer-list";
-
 
   if (
     !data.answers ||
@@ -2359,117 +2075,71 @@ function renderQuestionDetail(
   ) {
 
     const empty =
-      document.createElement(
-        "div"
-      );
-
+      document.createElement("div");
 
     empty.className =
       "no-answers";
 
-
     empty.textContent =
       "まだ回答がありません。最初の回答を書いてみよう！";
 
-
-    answerList.appendChild(
-      empty
-    );
+    answerList.appendChild(empty);
 
   } else {
 
     for (
-      const answer
-      of data.answers
+      const answer of data.answers
     ) {
 
       answerList.appendChild(
-        createAnswerCard(
-          answer
-        )
+        createAnswerCard(answer)
       );
 
     }
-
   }
 
-
-  detail.appendChild(
-    answerList
-  );
-
-
-  // -----------------------------
-  // Answer form
-  // -----------------------------
+  detail.appendChild(answerList);
 
   const answerArea =
-    document.createElement(
-      "div"
-    );
+    document.createElement("div");
 
-
-  answerArea.style.marginTop =
-    "25px";
-
+  answerArea.style.marginTop = "25px";
 
   if (data.question.is_closed) {
 
     const closed =
-      document.createElement(
-        "div"
-      );
-
+      document.createElement("div");
 
     closed.className =
       "no-answers";
 
-
     closed.textContent =
       "この質問は締め切られています。";
 
-
-    answerArea.appendChild(
-      closed
-    );
+    answerArea.appendChild(closed);
 
   } else if (currentUser) {
 
     const form =
-      document.createElement(
-        "form"
-      );
-
+      document.createElement("form");
 
     form.onsubmit =
       submitAnswer;
 
-
     const group =
-      document.createElement(
-        "div"
-      );
-
+      document.createElement("div");
 
     group.className =
       "form-group";
 
-
     const label =
-      document.createElement(
-        "label"
-      );
-
+      document.createElement("label");
 
     label.textContent =
       "あなたの回答";
 
-
     const textarea =
-      document.createElement(
-        "textarea"
-      );
-
+      document.createElement("textarea");
 
     textarea.id =
       "answerInput";
@@ -2480,344 +2150,188 @@ function renderQuestionDetail(
     textarea.placeholder =
       "質問への回答を書いてください。";
 
-
-    group.appendChild(
-      label
-    );
-
-    group.appendChild(
-      textarea
-    );
-
+    group.appendChild(label);
+    group.appendChild(textarea);
 
     const button =
-      document.createElement(
-        "button"
-      );
+      document.createElement("button");
 
+    button.type = "submit";
+    button.className = "form-button";
+    button.textContent = "回答を投稿";
 
-    button.type =
-      "submit";
+    form.appendChild(group);
+    form.appendChild(button);
 
-    button.className =
-      "form-button";
-
-    button.textContent =
-      "回答を投稿";
-
-
-    form.appendChild(
-      group
-    );
-
-    form.appendChild(
-      button
-    );
-
-
-    answerArea.appendChild(
-      form
-    );
+    answerArea.appendChild(form);
 
   } else {
 
     const loginMessage =
-      document.createElement(
-        "div"
-      );
-
+      document.createElement("div");
 
     loginMessage.className =
       "no-answers";
 
-
     loginMessage.textContent =
       "回答するにはログインしてください。";
 
-
     const loginButton =
-      document.createElement(
-        "button"
-      );
-
+      document.createElement("button");
 
     loginButton.className =
       "btn btn-primary";
 
-
     loginButton.style.marginTop =
       "12px";
-
 
     loginButton.textContent =
       "ログイン";
 
-
-    loginButton.onclick =
-      () => {
-
-        closeQuestionModal();
-
-        openAuth("login");
-
-      };
-
+    loginButton.onclick = () => {
+      closeQuestionModal();
+      openAuth("login");
+    };
 
     loginMessage.appendChild(
       document.createElement("br")
     );
 
-    loginMessage.appendChild(
-      loginButton
-    );
+    loginMessage.appendChild(loginButton);
 
-
-    answerArea.appendChild(
-      loginMessage
-    );
-
+    answerArea.appendChild(loginMessage);
   }
 
-
-  detail.appendChild(
-    answerArea
-  );
-
+  detail.appendChild(answerArea);
 }
 
 
+/* =====================================================
+   Answer card
+===================================================== */
 
-// =====================================================
-// Create answer card
-// =====================================================
-
-function createAnswerCard(
-  answer
-) {
+function createAnswerCard(answer) {
 
   const card =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   card.className =
     "answer-card";
 
-
-  // Header
   const header =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   header.className =
     "answer-header";
 
-
   const author =
-    document.createElement(
-      "span"
-    );
-
+    document.createElement("span");
 
   author.className =
     "answer-author";
 
-
   author.textContent =
     `👤 ${answer.username}`;
 
-
   const date =
-    document.createElement(
-      "span"
-    );
-
+    document.createElement("span");
 
   date.className =
     "answer-date";
 
-
   date.textContent =
-    formatDate(
-      answer.created_at
-    );
+    formatDate(answer.created_at);
 
+  header.appendChild(author);
+  header.appendChild(date);
 
-  header.appendChild(
-    author
-  );
-
-  header.appendChild(
-    date
-  );
-
-
-  // Text
   const text =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   text.className =
     "answer-text";
 
-
   text.textContent =
     answer.answer;
 
-
-  // Actions
   const actions =
-    document.createElement(
-      "div"
-    );
-
+    document.createElement("div");
 
   actions.className =
     "answer-actions";
 
-
   const good =
-    document.createElement(
-      "button"
-    );
-
+    document.createElement("button");
 
   good.className =
     "rate-button";
 
-
   good.textContent =
     `👍 Good ${answer.good_count || 0}`;
 
-
   good.onclick =
-    () => rateAnswer(
-      answer.id,
-      1
-    );
-
+    () => rateAnswer(answer.id, 1);
 
   const bad =
-    document.createElement(
-      "button"
-    );
-
+    document.createElement("button");
 
   bad.className =
     "rate-button";
 
-
   bad.textContent =
     `👎 Bad ${answer.bad_count || 0}`;
 
-
   bad.onclick =
-    () => rateAnswer(
-      answer.id,
-      -1
-    );
+    () => rateAnswer(answer.id, -1);
 
+  actions.appendChild(good);
+  actions.appendChild(bad);
 
-  actions.appendChild(
-    good
-  );
-
-  actions.appendChild(
-    bad
-  );
-
-
-  card.appendChild(
-    header
-  );
-
-  card.appendChild(
-    text
-  );
-
-  card.appendChild(
-    actions
-  );
-
+  card.appendChild(header);
+  card.appendChild(text);
+  card.appendChild(actions);
 
   return card;
-
 }
 
 
+/* =====================================================
+   Submit answer
+===================================================== */
 
-// =====================================================
-// Submit answer
-// =====================================================
-
-async function submitAnswer(
-  event
-) {
+async function submitAnswer(event) {
 
   event.preventDefault();
 
-
   if (!currentUser) {
-
-    alert(
-      "回答するにはログインしてください。"
-    );
-
+    alert("回答するにはログインしてください。");
     return;
-
   }
 
-
   const input =
-    document.getElementById(
-      "answerInput"
-    );
-
+    document.getElementById("answerInput");
 
   const answer =
     input.value.trim();
 
-
   if (!answer) {
-
-    alert(
-      "回答を入力してください。"
-    );
-
+    alert("回答を入力してください。");
     input.focus();
-
     return;
-
   }
-
 
   if (answer.length > 3000) {
-
-    alert(
-      "回答は3000文字以内にしてください。"
-    );
-
+    alert("回答は3000文字以内にしてください。");
     return;
-
   }
-
 
   const button =
     event.target.querySelector(
       "button[type='submit']"
     );
 
-
   button.disabled = true;
-
-  button.textContent =
-    "投稿中…";
-
+  button.textContent = "投稿中…";
 
   try {
 
@@ -2832,62 +2346,41 @@ async function submitAnswer(
       }
     );
 
-
     input.value = "";
 
-
-    // 詳細を再読み込み
     const data =
       await apiRequest(
         `/api/questions/${currentQuestionId}`
       );
 
+    renderQuestionDetail(data);
 
-    renderQuestionDetail(
-      data
-    );
-
-
-    // 一覧の回答数も更新
     await loadQuestions();
-
 
   } catch (error) {
 
     alert(error.message);
 
     button.disabled = false;
-
-    button.textContent =
-      "回答を投稿";
+    button.textContent = "回答を投稿";
 
   }
-
 }
 
 
+/* =====================================================
+   Rating
+===================================================== */
 
-// =====================================================
-// Rate answer
-// =====================================================
-
-async function rateAnswer(
-  answerId,
-  rating
-) {
+async function rateAnswer(answerId, rating) {
 
   if (!currentUser) {
 
-    alert(
-      "評価するにはログインしてください。"
-    );
-
+    alert("評価するにはログインしてください。");
     openAuth("login");
-
     return;
 
   }
-
 
   try {
 
@@ -2902,118 +2395,749 @@ async function rateAnswer(
       }
     );
 
-
-    // 詳細を再読み込み
     const data =
       await apiRequest(
         `/api/questions/${currentQuestionId}`
       );
 
-
-    renderQuestionDetail(
-      data
-    );
-
+    renderQuestionDetail(data);
 
   } catch (error) {
 
     alert(error.message);
 
   }
+}
+
+
+/* =====================================================
+   Admin candidates
+===================================================== */
+
+async function loadCandidates() {
+
+  if (
+    !currentUser ||
+    currentUser.role !== "admin"
+  ) {
+    return;
+  }
+
+  const list =
+    document.getElementById("candidateList");
+
+  list.innerHTML = `
+    <div class="loading">
+      学習候補を読み込んでいます…
+    </div>
+  `;
+
+  try {
+
+    const data =
+      await apiRequest(
+        "/api/admin/candidates"
+      );
+
+    list.innerHTML = "";
+
+    if (
+      !data.candidates ||
+      data.candidates.length === 0
+    ) {
+
+      list.innerHTML = `
+        <div class="empty">
+          現在、確認待ちの学習候補はありません。
+        </div>
+      `;
+
+      return;
+    }
+
+    for (
+      const candidate of data.candidates
+    ) {
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "candidate-card";
+
+      const question =
+        document.createElement("div");
+
+      question.className =
+        "candidate-question";
+
+      question.textContent =
+        candidate.question;
+
+      const meta =
+        document.createElement("div");
+
+      meta.className =
+        "candidate-meta";
+
+      meta.textContent =
+        `回答 ${candidate.answer_count || 0}件 / Good合計 ${candidate.good_total || 0}`;
+
+      const buttons =
+        document.createElement("div");
+
+      buttons.className =
+        "candidate-buttons";
+
+      const detailButton =
+        document.createElement("button");
+
+      detailButton.className =
+        "btn btn-secondary";
+
+      detailButton.textContent =
+        "回答を確認";
+
+      detailButton.onclick =
+        () => openCandidate(candidate.id);
+
+      buttons.appendChild(detailButton);
+
+      card.appendChild(question);
+      card.appendChild(meta);
+      card.appendChild(buttons);
+
+      list.appendChild(card);
+    }
+
+  } catch (error) {
+
+    list.innerHTML = `
+      <div class="empty">
+        学習候補を読み込めませんでした。<br>
+        ${escapeHtml(error.message)}
+      </div>
+    `;
+
+  }
+}
+
+
+/* =====================================================
+   Candidate detail
+===================================================== */
+
+async function openCandidate(candidateId) {
+
+  currentCandidateId =
+    candidateId;
+
+  const modal =
+    document.getElementById(
+      "candidateModal"
+    );
+
+  const detail =
+    document.getElementById(
+      "candidateDetail"
+    );
+
+  modal.classList.add("active");
+
+  detail.innerHTML = `
+    <div class="loading">
+      学習候補を読み込んでいます…
+    </div>
+  `;
+
+  try {
+
+    const data =
+      await apiRequest(
+        `/api/admin/candidates/${candidateId}`
+      );
+
+    renderCandidateDetail(data);
+
+  } catch (error) {
+
+    detail.innerHTML = `
+      <div class="empty">
+        ${escapeHtml(error.message)}
+      </div>
+    `;
+
+  }
+}
+
+
+function renderCandidateDetail(data) {
+
+  const detail =
+    document.getElementById(
+      "candidateDetail"
+    );
+
+  detail.innerHTML = "";
+
+  const question =
+    data.question;
+
+  const answers =
+    data.answers || [];
+
+  const box =
+    document.createElement("div");
+
+  box.className =
+    "admin-question-box";
+
+  const title =
+    document.createElement("h3");
+
+  title.textContent =
+    "質問";
+
+  const text =
+    document.createElement("div");
+
+  text.style.whiteSpace =
+    "pre-wrap";
+
+  text.style.lineHeight =
+    "1.8";
+
+  text.textContent =
+    question.question;
+
+  box.appendChild(title);
+  box.appendChild(text);
+
+  detail.appendChild(box);
+
+  const heading =
+    document.createElement("h3");
+
+  heading.textContent =
+    `回答 ${answers.length}件`;
+
+  detail.appendChild(heading);
+
+  if (!answers.length) {
+
+    const empty =
+      document.createElement("div");
+
+    empty.className =
+      "empty";
+
+    empty.textContent =
+      "回答がありません。";
+
+    detail.appendChild(empty);
+
+    return;
+  }
+
+  for (
+    const answer of answers
+  ) {
+
+    const card =
+      document.createElement("div");
+
+    card.className =
+      "admin-answer";
+
+    const author =
+      document.createElement("div");
+
+    author.innerHTML =
+      `<strong>👤 ${escapeHtml(answer.username)}</strong>`;
+
+    const answerText =
+      document.createElement("div");
+
+    answerText.className =
+      "admin-answer-text";
+
+    answerText.textContent =
+      answer.answer;
+
+    const stats =
+      document.createElement("div");
+
+    stats.className =
+      "admin-answer-stats";
+
+    stats.textContent =
+      `👍 Good ${answer.good_count || 0}　👎 Bad ${answer.bad_count || 0}`;
+
+    const actions =
+      document.createElement("div");
+
+    actions.className =
+      "admin-actions";
+
+    const approve =
+      document.createElement("button");
+
+    approve.className =
+      "btn btn-success";
+
+    approve.textContent =
+      "✅ この回答を学習データにする";
+
+    approve.onclick =
+      () => approveCandidate(
+        currentCandidateId,
+        answer.id
+      );
+
+    const reject =
+      document.createElement("button");
+
+    reject.className =
+      "btn btn-danger";
+
+    reject.textContent =
+      "❌ 不正確 → 修正版を書く";
+
+    reject.onclick = () => {
+
+      currentCandidateAnswerId =
+        answer.id;
+
+      openCorrectionModal();
+
+    };
+
+    actions.appendChild(approve);
+    actions.appendChild(reject);
+
+    card.appendChild(author);
+    card.appendChild(answerText);
+    card.appendChild(stats);
+    card.appendChild(actions);
+
+    detail.appendChild(card);
+  }
+}
+
+
+/* =====================================================
+   Approve
+===================================================== */
+
+async function approveCandidate(
+  candidateId,
+  answerId
+) {
+
+  if (
+    !confirm(
+      "この回答を学習データとして承認しますか？"
+    )
+  ) {
+    return;
+  }
+
+  try {
+
+    await apiRequest(
+      "/api/admin/candidates/approve",
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          candidate_id: candidateId,
+          answer_id: answerId
+        })
+      }
+    );
+
+    alert(
+      "学習データとして承認しました。"
+    );
+
+    closeCandidateModal();
+
+    await loadCandidates();
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+}
+
+
+/* =====================================================
+   Correction
+===================================================== */
+
+function openCorrectionModal() {
+
+  document
+    .getElementById("correctionModal")
+    .classList
+    .add("active");
+
+  document
+    .getElementById("correctionInput")
+    .value = "";
+
+  document
+    .getElementById("correctionInput")
+    .focus();
+}
+
+
+function closeCorrectionModal() {
+
+  document
+    .getElementById("correctionModal")
+    .classList
+    .remove("active");
 
 }
 
 
+async function submitCorrection() {
 
-// =====================================================
-// Close question modal
-// =====================================================
+  const correction =
+    document
+      .getElementById("correctionInput")
+      .value
+      .trim();
+
+  if (!correction) {
+
+    alert(
+      "修正版を入力してください。"
+    );
+
+    return;
+
+  }
+
+  if (!currentCandidateId) {
+
+    alert(
+      "学習候補が選択されていません。"
+    );
+
+    return;
+
+  }
+
+  try {
+
+    await apiRequest(
+      "/api/admin/candidates/reject",
+      {
+        method: "POST",
+
+        body: JSON.stringify({
+          candidate_id: currentCandidateId,
+          answer_id: currentCandidateAnswerId,
+          corrected_answer: correction
+        })
+      }
+    );
+
+    alert(
+      "修正版を学習データとして登録しました。"
+    );
+
+    closeCorrectionModal();
+    closeCandidateModal();
+
+    await loadCandidates();
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+}
+
+
+/* =====================================================
+   Sources
+===================================================== */
+
+async function registerSource(event) {
+
+  event.preventDefault();
+
+  if (
+    !currentUser ||
+    currentUser.role !== "admin"
+  ) {
+
+    alert(
+      "管理者のみ利用できます。"
+    );
+
+    return;
+
+  }
+
+  const body = {
+
+    title:
+      document.getElementById("sourceTitle").value.trim(),
+
+    source_type:
+      document.getElementById("sourceType").value,
+
+    url:
+      document.getElementById("sourceUrl").value.trim(),
+
+    author:
+      document.getElementById("sourceAuthor").value.trim(),
+
+    publisher:
+      document.getElementById("sourcePublisher").value.trim(),
+
+    license:
+      document.getElementById("sourceLicense").value.trim(),
+
+    description:
+      document.getElementById("sourceDescription").value.trim(),
+
+    content:
+      document.getElementById("sourceContent").value.trim()
+
+  };
+
+  try {
+
+    await apiRequest(
+      "/api/admin/sources",
+      {
+        method: "POST",
+        body: JSON.stringify(body)
+      }
+    );
+
+    alert(
+      "知識ソースを登録しました。"
+    );
+
+    document
+      .getElementById("sourceTitle")
+      .value = "";
+
+    document
+      .getElementById("sourceUrl")
+      .value = "";
+
+    document
+      .getElementById("sourceAuthor")
+      .value = "";
+
+    document
+      .getElementById("sourcePublisher")
+      .value = "";
+
+    document
+      .getElementById("sourceLicense")
+      .value = "";
+
+    document
+      .getElementById("sourceDescription")
+      .value = "";
+
+    document
+      .getElementById("sourceContent")
+      .value = "";
+
+    await loadSources();
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+}
+
+
+async function loadSources() {
+
+  if (
+    !currentUser ||
+    currentUser.role !== "admin"
+  ) {
+    return;
+  }
+
+  const list =
+    document.getElementById("sourceList");
+
+  list.innerHTML = `
+    <div class="loading">
+      ソースを読み込んでいます…
+    </div>
+  `;
+
+  try {
+
+    const data =
+      await apiRequest(
+        "/api/admin/sources"
+      );
+
+    list.innerHTML = "";
+
+    if (
+      !data.sources ||
+      data.sources.length === 0
+    ) {
+
+      list.innerHTML = `
+        <div class="empty">
+          登録されたソースはありません。
+        </div>
+      `;
+
+      return;
+    }
+
+    for (
+      const source of data.sources
+    ) {
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "source-card";
+
+      const title =
+        document.createElement("div");
+
+      title.className =
+        "source-title";
+
+      title.textContent =
+        source.title;
+
+      const meta =
+        document.createElement("div");
+
+      meta.className =
+        "source-meta";
+
+      meta.textContent =
+        `${source.source_type} / ${source.license || "ライセンス未設定"}`;
+
+      card.appendChild(title);
+      card.appendChild(meta);
+
+      if (source.url) {
+
+        const url =
+          document.createElement("div");
+
+        url.className =
+          "source-meta";
+
+        url.textContent =
+          source.url;
+
+        card.appendChild(url);
+
+      }
+
+      const disable =
+        document.createElement("button");
+
+      disable.className =
+        "btn btn-danger";
+
+      disable.style.marginTop =
+        "10px";
+
+      disable.textContent =
+        "無効化";
+
+      disable.onclick =
+        () => disableSource(source.id);
+
+      card.appendChild(disable);
+
+      list.appendChild(card);
+    }
+
+  } catch (error) {
+
+    list.innerHTML = `
+      <div class="empty">
+        ソースを読み込めませんでした。<br>
+        ${escapeHtml(error.message)}
+      </div>
+    `;
+
+  }
+}
+
+
+async function disableSource(sourceId) {
+
+  if (
+    !confirm(
+      "このソースを無効化しますか？"
+    )
+  ) {
+    return;
+  }
+
+  try {
+
+    await apiRequest(
+      `/api/admin/sources/${sourceId}`,
+      {
+        method: "DELETE"
+      }
+    );
+
+    await loadSources();
+
+  } catch (error) {
+
+    alert(error.message);
+
+  }
+}
+
+
+/* =====================================================
+   Modal close
+===================================================== */
 
 function closeQuestionModal() {
 
   document
-    .getElementById(
-      "questionModal"
-    )
+    .getElementById("questionModal")
     .classList
     .remove("active");
 
   currentQuestionId = null;
-
 }
 
 
+function closeCandidateModal() {
 
-// =====================================================
-// Date
-// =====================================================
+  document
+    .getElementById("candidateModal")
+    .classList
+    .remove("active");
 
-function formatDate(
-  dateString
-) {
-
-  if (!dateString) {
-    return "";
-  }
-
-
-  const date =
-    new Date(
-      dateString
-    );
-
-
-  if (
-    Number.isNaN(
-      date.getTime()
-    )
-  ) {
-    return dateString;
-  }
-
-
-  return date.toLocaleString(
-    "ja-JP",
-    {
-      year: "numeric",
-      month: "numeric",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit"
-    }
-  );
-
+  currentCandidateId = null;
 }
 
-
-
-// =====================================================
-// HTML escape
-// =====================================================
-
-function escapeHtml(
-  text
-) {
-
-  const div =
-    document.createElement(
-      "div"
-    );
-
-
-  div.textContent =
-    String(text);
-
-
-  return div.innerHTML;
-
-}
-
-
-
-// =====================================================
-// Close modal by background
-// =====================================================
 
 document
   .getElementById("authModal")
@@ -3022,12 +3146,9 @@ document
     event => {
 
       if (
-        event.target.id ===
-        "authModal"
+        event.target.id === "authModal"
       ) {
-
         closeModal();
-
       }
 
     }
@@ -3041,25 +3162,102 @@ document
     event => {
 
       if (
-        event.target.id ===
-        "questionModal"
+        event.target.id === "questionModal"
       ) {
-
         closeQuestionModal();
-
       }
 
     }
   );
 
 
+document
+  .getElementById("candidateModal")
+  .addEventListener(
+    "click",
+    event => {
 
-// =====================================================
-// Start
-// =====================================================
+      if (
+        event.target.id === "candidateModal"
+      ) {
+        closeCandidateModal();
+      }
+
+    }
+  );
+
+
+document
+  .getElementById("correctionModal")
+  .addEventListener(
+    "click",
+    event => {
+
+      if (
+        event.target.id === "correctionModal"
+      ) {
+        closeCorrectionModal();
+      }
+
+    }
+  );
+
+
+/* =====================================================
+   Date
+===================================================== */
+
+function formatDate(dateString) {
+
+  if (!dateString) {
+    return "";
+  }
+
+  const date =
+    new Date(dateString);
+
+  if (
+    Number.isNaN(
+      date.getTime()
+    )
+  ) {
+    return dateString;
+  }
+
+  return date.toLocaleString(
+    "ja-JP",
+    {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }
+  );
+}
+
+
+/* =====================================================
+   HTML escape
+===================================================== */
+
+function escapeHtml(text) {
+
+  const div =
+    document.createElement("div");
+
+  div.textContent =
+    String(text);
+
+  return div.innerHTML;
+}
+
+
+/* =====================================================
+   Start
+===================================================== */
 
 checkLogin();
-
 loadQuestions();
 
 </script>
